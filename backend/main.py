@@ -8,15 +8,16 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
-
+import uvicorn
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from db import get_db, engine
 import sql_app.models as models
 import sql_app.schemas as schemas
-from sql_app.repositories import ItemRepo, StoreRepo
+from sql_app.repositories import UserRepo
 from sqlalchemy.orm import Session
 from typing import List,Optional
+from sql_app.schemas import UserCreate , UserBase, User
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -46,16 +47,6 @@ class Token(BaseModel):
 class TokenData(BaseModel):
     username: Union[str, None] = None
 
-
-class User(BaseModel):
-    username: str
-    email: Union[str, None] = None
-    full_name: Union[str, None] = None
-    disabled: Union[bool, None] = None
-
-
-class UserInDB(User):
-    hashed_password: str
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -113,52 +104,62 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
     return encoded_jwt
 
 
-async def get_current_user(token: str = Depends(oauth2_scheme)):
+# async def get_current_user(token: str = Depends(oauth2_scheme)):
+#     credentials_exception = HTTPException(
+#         status_code=status.HTTP_401_UNAUTHORIZED,
+#         detail="Could not validate credentials",
+#         headers={"WWW-Authenticate": "Bearer"},
+#     )
+#     try:
+#         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+#         username: str = payload.get("sub")
+#         if username is None:
+#             raise credentials_exception
+#         token_data = TokenData(username=username)
+#     except JWTError:
+#         raise credentials_exception
+#     user = get_user(fake_users_db, username=token_data.username)
+#     if user is None:
+#         raise credentials_exception
+#     return user
+
+async def get_current_user(username: str, db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
-            raise credentials_exception
-        token_data = TokenData(username=username)
-    except JWTError:
-        raise credentials_exception
-    user = get_user(fake_users_db, username=token_data.username)
+    
+    user = UserRepo.fetch_by_username(db=db, username=username)
     if user is None:
         raise credentials_exception
     return user
 
 
 async def get_current_active_user(current_user: User = Depends(get_current_user)):
-    if current_user.disabled:
-        raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
 
-
-@app.post("/token", response_model=Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = authenticate_user(fake_users_db, form_data.username, form_data.password)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
-    )
-    return {"access_token": access_token, "token_type": "bearer"}
+# @app.post("/token", response_model=Token)
+# async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
+#     user = authenticate_user(fake_users_db, form_data.username, form_data.password)
+#     if not user:
+#         raise HTTPException(
+#             status_code=status.HTTP_401_UNAUTHORIZED,
+#             detail="Incorrect username or password",
+#             headers={"WWW-Authenticate": "Bearer"},
+#         )
+#     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+#     access_token = create_access_token(
+#         data={"sub": user.username}, expires_delta=access_token_expires
+#     )
+#     return {"access_token": access_token, "token_type": "bearer"}
 
 
 
 @app.get("/users/me/", response_model=User)
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
-    return current_user
+    json_compatible_item_data = jsonable_encoder(current_user)
+    return json_compatible_item_data
 
 
 @app.get("/users/me/items/")
@@ -173,11 +174,14 @@ class RegisterForm(LoginForm):
     email: str
 
 @app.post("/register")
-async def register_user(form_data: RegisterForm):
+async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
+    print(form_data)
     username = form_data.username
     password = form_data.password
     email = form_data.email
-    if username in fake_users_db:
+
+    db_user: User = UserRepo.fetch_by_username(db=db, username=username)
+    if db_user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="username already exists",
@@ -185,32 +189,35 @@ async def register_user(form_data: RegisterForm):
         )
     
     password_hash = get_password_hash(password)
-    fake_users_db[username] = {"username": username, "hashed_password": password_hash, "email": email, "disabled": False}
-    current_active_user = fake_users_db[username]
-    json_compatible_item_data = jsonable_encoder(User(**current_active_user))
+    new_user = await UserRepo.create(db=db, user=UserCreate(username=username, hashed_password=password_hash, email=email))
+    json_compatible_item_data = jsonable_encoder(new_user)
+    del json_compatible_item_data["hashed_password"]
     return json_compatible_item_data
 
 
-
 @app.post("/login")
-async def login(form_data: LoginForm):
+async def login(form_data: LoginForm, db: Session = Depends(get_db)):
     username = form_data.username
     password = form_data.password
-    print(fake_users_db)
-    if username not in fake_users_db:
-        
+    db_user: User = UserRepo.fetch_by_username(db=db, username=username)
+
+    if not db_user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    if not verify_password(password, fake_users_db[username]["hashed_password"]):
+    if not verify_password(password, db_user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
     else:
-        current_active_user = fake_users_db[username]
-        json_compatible_item_data = jsonable_encoder(User(**current_active_user))
+        json_compatible_item_data = jsonable_encoder(db_user)
+        del json_compatible_item_data["hashed_password"]
         return json_compatible_item_data
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", port=8000, reload=True)
