@@ -6,6 +6,7 @@ import React from "react";
 import usersReducer from "./user/reducer";
 import Login from "./user/login";
 import Register from "./user/register";
+import Home from "./home/home";
 const store = configureStore({
   reducer: {
       users: usersReducer,
@@ -17,7 +18,8 @@ function App() {
     <div className="container mt-4 mb-4">
       <Provider store={store}>
         <BrowserRouter>
-                <Routes>                
+                <Routes>
+                <Route path="/" element={<Home/>}/>  
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
             </Routes>

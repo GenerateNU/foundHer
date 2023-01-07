@@ -1,11 +1,24 @@
 from datetime import datetime, timedelta
 from typing import Union
+from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel
+from fastapi.encoders import jsonable_encoder
+
+from fastapi import Depends, FastAPI, HTTPException
+from fastapi.responses import JSONResponse
+from db import get_db, engine
+import sql_app.models as models
+import sql_app.schemas as schemas
+from sql_app.repositories import ItemRepo, StoreRepo
+from sqlalchemy.orm import Session
+from typing import List,Optional
+
+models.Base.metadata.create_all(bind=engine)
 
 # to get a string like this run:
 # openssl rand -hex 32
@@ -23,7 +36,7 @@ fake_users_db = {
         "disabled": False,
     }
 }
-
+current_active_user = None
 
 class Token(BaseModel):
     access_token: str
@@ -50,6 +63,20 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 app = FastAPI()
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:3000",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 def verify_password(plain_password, hashed_password):
@@ -137,3 +164,53 @@ async def read_users_me(current_user: User = Depends(get_current_active_user)):
 @app.get("/users/me/items/")
 async def read_own_items(current_user: User = Depends(get_current_active_user)):
     return [{"item_id": "Foo", "owner": current_user.username}]
+
+
+class LoginForm(BaseModel):
+    username: str
+    password: str
+class RegisterForm(LoginForm):
+    email: str
+
+@app.post("/register")
+async def register_user(form_data: RegisterForm):
+    username = form_data.username
+    password = form_data.password
+    email = form_data.email
+    if username in fake_users_db:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="username already exists",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    password_hash = get_password_hash(password)
+    fake_users_db[username] = {"username": username, "hashed_password": password_hash, "email": email, "disabled": False}
+    current_active_user = fake_users_db[username]
+    json_compatible_item_data = jsonable_encoder(User(**current_active_user))
+    return json_compatible_item_data
+
+
+
+@app.post("/login")
+async def login(form_data: LoginForm):
+    username = form_data.username
+    password = form_data.password
+    print(fake_users_db)
+    if username not in fake_users_db:
+        
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    if not verify_password(password, fake_users_db[username]["hashed_password"]):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    else:
+        current_active_user = fake_users_db[username]
+        json_compatible_item_data = jsonable_encoder(User(**current_active_user))
+        return json_compatible_item_data

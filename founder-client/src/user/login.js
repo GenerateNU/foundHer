@@ -5,55 +5,6 @@ import {Navigate, useNavigate} from "react-router";
 import React from "react";
 
 
-let _token = JSON.parse(localStorage.getItem('REACT_TOKEN_AUTH') || '') || null;
-const getToken = async () => {
-    if (!_token) {
-        return null;
-    }
-
-    return _token && _token.accessToken;
-};
-
-const isLoggedIn = () => {
-    return !!_token;
-};
-let observers = [];
-const subscribe = (observer) => {
-    observers.push(observer);
-};
-
-const unsubscribe = (observer) => {
-    observers = observers.filter(_observer => _observer !== observer);
-};
-const notify = () => {
-    const isLogged = isLoggedIn();
-    observers.forEach(observer => observer(isLogged));
-};
-const setToken = (token) => {
-    if (token) {
-        localStorage.setItem('REACT_TOKEN_AUTH', JSON.stringify(token));
-    } else {
-        localStorage.removeItem('REACT_TOKEN_AUTH');
-    }
-    _token = token;
-    notify();
-};
-
-const createTokenProvider = () => {
-
-    /* Implementation */
-
-    return {
-        getToken,
-        isLoggedIn,
-        setToken,
-        subscribe,
-        unsubscribe,
-    };
-};
-
-const tokenProvider = createTokenProvider();
-
 
 const Login = () => {
     const {currentUser} = useSelector((state) => state.users)
@@ -68,7 +19,7 @@ const Login = () => {
         }
     }
     if (currentUser) {
-        return (<Navigate to={'/profile'}/>)
+        return (<Navigate to={'/'}/>)
     }
     return(
         <>
@@ -89,4 +40,69 @@ const Login = () => {
         </>
     )
 }
+
 export default Login
+
+// let _token: { accessToken: string, refreshToken: string } = JSON.parse(localStorage.getItem('REACT_TOKEN_AUTH') || '') || null;
+// const getExpirationDate = (jwtToken?: string): number | undefined => {
+//     if (!jwtToken) {
+//         return undefined;
+//     }
+
+//     const jwt = JSON.parse(atob(jwtToken.split('.')[1]));
+
+//     // multiply by 1000 to convert seconds into milliseconds
+//     return jwt && jwt.exp && jwt.exp * 1000 || null;
+// };
+
+// const isExpired = (exp?: number) => {
+//     if (!exp) {
+//         return false;
+//     }
+
+//     return Date.now() > exp;
+// };
+
+// const getToken = async () => {
+//     if (!_token) {
+//         return null;
+//     }
+
+//     if (isExpired(getExpirationDate(_token.accessToken))) {
+//         const updatedToken = await fetch('/update-token', {
+//             method: 'POST',
+//             body: _token.refreshToken
+//         })
+//             .then(r => r.json());
+
+//         setToken(updatedToken);
+//     }
+
+//     return _token && _token.accessToken;
+// };
+
+// const isLoggedIn = () => {
+//     return !!_token;
+// };
+
+// let observers: Array<(isLogged: boolean) => void> = [];
+// const subscribe = (observer: (isLogged: boolean) => void) => {
+//     observers.push(observer);
+// };
+
+// const unsubscribe = (observer: (isLogged: boolean) => void) => {
+//     observers = observers.filter(_observer => _observer !== observer);
+// };
+// const notify = () => {
+//     const isLogged = isLoggedIn();
+//     observers.forEach(observer => observer(isLogged));
+// };
+// const setToken = (token: typeof _token) => {
+//     if (token) {
+//         localStorage.setItem('REACT_TOKEN_AUTH', JSON.stringify(token));
+//     } else {
+//         localStorage.removeItem('REACT_TOKEN_AUTH');
+//     }
+//     _token = token;
+//     notify();
+// };

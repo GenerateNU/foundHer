@@ -14,10 +14,9 @@ const Register = () => {
     const handleRegisterBtn = () => {
         dispatch(registerThunk({username, password, email}))
     }
-
-    // if(currentUser) {
-    //     return (<Navigate to={'/profile'}/>)
-    // }
+    if(currentUser) {
+        return (<Navigate to={'/'}/>)
+    }
 
     return(
         <>
