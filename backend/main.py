@@ -51,7 +51,7 @@ class TokenData(BaseModel):
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 app = FastAPI()
 origins = [
@@ -104,36 +104,36 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
     return encoded_jwt
 
 
-# async def get_current_user(token: str = Depends(oauth2_scheme)):
-#     credentials_exception = HTTPException(
-#         status_code=status.HTTP_401_UNAUTHORIZED,
-#         detail="Could not validate credentials",
-#         headers={"WWW-Authenticate": "Bearer"},
-#     )
-#     try:
-#         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-#         username: str = payload.get("sub")
-#         if username is None:
-#             raise credentials_exception
-#         token_data = TokenData(username=username)
-#     except JWTError:
-#         raise credentials_exception
-#     user = get_user(fake_users_db, username=token_data.username)
-#     if user is None:
-#         raise credentials_exception
-#     return user
-
-async def get_current_user(username: str, db: Session = Depends(get_db)):
+async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
-    
-    user = UserRepo.fetch_by_username(db=db, username=username)
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise credentials_exception
+        token_data = TokenData(username=username)
+    except JWTError:
+        raise credentials_exception
+    user = UserRepo.fetch_by_username(db=db, username=token_data.username)
     if user is None:
         raise credentials_exception
     return user
+
+# async def get_current_user(username: str, db: Session = Depends(get_db)):
+#     credentials_exception = HTTPException(
+#         status_code=status.HTTP_401_UNAUTHORIZED,
+#         detail="Could not validate credentials",
+#         headers={"WWW-Authenticate": "Bearer"},
+#     )
+    
+#     user = UserRepo.fetch_by_username(db=db, username=username)
+#     if user is None:
+#         raise credentials_exception
+#     return user
 
 
 async def get_current_active_user(current_user: User = Depends(get_current_user)):
@@ -156,7 +156,7 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 
 
 
-@app.get("/users/me/", response_model=User)
+@app.get("/profile", response_model=User)
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
     json_compatible_item_data = jsonable_encoder(current_user)
     return json_compatible_item_data
@@ -175,7 +175,6 @@ class RegisterForm(LoginForm):
 
 @app.post("/register")
 async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
-    print(form_data)
     username = form_data.username
     password = form_data.password
     email = form_data.email
@@ -192,6 +191,9 @@ async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
     new_user = await UserRepo.create(db=db, user=UserCreate(username=username, hashed_password=password_hash, email=email))
     json_compatible_item_data = jsonable_encoder(new_user)
     del json_compatible_item_data["hashed_password"]
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(data={"sub": username}, expires_delta=access_token_expires)
+    json_compatible_item_data["access_token"] = access_token
     return json_compatible_item_data
 
 
@@ -216,6 +218,9 @@ async def login(form_data: LoginForm, db: Session = Depends(get_db)):
     else:
         json_compatible_item_data = jsonable_encoder(db_user)
         del json_compatible_item_data["hashed_password"]
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        access_token = create_access_token(data={"sub": username}, expires_delta=access_token_expires)
+        json_compatible_item_data["access_token"] = access_token
         return json_compatible_item_data
 
 

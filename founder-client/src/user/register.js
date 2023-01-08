@@ -15,7 +15,8 @@ const Register = () => {
         dispatch(registerThunk({username, password, email}))
     }
     if(currentUser) {
-        return (<Navigate to={'/'}/>)
+        localStorage.setItem("token", currentUser.token)
+        return (<Navigate to={'/profile'}/>)
     }
 
     return(

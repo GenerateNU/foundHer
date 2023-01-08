@@ -9,7 +9,7 @@ export const logoutThunk = createAsyncThunk(
 
 export const profileThunk = createAsyncThunk(
     'profile',
-    async () => await profile()
+    async (token) => await profile(token)
 )
 
 export const loginThunk = createAsyncThunk(

@@ -20,7 +20,7 @@ export const logout = async () => {
     return response.data
 }
 
-export const profile = async () => {
-    const response = await api.post(`${BASE_API_URL}/profile`)
+export const profile = async (token) => {
+    const response = await api.get(`${BASE_API_URL}/profile`, { headers: {"Authorization" : `Bearer ${token}`} } )
     return response.data
 }

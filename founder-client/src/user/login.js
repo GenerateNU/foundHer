@@ -8,8 +8,8 @@ import React from "react";
 
 const Login = () => {
     const {currentUser} = useSelector((state) => state.users)
-    const [username, setUsername] = useState('alice')
-    const [password, setPassword] = useState('alice1234')
+    const [username, setUsername] = useState('phamlo')
+    const [password, setPassword] = useState('password')
     const dispatch = useDispatch()
     const handleLoginBtn = () => {
         try {
@@ -19,8 +19,10 @@ const Login = () => {
         }
     }
     if (currentUser) {
-        return (<Navigate to={'/'}/>)
+        localStorage.setItem('access_token', currentUser.access_token)
+        return (<Navigate to={'/profile'}/>)
     }
+    
     return(
         <>
             <h1>Login</h1>
