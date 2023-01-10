@@ -161,7 +161,7 @@ async def read_users_me(current_user: User = Depends(get_current_active_user)):
     json_compatible_item_data = jsonable_encoder(current_user)
     return json_compatible_item_data
 
-@app.get("/", response_model=User)
+@app.get("/")
 async def read():
     return {"welcome": "you"}
 
