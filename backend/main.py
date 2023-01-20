@@ -26,6 +26,10 @@ app.add_middleware(
 async def read():
     return {"welcome": "you"}
 
+@app.get("/question/")
+async def question():
+    return {"welcome": "question"}
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", port=8000, reload=True)
