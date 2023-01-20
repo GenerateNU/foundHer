@@ -21,15 +21,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.get("/")
 async def read():
     return {"welcome": "you"}
 
-@app.get("/question/")
-async def question():
-    return {"welcome": "question"}
-
+@app.post('/add_question')
+async def add_question(question_content: str, possible_answers: str):
+    print("hello")
+    return question_content
 
 if __name__ == "__main__":
     uvicorn.run("main:app", port=8000, reload=True)
