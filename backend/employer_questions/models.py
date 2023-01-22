@@ -18,4 +18,4 @@ class Employer_Question(Base):
     
 
     def __repr__(self):
-        return 'Employer_Question(id=%s)' % self.id
+        return 'Employer_Question(id=%s, question=%s)' % (self.id, self.question_content)

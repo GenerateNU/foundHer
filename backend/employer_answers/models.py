@@ -11,13 +11,13 @@ from sqlalchemy import Column, Integer, ForeignKey, String, ARRAY
 
 from db import Base
 
-class Employer_Answer(Base):
+class EmployerAnswer(Base):
     __tablename__ = "employer_answers"
     id = Column(Integer, primary_key=True,index=True)
     user_id = Column(Integer, ForeignKey('user.id'))
     question_id = Column(Integer, ForeignKey('employer_question.id'))
-    possible_answers = Column(ARRAY(String(40)))
+    answers = Column(ARRAY(String(40)))
     
 
     def __repr__(self):
-        return 'Employer_Answer(id=%s)' % self.id
+        return 'EmployerAnswer(id=%s, user_id:%s, question_id:%s)' % (self.id, self.user_id, self.question_id)
