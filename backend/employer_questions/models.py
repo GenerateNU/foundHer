@@ -10,7 +10,7 @@ from sqlalchemy import Column, Integer, String, ARRAY
 
 from db import Base
 
-class Employer_Question(Base):
+class EmployerQuestion(Base):
     __tablename__ = "employer_questions"
     id = Column(Integer, primary_key=True,index=True)
     question_content = Column(String(200), nullable=False, unique=True)
@@ -18,4 +18,4 @@ class Employer_Question(Base):
     
 
     def __repr__(self):
-        return 'Employer_Question(id=%s)' % self.id
+        return 'EmployerQuestion(id=%s)' % self.id
