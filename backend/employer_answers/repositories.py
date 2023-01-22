@@ -28,4 +28,3 @@ class EmployerAnswersRepo:
     db.commit()
     return updated_employer_answer
     
-    

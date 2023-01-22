@@ -25,3 +25,4 @@ class EmployerQuestionsRepo:
     async def update(db: Session,employer_question_data):
         db.merge(employer_question_data)
         db.commit()
+        

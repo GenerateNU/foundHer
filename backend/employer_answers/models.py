@@ -21,3 +21,4 @@ class EmployerAnswer(Base):
 
     def __repr__(self):
         return 'EmployerAnswer(id=%s, user_id:%s, question_id:%s)' % (self.id, self.user_id, self.question_id)
+        
