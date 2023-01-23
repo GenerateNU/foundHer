@@ -8,7 +8,8 @@ from typing import Optional
 
 from sqlalchemy import null
 
-from backend.models import Applicant_Question, Applicant_Answer
+from backend.applicant_answer.models import Applicant_Answer
+from backend.applicant_question.models import Applicant_Question
 
 app = FastAPI()
 origins = [
