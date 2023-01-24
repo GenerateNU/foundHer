@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
 import uvicorn
+from employer_questions import router as eq_router
 
 
 app = FastAPI()
@@ -21,7 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+app.include_router(eq_router.router)
 @app.get("/")
 async def read():
     return {"welcome": "you"}

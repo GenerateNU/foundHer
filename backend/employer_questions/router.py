@@ -8,18 +8,18 @@ from fastapi import Depends, HTTPException, status
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
 from db import get_db
-from repositories import EmployerQuestionsRepo
+from .repositories import EmployerQuestionsRepo
 from fastapi import APIRouter
 import users.models as models
-from ..db import engine
-import schemas
+from db import engine
+from .schemas import EmployerQuestion, EmployerQuestionCreate
 
 models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 
-@router.post('/employer-questions', tags=['EmployerQuestion'], response_model=schemas.EmployerQuestion,status_code=201)
-async def create_question(question_request: schemas.EmployerQuestionCreate, db: Session = Depends(get_db)):
+@router.post('/employer-questions', tags=['EmployerQuestion'], response_model=EmployerQuestion,status_code=201)
+async def create_question(question_request: EmployerQuestionCreate, db: Session = Depends(get_db)):
     """
     Create an employer question and store it in the database
     """
@@ -31,7 +31,7 @@ async def create_question(question_request: schemas.EmployerQuestionCreate, db: 
     return await EmployerQuestionsRepo.create(db=db, employee_question=question_request)
 
 
-@router.get('/employer-questions/{employer_question_id}', tags=['EmployerQuestion'], response_model=schemas.EmployerQuestion)
+@router.get('/employer-questions/{employer_question_id}', tags=['EmployerQuestion'], response_model=EmployerQuestion)
 def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)):
     db_employer_question = EmployerQuestionsRepo.fetch_by_id(db, employer_question_id)
     if db_employer_question is None:

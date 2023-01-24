@@ -4,7 +4,7 @@ from . import models, schemas
     
 class EmployerQuestionsRepo:
     async def create(db: Session, employee_question: schemas.EmployerQuestionCreate):
-            db_employer_question = models.EmployerQuestion(question=employee_question.question_content, answers = employee_question.possible_answers)
+            db_employer_question = models.EmployerQuestion(question_content=employee_question.question_content, possible_answers = employee_question.possible_answers)
             db.add(db_employer_question)
             db.commit()
             db.refresh(db_employer_question)
