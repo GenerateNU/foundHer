@@ -7,14 +7,13 @@ from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException, status
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
-from db.db import engine
-from .models import Base
+from db.db import engine, get_db
+import users.models as models
 from .repositories import UserRepo
 from .schemas import UserCreate, User
 from fastapi import APIRouter
-Base.metadata.create_all(bind=engine)
 
-
+models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 class Token(BaseModel):
