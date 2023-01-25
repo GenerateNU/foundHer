@@ -1,4 +1,4 @@
-from .test_main import client, test_db
+from main_test import client, test_db
 def test_register_user(test_db):
     json={"username": "me", "password": "newPassword", "email": "fake_email.com"}
     response = client.post(url="/register", json=json)
