@@ -9,7 +9,7 @@
 
 from sqlalchemy import Column, Integer, ForeignKey, String, ARRAY
 
-from db import Base
+from db.db import Base
 
 class EmployerAnswer(Base):
     __tablename__ = "employer_answers"

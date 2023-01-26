@@ -8,13 +8,13 @@
 
 from sqlalchemy import Column, Integer, String, ARRAY
 
-from db import Base
+from db.db import Base
 
 class EmployerQuestion(Base):
     __tablename__ = "employer_questions"
     id = Column(Integer, primary_key=True,index=True)
     question_content = Column(String(200), nullable=False, unique=True)
-    possible_answers = Column(ARRAY(String(40)))
+    # possible_answers = Column(ARRAY(String(40)))
     
 
     def __repr__(self):

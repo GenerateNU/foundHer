@@ -26,7 +26,7 @@ app.add_middleware(
 )
 
 app.include_router(router)
-app.include_router(eq_router)
+# app.include_router(eq_router)
 
 @app.get("/")
 async def read():

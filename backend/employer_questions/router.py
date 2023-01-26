@@ -7,11 +7,11 @@ from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException, status
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
-from db import get_db
+from db.db import get_db
 from .repositories import EmployerQuestionsRepo
 from fastapi import APIRouter
 import users.models as models
-from ..db import engine
+from db.db import engine
 from .schemas import EmployerQuestion, EmployerQuestionCreate
 
 models.Base.metadata.create_all(bind=engine)
