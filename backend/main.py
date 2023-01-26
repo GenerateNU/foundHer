@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 import uvicorn
 from users.authentication import router
+from employer_questions import router as eq_router
 from db.db import Base, engine
 
 
@@ -25,6 +26,7 @@ app.add_middleware(
 )
 
 app.include_router(router)
+app.include_router(eq_router)
 
 @app.get("/")
 async def read():
