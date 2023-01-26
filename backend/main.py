@@ -1,9 +1,12 @@
-from typing import Union
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
-from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
 import uvicorn
+from users.authentication import router
+from db.db import Base, engine
+
+
+Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI()
@@ -21,6 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(router)
 
 @app.get("/")
 async def read():
