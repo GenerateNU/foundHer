@@ -23,7 +23,6 @@ async def add_question_answer_for_applicant(question_id: int, answer: str, user_
     return "add_question_answer_for_applicant"
 
 @router.post("/update_question_answer_for_applicant")
-
 async def update_question_answer_for_applicant(answer_id: int, question_id: int, answer: str): #-> Optional[Applicant_Answer]:
     return "update_question_answer_for_applicant"
 
