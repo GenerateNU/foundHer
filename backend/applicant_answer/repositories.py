@@ -12,8 +12,8 @@ class Applicant_Answer_Repo:
         db.refresh(db_answer)
         return db_answer
     
-    def fetch_by_id(db: Session,_id):
-        return db.query(models.Applicant_Answer).filter(models.Applicant_Answer.id == _id).first()
+    def fetch_by_id(db: Session, answer_id):
+        return db.query(models.Applicant_Answer).filter(models.Applicant_Answer.id == answer_id).first()
         
     def fetch_by_question_id(db: Session,question_id):
         return db.query(models.Applicant_Answer).filter(models.Applicant_Answer.question_id == question_id).first()
@@ -21,7 +21,7 @@ class Applicant_Answer_Repo:
     def fetch_all(db: Session, skip: int = 0, limit: int = 100):
         return db.query(models.Applicant_Answer).offset(skip).limit(limit).all()
  
-    async def delete(db: Session,answer_id):
+    async def delete(db: Session, answer_id):
         db_answer= db.query(models.Applicant_Answer).filter_by(id=answer_id).first()
         db.delete(db_answer)
         db.commit()

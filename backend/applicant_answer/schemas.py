@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class Applicant_Answer_Base(BaseModel):
     id : int
     question_id : int
+    applicant_id : int
     answers : List[str] = []
 
 
