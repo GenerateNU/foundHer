@@ -39,9 +39,7 @@ def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)
         raise HTTPException(status_code=404, detail=f'Employer Question {employer_question_id} not found')
     return db_employer_question
 
-
-
 @eq_router.get('/employer-questions')
 def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)):
-    return 'hello'
+    return {"welcome": "you"}
 

@@ -13,7 +13,7 @@ from pydantic import BaseModel
 
 class EmployerQuestionBase(BaseModel):
     question_content: str
-    possible_answers: list[str]
+    # possible_answers: List[str]
     
     
 
