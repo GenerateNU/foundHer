@@ -9,11 +9,11 @@ class Applicant_Question_Base(BaseModel):
     possible_answers : List[str] = []
 
 
-class Applicant_Answer_Create(Applicant_Question_Base):
+class Applicant_Question(Applicant_Question_Base):
     pass
 
 
-class Applicant_Answer_Create(Applicant_Question_Base):
+class Applicant_Question_Create(Applicant_Question_Base):
     id: int
 
     class Config:
