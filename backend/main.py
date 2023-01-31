@@ -30,12 +30,7 @@ app.include_router(eq_router.router)
 
 @app.get("/")
 async def read():
-    return {"welcome": "you"}
-
-@app.get('/employer-questions')
-async def get_employer_question():
     return {"hello": "world"}
-
 
 if __name__ == "__main__":
     uvicorn.run("main:app", port=8000, reload=True)
