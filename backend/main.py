@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 import uvicorn
 from users.authentication import router
-from employer_questions.router import router as eq_router
+from employer_questions.router import eq_router
 from db.db import Base, engine
 
 
