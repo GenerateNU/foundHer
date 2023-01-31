@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 import uvicorn
 from users.authentication import router
-from employer_questions.router import eq_router
+from employer_questions import router as eq_router
 from db.db import Base, engine
 
 
@@ -26,11 +26,15 @@ app.add_middleware(
 )
 
 app.include_router(router)
-app.include_router(eq_router)
+app.include_router(eq_router.router)
 
 @app.get("/")
 async def read():
     return {"welcome": "you"}
+
+@app.get('/employer-questions')
+async def get_employer_question():
+    return {"hello": "world"}
 
 
 if __name__ == "__main__":

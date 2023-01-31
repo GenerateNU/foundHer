@@ -17,9 +17,9 @@ from fastapi.encoders import jsonable_encoder
 
 models.Base.metadata.create_all(bind=engine)
 
-eq_router = APIRouter()
+router = APIRouter()
 
-@eq_router.post('/employer-questions', tags=['EmployerQuestion'], response_model=EmployerQuestion,status_code=201)
+@router.post('/employer-questions', tags=['EmployerQuestion'], response_model=EmployerQuestion,status_code=201)
 async def create_question(question_request: EmployerQuestionCreate, db: Session = Depends(get_db)):
     """
     Create an employer question and store it in the database
@@ -32,14 +32,14 @@ async def create_question(question_request: EmployerQuestionCreate, db: Session 
     return jsonable_encoder(json_compatible_item_data)
 
 
-@eq_router.get('/employer-questions/{employer_question_id}', tags=['EmployerQuestion'], response_model=EmployerQuestion)
+@router.get('/employer-questions/{employer_question_id}', tags=['EmployerQuestion'], response_model=EmployerQuestion)
 def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)):
     db_employer_question = EmployerQuestionsRepo.fetch_by_id(db, employer_question_id)
     if db_employer_question is None:
         raise HTTPException(status_code=404, detail=f'Employer Question {employer_question_id} not found')
     return db_employer_question
 
-@eq_router.get('/employer-questions')
-def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)):
+@router.get('/employer-questions')
+async def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)):
     return {"welcome": "you"}
 
