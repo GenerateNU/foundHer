@@ -13,8 +13,8 @@ class Applicant_Question_Repo:
         db.refresh(db_question)
         return db_question
     
-    def fetch_by_id(db: Session,_id):
-        return db.query(models.Applicant_Question).filter(models.Applicant_Question.id == _id).first()
+    def fetch_by_id(db: Session, question_id):
+        return db.query(models.Applicant_Question).filter(models.Applicant_Question.id == question_id).first()
  
     def fetch_all(db: Session, skip: int = 0, limit: int = 100):
         return db.query(models.Applicant_Question).offset(skip).limit(limit).all()

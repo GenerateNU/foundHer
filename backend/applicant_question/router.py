@@ -2,7 +2,7 @@ from typing import Optional, List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
-from db.db import get_db, engine
+from db import get_db, engine
 from .repositories import Applicant_Question_Repo
 import users.models as models
 from .schemas import Applicant_Question, Applicant_Question_Create
@@ -13,11 +13,13 @@ models.Base.metadata.create_all(bind=engine)
 router = APIRouter()
 
 @router.post('/add_question', tags=["Applicant_Question"], status_code=201)
-async def add_question(question_request: Applicant_Question_Create, db: Session = Depends(get_db)):#question_content: str, possible_answers: List[str], db: Session = Depends(get_db)):
+async def add_question(question_content: str, possible_answers: List[str], db: Session = Depends(get_db)):
     """
     Add an applicant question and store it in the database
     """
-    return await Applicant_Question_Repo.create(db=db, question=question_request)
+
+    question = Applicant_Question_Create(id=2, question_content=question_content, possible_answers=possible_answers)
+    return await Applicant_Question_Repo.create(db=db, question=question)
 
 @router.get('/get_question', tags=["Applicant_Question"])
 async def get_question (question_id: int, db: Session = Depends(get_db))-> Optional[Applicant_Question]:

@@ -7,11 +7,11 @@ from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException, status
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
-from db.db import get_db, engine
+from db import get_db, engine
 from .repositories import Applicant_Answer_Repo
 from fastapi import APIRouter
 import users.models as models
-from .schemas import Applicant_Answer_Base, Applicant_Answer_Create
+from .schemas import Applicant_Answer, Applicant_Answer_Base, Applicant_Answer_Create
 from . import models
 
 models.Base.metadata.create_all(bind=engine)
