@@ -1,11 +1,15 @@
 from typing import Union, List
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
-from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
 from applicant_question.router import router as aq_router
 import uvicorn
 from typing import Optional
+from users.authentication import router
+from db.db import Base, engine
+
+
+Base.metadata.create_all(bind=engine)
 
 from sqlalchemy import null
 
@@ -24,6 +28,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(router)
 app.include_router(aq_router)
 
 @app.get("/")
