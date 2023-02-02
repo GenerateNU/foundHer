@@ -2,7 +2,7 @@ from typing import Optional, List
 from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
-from db import get_db, engine
+from db.db import get_db, engine
 from .repositories import Applicant_Question_Repo
 import users.models as models
 from .schemas import Applicant_Question, Applicant_Question_Create

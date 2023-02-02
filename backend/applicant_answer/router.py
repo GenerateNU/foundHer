@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException, status
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
-from db import get_db, engine
+from db.db import get_db, engine
 from .repositories import Applicant_Answer_Repo
 from fastapi import APIRouter
 import users.models as models
