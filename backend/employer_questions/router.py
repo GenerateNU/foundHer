@@ -39,7 +39,9 @@ def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)
         raise HTTPException(status_code=404, detail=f'Employer Question {employer_question_id} not found')
     return db_employer_question
 
-@router.get('/employer-questions')
-async def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)):
-    return {"welcome": "you"}
+# @router.get('/employer-questions')
+# async def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)):
+#     return {"welcome": "you"}
+
+
 
