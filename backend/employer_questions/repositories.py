@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
 
 from . import models, schemas
-    
+
 class EmployerQuestionsRepo:
-    async def create(db: Session, employee_question: schemas.EmployerQuestionCreate):
-            db_employer_question = models.EmployerQuestion(question_content=employee_question.question_content, possible_answers = employee_question.possible_answers)
+    async def create(db: Session, employer_question: schemas.EmployerQuestionCreate):
+            db_employer_question = models.EmployerQuestion(question_content=employer_question.question_content, possible_answers = employer_question.possible_answers)
             db.add(db_employer_question)
             db.commit()
             db.refresh(db_employer_question)
@@ -22,7 +22,8 @@ class EmployerQuestionsRepo:
         db.delete(db_employer_question)
         db.commit()
         
-    async def update(db: Session,employer_question_data):
-        db.merge(employer_question_data)
-        db.commit()
+    async def update(db: Session, employer_question: schemas.EmployerQuestionUpdate, id: int):
+        db.query(models.EmployerQuestion).filter(models.EmployerQuestion.id == id).update({"question_content": employer_question.question_content, "possible_answers": employer_question.possible_answers}, synchronize_session="fetch")
+        stuff = EmployerQuestionsRepo.fetch_by_id(db, id)
+        return stuff
         

@@ -12,7 +12,7 @@ from .repositories import EmployerQuestionsRepo
 from fastapi import APIRouter
 import users.models as models
 from db.db import engine
-from .schemas import EmployerQuestion, EmployerQuestionCreate
+from .schemas import EmployerQuestion, EmployerQuestionCreate, EmployerQuestionUpdate
 from fastapi.encoders import jsonable_encoder
 
 models.Base.metadata.create_all(bind=engine)
@@ -28,7 +28,7 @@ async def create_question(question_request: EmployerQuestionCreate, db: Session 
     # db_employer_question = EmployerQuestionsRepo.fetch_by_id(db, id=question_request.id)
     # if db_employer_question:
     #     raise HTTPException(status_code=400, detail="Employer Question already exists!")
-    json_compatible_item_data = await EmployerQuestionsRepo.create(db=db, employee_question=question_request)
+    json_compatible_item_data = await EmployerQuestionsRepo.create(db=db, employer_question=question_request)
     return jsonable_encoder(json_compatible_item_data)
 
 
@@ -43,5 +43,10 @@ def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)
 # async def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)):
 #     return {"welcome": "you"}
 
+@router.put('/employer-questions/{employer_question_id}', tags=['EmployerQuestion'], response_model=EmployerQuestion)
+async def get_employer_question(question_request: EmployerQuestionUpdate, db: Session=Depends(get_db)):
+    print("123141234")
+    # db_employer_question = EmployerQuestionsRepo.fetch_by_id(db, question_request.id)
+    json_compatible_item_data = await EmployerQuestionsRepo.update(db=db, employer_question=question_request, id=question_request.id)
 
-
+    return jsonable_encoder(json_compatible_item_data)

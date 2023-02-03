@@ -25,3 +25,8 @@ class EmployerQuestion(EmployerQuestionBase):
 
 class EmployerQuestionCreate(EmployerQuestionBase):
     pass
+
+class EmployerQuestionUpdate(BaseModel):
+    id: int
+    question_content: str
+    possible_answers: List[str]
