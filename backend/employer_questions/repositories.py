@@ -18,9 +18,11 @@ class EmployerQuestionsRepo:
         return db.query(models.EmployerQuestion).offset(skip).limit(limit).all()
     
     async def delete(db: Session,_id:int):
-        db_employer_question= db.query(models.EmployerQuestion).filter_by(id=_id).first()
+        db_employer_question= db.query(models.EmployerQuestion).filter(models.EmployerQuestion.id == _id).first()
+        print(db_employer_question)
         db.delete(db_employer_question)
         db.commit()
+        return db_employer_question
         
     async def update(db: Session, employer_question: schemas.EmployerQuestionUpdate, id: int):
         db.query(models.EmployerQuestion).filter(models.EmployerQuestion.id == id).update({"question_content": employer_question.question_content, "possible_answers": employer_question.possible_answers}, synchronize_session="fetch")
