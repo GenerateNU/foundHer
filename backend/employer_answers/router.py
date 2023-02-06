@@ -48,7 +48,7 @@ def get_employer_all_answer(db: Session=Depends(get_db)):
     return jsonable_encoder(all_db_employer_answer)
 
 @router.put('/employer-answers/{employer_answer_id}', tags=['EmployerAnswer'], response_model=EmployerAnswer)
-async def get_employer_answer(answer_request: EmployerAnswerUpdate, db: Session=Depends(get_db)):
+async def update_employer_answer(answer_request: EmployerAnswerUpdate, db: Session=Depends(get_db)):
     json_compatible_item_data = await EmployerAnswersRepo.update(db=db, employer_answer=answer_request, id=answer_request.id)
 
     return jsonable_encoder(json_compatible_item_data)
