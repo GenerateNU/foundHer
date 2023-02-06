@@ -25,3 +25,9 @@ class EmployerAnswer(EmployerAnswerBase):
 
 class EmployerAnswerCreate(EmployerAnswerBase):
     pass
+
+class EmployerAnswerUpdate(BaseModel):
+    id: int
+    user_id: int
+    question_id: int
+    answers: List[str]
