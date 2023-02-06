@@ -67,3 +67,4 @@ async def delete_question(question_id: int, db: Session = Depends(get_db)) -> in
     await Applicant_Question_Repo.delete(db=db, question_id=question_id)
     return 0
 
+
