@@ -37,7 +37,7 @@ def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)
     db_employer_question = EmployerQuestionsRepo.fetch_by_id(db, employer_question_id)
     if db_employer_question is None:
         raise HTTPException(status_code=404, detail=f'Employer Question {employer_question_id} not found')
-    return db_employer_question
+    return jsonable_encoder(db_employer_question)
 
 @router.get('/all-employer-questions', tags=['EmployerQuestion'], response_model=List[EmployerQuestion])
 def get_employer_all_question(db: Session=Depends(get_db)):

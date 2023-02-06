@@ -37,7 +37,7 @@ def get_employer_answer(employer_answer_id: int, db: Session=Depends(get_db)):
     db_employer_answer = EmployerAnswersRepo.fetch_by_id(db, employer_answer_id)
     if db_employer_answer is None:
         raise HTTPException(status_code=404, detail=f'Employer Answer {employer_answer_id} not found')
-    return db_employer_answer
+    return jsonable_encoder(db_employer_answer)
 
 @router.get('/all-employer-answers', tags=['EmployerAnswer'], response_model=List[EmployerAnswer])
 def get_employer_all_answer(db: Session=Depends(get_db)):
