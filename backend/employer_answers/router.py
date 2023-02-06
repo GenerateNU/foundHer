@@ -19,7 +19,7 @@ models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 
-@router.post('/employer-answers', tags=['EmployerAnswer'], response_model=EmployerAnswer, status_code=201)
+@router.post('/employer-answers', tags=['EmployerAnswer'], response_model=EmployerAnswer,status_code=201)
 async def create_answer(answer_request: EmployerAnswerCreate, db: Session = Depends(get_db)):
     """
     Create an employer answer and store it in the database
