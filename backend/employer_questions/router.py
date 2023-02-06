@@ -47,10 +47,6 @@ def get_employer_all_question(db: Session=Depends(get_db)):
 
     return jsonable_encoder(all_db_employer_question)
 
-# @router.get('/employer-questions')
-# async def get_employer_question(employer_question_id: int, db: Session=Depends(get_db)):
-#     return {"welcome": "you"}
-
 @router.put('/employer-questions/{employer_question_id}', tags=['EmployerQuestion'], response_model=EmployerQuestion)
 async def get_employer_question(question_request: EmployerQuestionUpdate, db: Session=Depends(get_db)):
     json_compatible_item_data = await EmployerQuestionsRepo.update(db=db, employer_question=question_request, id=question_request.id)
