@@ -75,4 +75,3 @@ async def delete_question(question_id: int, db: Session = Depends(get_db)) -> in
 
     return jsonable_encoder(json_compatible_delete)
 
-
