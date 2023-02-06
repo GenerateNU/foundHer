@@ -7,7 +7,7 @@ from . import models, schemas
 class Applicant_Question_Repo:
     
     async def create(db: Session, question: schemas.Applicant_Question_Create):
-        db_question = models.Applicant_Question(id=question.id,question_content=question.question_content,possible_answers=question.possible_answers)
+        db_question = models.Applicant_Question(question_content=question.question_content,possible_answers=question.possible_answers)
         db.add(db_question)
         db.commit()
         db.refresh(db_question)
@@ -23,9 +23,10 @@ class Applicant_Question_Repo:
         db_question = db.query(models.Applicant_Question).filter_by(id=question_id).first()
         db.delete(db_question)
         db.commit()
+        return 0
      
      
-    async def update(db: Session,question_data):
-        question_data = db.merge(question_data)
+    async def update(db: Session, question_data: schemas.Applicant_Question_Update, id: int):
+        db.query(models.Applicant_Question).filter(models.Applicant_Question.id == id).update({"question_content": question_data.question_content, "possible_answers": question_data.possible_answers}, synchronize_session="fetch")
         db.commit()
         return question_data

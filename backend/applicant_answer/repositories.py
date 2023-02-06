@@ -6,7 +6,7 @@ from . import models, schemas
 
 class Applicant_Answer_Repo:
     async def create(db: Session, answer: schemas.Applicant_Answer_Create):
-        db_answer = models.Applicant_Answer(id=answer.id,question_id=answer.question_id,answers=answer.answers)
+        db_answer = models.Applicant_Answer(question_id=answer.question_id,answers=answer.answers)
         db.add(db_answer)
         db.commit()
         db.refresh(db_answer)
