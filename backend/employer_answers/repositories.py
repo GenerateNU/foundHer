@@ -21,10 +21,11 @@ class EmployerAnswersRepo:
      db_employer_answer= db.query(models.EmployerAnswer).filter_by(id=employer_answer_id).first()
      db.delete(db_employer_answer)
      db.commit()
+     return db_employer_answer
      
      
  async def update(db: Session,employer_answer_data):
-    updated_employer_answer = db.merge(employer_answer_data)
-    db.commit()
-    return updated_employer_answer
+    db.query(models.EmployerAnswer).filter(models.EmployerAnswer.id == id).update({"answers": employer_answer_data.answers}, synchronize_session="fetch")
+    stuff = EmployerAnswersRepo.fetch_by_id(db, id)
+    return stuff
     
