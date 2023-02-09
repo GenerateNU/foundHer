@@ -14,8 +14,8 @@ from db.db import Base
 class EmployerAnswer(Base):
     __tablename__ = "employer_answers"
     id = Column(Integer, primary_key=True,index=True)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    question_id = Column(Integer, ForeignKey('employer_question.id'))
+    user_id = Column(Integer, ForeignKey('users.id'))
+    question_id = Column(Integer, ForeignKey('employer_questions.id'))
     answers = Column(ARRAY(String(40)))
     
 

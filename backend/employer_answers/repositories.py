@@ -17,14 +17,14 @@ class EmployerAnswersRepo:
  def fetch_all(db: Session, skip: int = 0, limit: int = 100):
      return db.query(models.EmployerAnswer).offset(skip).limit(limit).all()
  
- async def delete(db: Session,employer_answer_id):
-     db_employer_answer= db.query(models.EmployerAnswer).filter_by(id=employer_answer_id).first()
+ async def delete(db: Session, _id: int):
+     db_employer_answer= db.query(models.EmployerAnswer).filter_by(id=_id).first()
      db.delete(db_employer_answer)
      db.commit()
      return db_employer_answer
      
      
- async def update(db: Session,employer_answer_data):
+ async def update(db: Session, employer_answer_data, id: int):
     db.query(models.EmployerAnswer).filter(models.EmployerAnswer.id == id).update({"answers": employer_answer_data.answers}, synchronize_session="fetch")
     stuff = EmployerAnswersRepo.fetch_by_id(db, id)
     return stuff
