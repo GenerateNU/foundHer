@@ -46,7 +46,7 @@ async def get_all_questions(db: Session = Depends(get_db)) -> List[Applicant_Que
     return jsonable_encoder(all_applicant_questions)
 
 
-@router.put('/applicant-questions/{question_request.id}', tags=["Applicant_Question"])
+@router.put('/applicant-questions/{question_id}', tags=["Applicant_Question"])
 async def update_question (question_request: Applicant_Question_Update, db: Session = Depends(get_db)) -> Optional[Applicant_Question]: #question_id: int, question_content: str db: Session = Depends(get_db)) -> Optional[Applicant_Question]:
     """
     Update a question that already exists in the database
@@ -70,7 +70,7 @@ async def delete_question(question_id: int, db: Session = Depends(get_db)) -> in
     db_question = Applicant_Question_Repo.fetch_by_id(db=db, question_id=question_id)
     if db_question is None:
         raise HTTPException(status_code=404, detail= f"Question not found with the given ID: {question_id}")
-
+    
     json_compatible_delete = await Applicant_Question_Repo.delete(db=db, question_id=question_id)
 
     return jsonable_encoder(json_compatible_delete)

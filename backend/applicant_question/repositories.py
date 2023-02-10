@@ -13,17 +13,17 @@ class Applicant_Question_Repo:
         db.refresh(db_question)
         return db_question
     
-    def fetch_by_id(db: Session, question_id):
+    def fetch_by_id(db: Session, question_id: int):
         return db.query(models.Applicant_Question).filter(models.Applicant_Question.id == question_id).first()
  
     def fetch_all(db: Session, skip: int = 0, limit: int = 100):
         return db.query(models.Applicant_Question).offset(skip).limit(limit).all()
  
-    async def delete(db: Session,question_id):
-        db_question = db.query(models.Applicant_Question).filter_by(id=question_id).first()
+    async def delete(db: Session,question_id: int):
+        db_question= db.query(models.Applicant_Question).filter(models.Applicant_Question.id == question_id).first()
         db.delete(db_question)
         db.commit()
-        return 0
+        return db_question
      
      
     async def update(db: Session, question_data: schemas.Applicant_Question_Update, id: int):

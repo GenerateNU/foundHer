@@ -28,11 +28,13 @@ class Applicant_Answer_Repo:
         db_answer= db.query(models.Applicant_Answer).filter_by(id=answer_id).first()
         db.delete(db_answer)
         db.commit()
-        return 0
+        return db_answer
      
      
     async def update(db: Session, answer_data: schemas.Applicant_Answer_Update, id: int):
         db.query(models.Applicant_Answer).filter(models.Applicant_Answer.id == id).update({"question_id": answer_data.question_id, "applicant_id": answer_data.applicant_id,\
             "answers": answer_data.answers}, synchronize_session="fetch")
         db.commit()
-        return answer_data
+        stuff = Applicant_Answer_Repo.fetch_by_id(db, id)
+
+        return stuff

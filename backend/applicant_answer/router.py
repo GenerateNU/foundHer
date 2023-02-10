@@ -34,10 +34,9 @@ async def update_question_answer_for_applicant(answer_request: Applicant_Answer_
     
     db_answer = Applicant_Answer_Repo.fetch_by_id(db, answer_request.id)
     if db_answer:
-        updated_question = jsonable_encoder(answer_request)
-        db_answer.question_id = updated_question["question_id"]
-        db_answer.applicant_id = updated_question["applicant_id"]
-        db_answer.answers = updated_question["answers"]
+        db_answer.question_id = answer_request["question_id"]
+        db_answer.applicant_id = answer_request["applicant_id"]
+        db_answer.answers = answer_request["answers"]
         json_compatible_question = await Applicant_Answer_Repo.update(db=db, answer_data=answer_request, id=answer_request.id)
     else:
         raise HTTPException(status_code=400, detail=f"Question not found with the given ID: {answer_request.id}")
@@ -56,6 +55,7 @@ async def delete_question_answer_for_applicant(answer_id: int, db: Session = Dep
     json_compatible_delete = await Applicant_Answer_Repo.delete(db=db, answer_id=answer_id)
 
     return jsonable_encoder(json_compatible_delete)
+
 
 @router.get("/applicant-answers/{answer_id}", tags=["Applicant_Answer"])
 async def get_question_answer_for_applicant(answer_id: int, db: Session = Depends(get_db)) -> Optional[Applicant_Answer]:
