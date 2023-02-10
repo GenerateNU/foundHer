@@ -32,7 +32,7 @@ class Applicant_Answer_Repo:
      
      
     async def update(db: Session, answer_data: schemas.Applicant_Answer_Update, id: int):
-        db.query(models.Applicant_Question).filter(models.Applicant_Question.id == id).update({"question_id": answer_data.question_id, "applicant_id": answer_data.applicant_id,\
+        db.query(models.Applicant_Answer).filter(models.Applicant_Answer.id == id).update({"question_id": answer_data.question_id, "applicant_id": answer_data.applicant_id,\
             "answers": answer_data.answers}, synchronize_session="fetch")
         db.commit()
         return answer_data

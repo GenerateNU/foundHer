@@ -35,9 +35,10 @@ async def update_question_answer_for_applicant(answer_request: Applicant_Answer_
     db_answer = Applicant_Answer_Repo.fetch_by_id(db, answer_request.id)
     if db_answer:
         updated_question = jsonable_encoder(answer_request)
-        db_answer.question_content = updated_question["question_content"]
-        db_answer.possible_answers = updated_question["possible_answers"]
-        json_compatible_question = await Applicant_Answer_Repo.update(db=db, question_data=answer_request, id=answer_request.id)
+        db_answer.question_id = updated_question["question_id"]
+        db_answer.applicant_id = updated_question["applicant_id"]
+        db_answer.answers = updated_question["answers"]
+        json_compatible_question = await Applicant_Answer_Repo.update(db=db, answer_data=answer_request, id=answer_request.id)
     else:
         raise HTTPException(status_code=400, detail=f"Question not found with the given ID: {answer_request.id}")
 
@@ -48,7 +49,7 @@ async def delete_question_answer_for_applicant(answer_id: int, db: Session = Dep
     """
     Delete an answer that exists in the database
     """
-    db_question = Applicant_Answer_Repo.fetch_by_id(db=db, id=answer_id)
+    db_question = Applicant_Answer_Repo.fetch_by_id(db=db, answer_id=answer_id)
     if db_question is None:
         raise HTTPException(status_code=404, detail= f"Answer not found with the given ID: {answer_id}")
 
