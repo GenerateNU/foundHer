@@ -4,10 +4,8 @@ import {loginThunk} from "./thunks.js";
 import {Navigate, useNavigate} from "react-router";
 import React from "react";
 
-
-
 const Login = () => {
-    const {currentUser} = useSelector((state) => state.users)
+    const {currentUser} = useSelector((state: any) => state.users)
     const [username, setUsername] = useState('phamlo')
     const [password, setPassword] = useState('password')
     const dispatch = useDispatch()

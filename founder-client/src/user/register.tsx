@@ -5,7 +5,7 @@ import {Navigate} from "react-router";
 import React from "react";
 
 const Register = () => {
-    const {currentUser} = useSelector((state) => state.users)
+    const {currentUser} = useSelector((state: any) => state.users)
     const [username, setUsername] = useState('alice')
     const [email, setEmail] = useState('email@gmail.com')
     const [password, setPassword] = useState('alice1234')

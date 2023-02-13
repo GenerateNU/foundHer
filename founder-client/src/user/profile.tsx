@@ -5,7 +5,7 @@ import { profileThunk } from "./thunks";
 import {Navigate, useNavigate} from "react-router";
 
 const Profile = () => {
-    const {currentUser} = useSelector((state) => state.users)
+    const {currentUser} = useSelector((state: any) => state.users)
     const dispatch = useDispatch()
     
     try {
