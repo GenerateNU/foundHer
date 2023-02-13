@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "./thunks.js";
 import {Navigate} from "react-router";
 import React from "react";
+import { AsyncThunkAction } from "@reduxjs/toolkit";
 
 const Register = () => {
     const {currentUser} = useSelector((state: any) => state.users)
@@ -10,7 +11,7 @@ const Register = () => {
     const [email, setEmail] = useState('email@gmail.com')
     const [password, setPassword] = useState('alice1234')
     
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<any>()
     const handleRegisterBtn = () => {
         dispatch(registerThunk({username, password, email}))
     }

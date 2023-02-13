@@ -8,7 +8,7 @@ const Login = () => {
     const {currentUser} = useSelector((state: any) => state.users)
     const [username, setUsername] = useState('phamlo')
     const [password, setPassword] = useState('password')
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<any>()
     const handleLoginBtn = () => {
         try {
             dispatch(loginThunk({username, password}))
