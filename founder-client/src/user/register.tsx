@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import {useState} from "react";
 // import {useDispatch, useSelector} from "react-redux";
 // import {registerThunk} from "./thunks.js";
@@ -18,6 +19,29 @@
 //         localStorage.setItem("token", currentUser.token)
 //         return (<Navigate to={'/profile'}/>)
 //     }
+=======
+import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {registerThunk} from "./thunks.js";
+import {Navigate} from "react-router";
+import React from "react";
+import { AsyncThunkAction } from "@reduxjs/toolkit";
+
+const Register = () => {
+    const {currentUser} = useSelector((state: any) => state.users)
+    const [username, setUsername] = useState('alice')
+    const [email, setEmail] = useState('email@gmail.com')
+    const [password, setPassword] = useState('alice1234')
+    
+    const dispatch = useDispatch<any>()
+    const handleRegisterBtn = () => {
+        dispatch(registerThunk({username, password, email}))
+    }
+    if(currentUser) {
+        localStorage.setItem("token", currentUser.token)
+        return (<Navigate to={'/profile'}/>)
+    }
+>>>>>>> frontend/ts-refactor
 
 //     return(
 //         <>

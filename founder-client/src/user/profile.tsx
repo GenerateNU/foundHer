@@ -4,9 +4,15 @@
 // import { profileThunk } from "./thunks";
 // import {Navigate, useNavigate} from "react-router";
 
+<<<<<<< HEAD
 // const Profile = () => {
 //     const {currentUser} = useSelector((state) => state.users)
 //     const dispatch = useDispatch()
+=======
+const Profile = () => {
+    const {currentUser} = useSelector((state: any) => state.users)
+    const dispatch = useDispatch<any>()
+>>>>>>> frontend/ts-refactor
     
 //     try {
 //         useEffect(() => {

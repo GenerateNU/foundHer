@@ -3,17 +3,16 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {configureStore} from "@reduxjs/toolkit";
 import React from "react";
-// import usersReducer from "./user/reducer";
-// import Login from "./user/login.tsx";
-// import Register from "./user/register";
+import usersReducer from "./user/reducer";
+import Login from "./user/Login";
+import Register from "./user/Register";
 import Home from "./pages/Home";
-// import Profile from "./user/profile";
-import EmployerQuestionForm from './pages/EmployerQuestionForm/EmployerQuestionForm';
-// const store = configureStore({
-//   reducer: {
-//       users: usersReducer,
-//   }
-// })
+import Profile from "./user/Profile";
+const store = configureStore({
+  reducer: {
+      users: usersReducer,
+  }
+})
 
 function App() {
   return (
