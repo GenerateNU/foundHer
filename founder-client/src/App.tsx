@@ -4,10 +4,10 @@ import {Provider} from "react-redux";
 import {configureStore} from "@reduxjs/toolkit";
 import React from "react";
 import usersReducer from "./user/reducer";
-import Login from "./user/Login";
-import Register from "./user/Register";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Home from "./pages/Home";
-import Profile from "./user/Profile";
+import Profile from "./pages/Profile";
 const store = configureStore({
   reducer: {
       users: usersReducer,

@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loginThunk} from "./thunks.js";
+import {loginThunk} from "../user/thunks.js";
 import {Navigate, useNavigate} from "react-router";
 import React from "react";
 

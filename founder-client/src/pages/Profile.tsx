@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import React from "react";
-import { profileThunk } from "./thunks";
+import { profileThunk } from "../user/thunks";
 import {Navigate, useNavigate} from "react-router";
 
 const Profile = () => {

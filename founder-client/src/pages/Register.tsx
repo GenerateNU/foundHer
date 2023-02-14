@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {registerThunk} from "./thunks.js";
+import {registerThunk} from "../user/thunks.js";
 import {Navigate} from "react-router";
 
 const Register = () => {
