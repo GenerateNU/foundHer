@@ -7,21 +7,19 @@ type EmployerQuestion = {
   answerText: string
 }
 
-const EmployerQuestion: JSX.Element = ({ question } : { question: EmployerQuestion }) => {
+const EmployerQuestion = ({ question } : { question: EmployerQuestion }) => {
   const [answer, setAnswer] = useState<string>(question.answerText);
 
   return (
-    <>
-      <div className='question'>
-        <span>{question.questionText}</span>
-        <input 
-          type='text'
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          placeholder='Add answer...'
-        />
-      </div>
-    </>
+    <div className='question'>
+      <span>{question.questionText}</span>
+      <input 
+        type='text'
+        value={answer}
+        onChange={(e) => setAnswer(e.target.value)}
+        placeholder='Add answer...'
+      />
+    </div>
   )
 }
 

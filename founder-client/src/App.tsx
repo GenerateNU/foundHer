@@ -8,6 +8,8 @@ import Login from "./user/Login";
 import Register from "./user/Register";
 import Home from "./pages/Home";
 import Profile from "./user/Profile";
+import EmployerQuestionForm from "./pages/EmployerQuestionForm/EmployerQuestionForm";
+
 const store = configureStore({
   reducer: {
       users: usersReducer,

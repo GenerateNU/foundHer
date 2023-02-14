@@ -1,7 +1,9 @@
 import React from 'react';
 
-function EmployerQuestionForm() {
-
+const EmployerQuestionForm = () => {
+  return (
+    <div></div>
+  )
 }
 
 export default EmployerQuestionForm;
