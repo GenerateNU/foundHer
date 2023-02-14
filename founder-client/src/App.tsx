@@ -26,7 +26,6 @@ function App() {
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/employer-questions" element={<EmployerQuestionForm/>}/>
             </Routes>
-          
         </BrowserRouter>
       </Provider>
     </div>
