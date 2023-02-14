@@ -8,20 +8,20 @@ const usersReducer = createSlice({
         currentUser: null,
         loading: false,
     },
-    extraReducers: {
-        [logoutThunk.fulfilled]: (state, action) => {
-            state.currentUser = null
-        },
-        [registerThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload
-        },
-        [loginThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload
-        },
-        [profileThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload
-        },
-    },
+    // extraReducers: {
+    //     [logoutThunk.fulfilled]: (state, action) => {
+    //         state.currentUser = null
+    //     },
+    //     [registerThunk.fulfilled]: (state, action) => {
+    //         state.currentUser = action.payload
+    //     },
+    //     [loginThunk.fulfilled]: (state, action) => {
+    //         state.currentUser = action.payload
+    //     },
+    //     [profileThunk.fulfilled]: (state, action) => {
+    //         state.currentUser = action.payload
+    //     },
+    // },
     reducers: {
 
     }

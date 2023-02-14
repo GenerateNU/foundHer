@@ -6,11 +6,11 @@ import {Navigate, useNavigate} from "react-router";
 
 const Profile = () => {
     const {currentUser} = useSelector((state: any) => state.users)
-    const dispatch = useDispatch<any>()
+    // const dispatch = useDispatch<any>()
     
     try {
         useEffect(() => {
-            dispatch(profileThunk(localStorage.getItem("access_token")))
+            // dispatch(profileThunk(localStorage.getItem("access_token")))
           }, [])
     } catch (e) {
         return (<Navigate to={'/login'}/>)
