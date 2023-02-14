@@ -4,10 +4,10 @@ import {Provider} from "react-redux";
 import {configureStore} from "@reduxjs/toolkit";
 import React from "react";
 import usersReducer from "./user/reducer";
-import Login from "./user/login";
-import Register from "./user/register";
-import Home from "./home/home";
-import Profile from "./user/profile";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 const store = configureStore({
   reducer: {
       users: usersReducer,
@@ -25,7 +25,6 @@ function App() {
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/profile" element={<Profile/>}/>
             </Routes>
-          
         </BrowserRouter>
       </Provider>
     </div>

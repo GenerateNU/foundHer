@@ -1,16 +1,16 @@
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import React from "react";
-import { profileThunk } from "./thunks";
+import { profileThunk } from "../user/thunks";
 import {Navigate, useNavigate} from "react-router";
 
 const Profile = () => {
-    const {currentUser} = useSelector((state) => state.users)
-    const dispatch = useDispatch()
+    const {currentUser} = useSelector((state: any) => state.users)
+    // const dispatch = useDispatch<any>()
     
     try {
         useEffect(() => {
-            dispatch(profileThunk(localStorage.getItem("access_token")))
+            // dispatch(profileThunk(localStorage.getItem("access_token")))
           }, [])
     } catch (e) {
         return (<Navigate to={'/login'}/>)

@@ -1,19 +1,17 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loginThunk} from "./thunks.js";
+import {loginThunk} from "../user/thunks.js";
 import {Navigate, useNavigate} from "react-router";
 import React from "react";
 
-
-
 const Login = () => {
-    const {currentUser} = useSelector((state) => state.users)
+    const {currentUser} = useSelector((state: any) => state.users)
     const [username, setUsername] = useState('phamlo')
     const [password, setPassword] = useState('password')
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch<any>()
     const handleLoginBtn = () => {
         try {
-            dispatch(loginThunk({username, password}))
+            // dispatch(loginThunk({username, password}))
         } catch (e) {
 
         }
