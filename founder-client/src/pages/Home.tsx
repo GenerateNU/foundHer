@@ -1,17 +1,8 @@
-import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import React from "react";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-const Home = () => {
-    const {currentUser} = useSelector((state: any) => state.users)
+export default function Home() {
+  const { currentUser } = useSelector((state: any) => state.users);
 
-    return (
-        <>
-            {
-                currentUser &&
-                <h1>Welcome new user: {currentUser.username}</h1>
-            }
-        </>
-    )
+  return <>{currentUser && <h1>Welcome new user: {currentUser.username}</h1>}</>;
 }
-export default Home
