@@ -35,6 +35,6 @@ class Applicant_Answer_Repo:
         db.query(models.Applicant_Answer).filter(models.Applicant_Answer.id == id).update({"question_id": answer_data.question_id, "applicant_id": answer_data.applicant_id,\
             "answers": answer_data.answers}, synchronize_session="fetch")
         db.commit()
-        stuff = Applicant_Answer_Repo.fetch_by_id(db, id)
+        updated_answer = Applicant_Answer_Repo.fetch_by_id(db, id)
 
-        return stuff
+        return updated_answer
