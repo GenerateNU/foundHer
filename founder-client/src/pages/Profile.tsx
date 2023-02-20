@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import React from 'react';
-import { profileThunk } from './thunks';
-import { Navigate, useNavigate } from 'react-router';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router';
 
-const Profile = () => {
+export default function Profile() {
   const { currentUser } = useSelector((state: any) => state.users);
   // const dispatch = useDispatch<any>()
 
@@ -22,5 +20,4 @@ const Profile = () => {
       {currentUser && <h1>Welcome, {currentUser.username}</h1>}
     </>
   );
-};
-export default Profile;
+}
