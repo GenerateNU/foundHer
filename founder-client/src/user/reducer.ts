@@ -1,5 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { access, stat } from "fs";
 import { loginThunk, logoutThunk, registerThunk, profileThunk } from "./thunks";
 
 
@@ -42,8 +41,8 @@ const usersReducer = createSlice({
           })
     },
     reducers: {
-
     }
-})
+  });
+
 
 export default usersReducer.reducer;

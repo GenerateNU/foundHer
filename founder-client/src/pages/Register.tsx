@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "../user/thunks";
 import {Navigate} from "react-router";
-
+import React from "react";
 const Register = () => {
     const {currentUser} = useSelector((state: any) => state.users)
     const [username, setUsername] = useState('');
@@ -50,7 +50,6 @@ const Register = () => {
                 currentUser &&
                 <h1>Welcome new user: {currentUser.username}</h1>
             } */}
-        </>
-    )
+    </>
+  );
 }
-export default Register
