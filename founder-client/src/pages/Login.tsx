@@ -6,13 +6,15 @@ import React from "react";
 
 const Login = () => {
     const {currentUser} = useSelector((state: any) => state.users)
-    const [username, setUsername] = useState('phamlo')
-    const [password, setPassword] = useState('password')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
     const dispatch = useDispatch<any>()
     const handleLoginBtn = () => {
         try {
-            dispatch(loginThunk({username, password}))
+            dispatch(loginThunk({username, password}));
         } catch (e) {
+        }
+    }
 
   return (
     <>
@@ -37,68 +39,5 @@ const Login = () => {
       </button>
     </>
   );
-}
-
-// let _token: { accessToken: string, refreshToken: string } = JSON.parse(localStorage.getItem('REACT_TOKEN_AUTH') || '') || null;
-// const getExpirationDate = (jwtToken?: string): number | undefined => {
-//     if (!jwtToken) {
-//         return undefined;
-//     }
-
-//     const jwt = JSON.parse(atob(jwtToken.split('.')[1]));
-
-//     // multiply by 1000 to convert seconds into milliseconds
-//     return jwt && jwt.exp && jwt.exp * 1000 || null;
-// };
-
-// const isExpired = (exp?: number) => {
-//     if (!exp) {
-//         return false;
-//     }
-
-//     return Date.now() > exp;
-// };
-
-// const getToken = async () => {
-//     if (!_token) {
-//         return null;
-//     }
-
-//     if (isExpired(getExpirationDate(_token.accessToken))) {
-//         const updatedToken = await fetch('/update-token', {
-//             method: 'POST',
-//             body: _token.refreshToken
-//         })
-//             .then(r => r.json());
-
-//         setToken(updatedToken);
-//     }
-
-//     return _token && _token.accessToken;
-// };
-
-// const isLoggedIn = () => {
-//     return !!_token;
-// };
-
-// let observers: Array<(isLogged: boolean) => void> = [];
-// const subscribe = (observer: (isLogged: boolean) => void) => {
-//     observers.push(observer);
-// };
-
-// const unsubscribe = (observer: (isLogged: boolean) => void) => {
-//     observers = observers.filter(_observer => _observer !== observer);
-// };
-// const notify = () => {
-//     const isLogged = isLoggedIn();
-//     observers.forEach(observer => observer(isLogged));
-// };
-// const setToken = (token: typeof _token) => {
-//     if (token) {
-//         localStorage.setItem('REACT_TOKEN_AUTH', JSON.stringify(token));
-//     } else {
-//         localStorage.removeItem('REACT_TOKEN_AUTH');
-//     }
-//     _token = token;
-//     notify();
-// };
+};
+export default Login;
