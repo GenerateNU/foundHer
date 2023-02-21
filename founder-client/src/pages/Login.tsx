@@ -15,7 +15,10 @@ const Login = () => {
         } catch (e) {
         }
     }
-
+    if (currentUser) {
+      localStorage.setItem('access_token', currentUser.access_token)
+      return (<Navigate to={'/profile'}/>)
+    }
   return (
     <>
       <h1>Login</h1>
