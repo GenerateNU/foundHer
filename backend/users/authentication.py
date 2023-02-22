@@ -1,6 +1,6 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
-from typing import Union
+from typing import Union, Optional
 from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
@@ -78,13 +78,19 @@ class LoginForm(BaseModel):
     password: str
 class RegisterForm(LoginForm):
     email: str
+    fullname: Optional[str]
+    company_name: Optional[str]
+    is_applicant: Optional[bool]
 
 @router.post("/register")
 async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
-    username = form_data.username
-    password = form_data.password
-    email = form_data.email
-
+    username: str = form_data.username
+    password: str = form_data.password
+    email: str = form_data.email
+    fullname: str = form_data.fullname if form_data.fullname else ""
+    company_name: str = form_data.company_name if form_data.company_name else ""
+    is_applicant: bool = form_data.is_applicant if form_data.is_applicant else True
+    
     db_user: User = UserRepo.fetch_by_username(db=db, username=username)
     if db_user:
         raise HTTPException(
@@ -94,7 +100,7 @@ async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
         )
     
     password_hash = get_password_hash(password)
-    new_user = await UserRepo.create(db=db, user=UserCreate(username=username, hashed_password=password_hash, email=email))
+    new_user = await UserRepo.create(db=db, user=UserCreate(username=username, hashed_password=password_hash, email=email, company_name=company_name, fullname=fullname, is_applicant=is_applicant))
     json_compatible_item_data = jsonable_encoder(new_user)
     del json_compatible_item_data["hashed_password"]
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
