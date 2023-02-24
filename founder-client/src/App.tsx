@@ -1,5 +1,4 @@
-import { Routes, Route } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
@@ -16,7 +15,7 @@ const store = configureStore({
   },
 });
 
-function App() {
+export default function App() {
   return (
     <div className='container mt-4 mb-4'>
       <Provider store={store}>
@@ -33,5 +32,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
