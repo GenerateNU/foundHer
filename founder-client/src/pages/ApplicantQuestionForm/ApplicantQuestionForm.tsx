@@ -27,6 +27,13 @@ const QUESTION_LIST: ApplicantQuestion[] = [
     id: 5,
     questionContent: 'Do you have a reference?',
   },
+  {
+    id: 6,
+    questionContent: 'What kind of a business are you looking to work at?',
+    possibleAnswers: ['Micro-sized enterprise (1-15 employees)', 'Small-sized enterprise (15-5 employees)',
+      'Medium-sized enterprise (50-250 employees)', 'Large-sized enterprise (250+ employees)',
+      'No preference'],
+  },
 ];
 
 // eslint-disable-next-line @typescript-eslint/naming-convention

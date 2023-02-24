@@ -7,22 +7,26 @@ const ApplicantQuestionInput = ({ question }: { question: ApplicantQuestion }) =
   const [answer, setAnswer] = useState<string>('');
   if (question.possibleAnswers) {
     const options = question.possibleAnswers.map((answerOption, index) => {
+      
       return (
-        <option key={index} value={answerOption}>
-          {answerOption}
-        </option>
+        
+        <div>
+        <input type="checkbox" className='box'/>
+        <span>
+          {answerOption}<br/>
+        </span>
+        </div>
       );
     });
-
+    
     return (
       <div className='question'>
         <span>{question.questionContent}</span>
-        <select onChange={e => setAnswer(e.target.value)}>
-          <option value='' disabled>
-            Select an option
-          </option>
+        {/* <div onChange={e => setAnswer(e.target.value)}> */}
+          <div>
           {options}
-        </select>
+          
+        </div>
       </div>
     );
   } else {
