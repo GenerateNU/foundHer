@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useReducer} from 'react';
+
 import ApplicantQuestionInput from '../../components/ApplicantQuestion/ApplicantQuestion';
-import { ApplicantQuestion } from '../../utils/ApplicantQuestionTypes';
+import { ApplicantQuestion, ApplicantAnswer} from '../../utils/ApplicantQuestionTypes';
 import {useDispatch, useSelector} from "react-redux";
 import { applicantQuestionsThunk, addApplicantAnswerThunk } from '../../user/thunks';
 
@@ -38,21 +39,49 @@ const QUESTION_LIST: ApplicantQuestion[] = [
   },
 ];
 
+function getAnswerMap() {
+  let answers: Map<number, ApplicantAnswer> = new Map<number, ApplicantAnswer>();
+  QUESTION_LIST.forEach((question: ApplicantQuestion) => {
+      answers.set(question.id, {
+        "questionId": question.id,
+        "applicantId": 1,
+        "answers": []
+      })
+    });
+  return answers;
+};
+
+const reducer = (state: Map<number, ApplicantAnswer>, action: { questionId: number, answers: string[] }) => {
+  let ans: ApplicantAnswer | undefined = state.get(action.questionId);
+  if (ans) {
+    ans.answers = action.answers;
+    state.set(action.questionId, ans);
+  }
+  return state;
+};
+
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ApplicantQuestionForm = () => {
+
   console.log('rendered!');
+
+  const [answers, dispatchAnswer] = useReducer(reducer, getAnswerMap());
+
+  console.log(answers);
+
+  const questionsView = QUESTION_LIST.map((q, index) => (
+  <ApplicantQuestionInput key={index} question={q} dispatchAnswer={dispatchAnswer} />
+  ));
+  
   const dispatch = useDispatch<any>();
   const handleSubmitBtn = () => {
     try {
+
         dispatch(addApplicantAnswerThunk({}))
     } catch (e) {
 
     }
   }
-
-  const questionsView = QUESTION_LIST.map((q, index) => (
-    <ApplicantQuestionInput key={index} question={q} />
-  ));
 
   return (
     <section>
