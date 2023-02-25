@@ -1,6 +1,8 @@
 import React from 'react';
 import ApplicantQuestionInput from '../../components/ApplicantQuestion/ApplicantQuestion';
 import { ApplicantQuestion } from '../../utils/ApplicantQuestionTypes';
+import {useDispatch, useSelector} from "react-redux";
+import { applicantQuestionsThunk, addApplicantAnswerThunk } from '../../user/thunks';
 
 import './ApplicantQuestionForm.css';
 
@@ -12,7 +14,7 @@ const QUESTION_LIST: ApplicantQuestion[] = [
   {
     id: 2,
     questionContent: 'What is your identified gender?',
-    possibleAnswers: ['Male', 'Female', 'Non-binary'],
+    possibleAnswers: ['Male', 'Female', 'Non-binary', 'Other'],
   },
   {
     id: 3,
@@ -39,6 +41,15 @@ const QUESTION_LIST: ApplicantQuestion[] = [
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ApplicantQuestionForm = () => {
   console.log('rendered!');
+  const dispatch = useDispatch<any>();
+  const handleSubmitBtn = () => {
+    try {
+        dispatch(addApplicantAnswerThunk({}))
+    } catch (e) {
+
+    }
+  }
+
   const questionsView = QUESTION_LIST.map((q, index) => (
     <ApplicantQuestionInput key={index} question={q} />
   ));
@@ -47,6 +58,9 @@ const ApplicantQuestionForm = () => {
     <section>
       <h1>Applicant Questions</h1>
       {questionsView}
+      <button
+        className="btn btn-primary w-100"
+        onClick={handleSubmitBtn}>Submit</button>
     </section>
   );
 };
