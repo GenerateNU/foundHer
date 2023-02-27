@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "../../user/thunks";
 import {Navigate, useNavigate} from "react-router";
 import {BottomLine, NeedHelpContactUs} from "../../util/util";
-import React from "react";
 const EmployerRegister = () => {
     const {currentUser} = useSelector((state: any) => state.users)
     const [username, setUsername] = useState('');
