@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, { useState } from 'react';
 
 import ApplicantQuestionInput from '../../components/ApplicantQuestion/ApplicantQuestion';
 import { ApplicantQuestion, ApplicantAnswer} from '../../utils/ApplicantQuestionTypes';
@@ -39,46 +39,15 @@ const QUESTION_LIST: ApplicantQuestion[] = [
   },
 ];
 
-function getAnswerMap() {
-  let answers: Map<number, ApplicantAnswer> = new Map<number, ApplicantAnswer>();
-  QUESTION_LIST.forEach((question: ApplicantQuestion) => {
-      answers.set(question.id, {
-        "questionId": question.id,
-        "applicantId": 1,
-        "answers": []
-      })
-    });
-  return answers;
-};
-
-const reducer = (state: Map<number, ApplicantAnswer>, action: { questionId: number, answers: string[] }) => {
-  let ans: ApplicantAnswer | undefined = state.get(action.questionId);
-  if (ans) {
-    ans.answers = action.answers;
-    state.set(action.questionId, ans);
-  }
-  return state;
-};
-
+const handleSubmitBtn = () => {}
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ApplicantQuestionForm = () => {
 
-  const [answers, dispatchAnswer] = useReducer(reducer, getAnswerMap());
+  const [submit, setSubmit] = useState<boolean>(false);
 
   const questionsView = QUESTION_LIST.map((q, index) => (
-  <ApplicantQuestionInput key={index} question={q} dispatchAnswer={dispatchAnswer} />
+  <ApplicantQuestionInput key={index} question={q} submit={submit} />
   ));
-  
-  const dispatch = useDispatch<any>();
-  const handleSubmitBtn = () => {
-    try {
-      for (let answer of answers.values()) {
-        dispatch(addApplicantAnswerThunk(answer));
-      };
-    } catch (e) {
-
-    }
-  }
 
   return (
     <section>
@@ -86,7 +55,7 @@ const ApplicantQuestionForm = () => {
       {questionsView}
       <button
         className="btn btn-primary w-100"
-        onClick={handleSubmitBtn}>Submit</button>
+        onClick={() => setSubmit(true)}>Submit</button>
     </section>
   );
 };
