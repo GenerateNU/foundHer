@@ -63,11 +63,7 @@ const reducer = (state: Map<number, ApplicantAnswer>, action: { questionId: numb
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ApplicantQuestionForm = () => {
 
-  console.log('rendered!');
-
   const [answers, dispatchAnswer] = useReducer(reducer, getAnswerMap());
-
-  console.log(answers);
 
   const questionsView = QUESTION_LIST.map((q, index) => (
   <ApplicantQuestionInput key={index} question={q} dispatchAnswer={dispatchAnswer} />
@@ -76,8 +72,9 @@ const ApplicantQuestionForm = () => {
   const dispatch = useDispatch<any>();
   const handleSubmitBtn = () => {
     try {
-
-        dispatch(addApplicantAnswerThunk({}))
+      for (let answer of answers.values()) {
+        dispatch(addApplicantAnswerThunk(answer));
+      };
     } catch (e) {
 
     }
