@@ -1,0 +1,130 @@
+.signinTitle {
+    /* position: absolute; */
+    width: 132px;
+    height: 48px;
+    /* left: 520px; */
+    top: 237px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 48px;
+    margin-left: 35px;
+    /* text-align: center; */
+
+    color: #000000;
+}
+
+.usernameField {
+    /* position: absolute; */
+    width: 396px;
+    height: 40px;
+    left: 521px;
+    top: 310px;
+
+    margin-left: 35px;
+    margin-top: 20px;
+    background: #D9D9D9;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+.formContainer {
+    position: absolute;
+    width: 477px;
+    height: 450px;
+    left: 482px;
+    top: 100px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 5px 10px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+}
+
+.passwordField {
+    /* position: absolute; */
+    margin-left: 35px;
+    width: 396px;
+    height: 40px;
+    left: 521px;
+    top: 423px;
+    margin-top: 20px;
+    font-size: 15px;
+    background: #D9D9D9;
+    border-radius: 5px;
+}
+
+.signinButton {
+    /* position: relative; */
+width: 396px;
+height: 40px;
+left: 521px;
+top: 576px;
+margin-left: 35px;
+margin-top: 20px;
+background: #D9D9D9;
+font-size: 18px;
+border-radius: 64px;
+}
+
+.forgotPassword {
+    /* position: absolute; */
+width: 153px;
+height: 22px;
+left: 520px;
+top: 509px;
+margin-left: 35px;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 22px;
+/* identical to box height */
+
+/* text-align: center; */
+
+color: #000000;
+}
+
+.newToFoundHer {
+    /* position: absolute; */
+width: 159px;
+height: 22px;
+left: 554px;
+top: 686px;
+margin-left: 115px;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 22px;
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+}
+.createAnAccount {
+    /* position: absolute; */
+width: 162px;
+height: 22px;
+left: 725px;
+top: 686px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 22px;
+/* identical to box height */
+margin-left: 10px;
+
+text-align: center;
+
+color: #000000;
+}
+
+.newto {
+    margin-top: 100px;
+}

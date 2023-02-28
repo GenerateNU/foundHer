@@ -3,16 +3,15 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
 import usersReducer from './user/reducer';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import Login from './pages/Signin/Signin';
+import ApplicantRegister from './pages/ApplicantRegister/ApplicantRegister';
+import EmployerRegister from './pages/EmployerRegister/EmployerRegister';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuestionForm';
-import questionsReducer from "./question/reducer"
+import PreRegister from './pages/Pre-register/PreRegister';
 const store = configureStore({
   reducer: {
     users: usersReducer,
-    questions: questionsReducer,
   },
 });
 
@@ -22,11 +21,13 @@ export default function App() {
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<Login />} />
+            <Route path='/preregister' element={<PreRegister/>} />
+            <Route path='/home' element={<Home />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+            <Route path='/register-applicant' element={<ApplicantRegister />} />
+            <Route path='/register-employer' element={<EmployerRegister />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/applicant_questions' element={<ApplicantQuestionForm />} />
           </Routes>
         </BrowserRouter>
       </Provider>

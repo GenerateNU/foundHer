@@ -8,10 +8,10 @@ from sqlalchemy.orm import sessionmaker
 from db.db import Base, get_db
 
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
+SQLALCHEMY_DATABASE_URL = "postgresql://user:pwd@localhost:5433/foundher"
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+    SQLALCHEMY_DATABASE_URL, echo=True
 )
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -27,7 +27,7 @@ def override_get_db():
 def test_db():
     Base.metadata.create_all(bind=engine)
     yield
-    Base.metadata.drop_all(bind=engine)
+    Base.metadata.drop_all(bind=engine) # could be better to just delete the data instead of recreating the whole thing
 
 app.dependency_overrides[get_db] = override_get_db
 
