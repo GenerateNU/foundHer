@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {registerThunk} from "../../user/thunks";
-import {Navigate, useNavigate} from "react-router";
+import {Navigate, useNavigate} from "react-router-dom";
 import {BottomLine, NeedHelpContactUs} from "../../util/util";
 import "./applicantregister.css";
 const ApplicantRegister = () => {
