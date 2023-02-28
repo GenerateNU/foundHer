@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import React from "react";
-import { profileThunk, logoutThunk } from "../user/thunks";
+import { profileThunk, logoutThunk } from "../../user/thunks";
 import {Navigate, useNavigate} from "react-router";
-
+import "./profile.css"
 const Profile = () => {
     const {currentUser} = useSelector((state: any) => state.users);
     const dispatch = useDispatch<any>();
@@ -24,8 +24,7 @@ const Profile = () => {
     }
 
     return (
-        <>
-            Profile
+        <div className="box main">
             {
                 currentUser &&
                 <h1>Welcome, {currentUser.username}</h1>
@@ -34,7 +33,7 @@ const Profile = () => {
             <button
                 className="btn btn-primary w-100"
                 onClick={handleLogoutBtn}>Logout</button>
-        </>
+        </div>
     )
 }
 export default Profile;

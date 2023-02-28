@@ -5,8 +5,8 @@ export type ApplicantQuestion = {
   };
   
   export type ApplicantAnswer = {
-    questionId: number;
-    applicantId: number;
+    question_id: number;
+    applicant_id: number;
     answers: string[];
   };
   

@@ -64,7 +64,7 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
         <span>{question.question_content}</span>
         <div>{options}</div>
         <div className="button-div">
-          <button onClick={() => handleSubmit()}>Submit</button>
+          <button onClick={() => handleSubmit()}>Next</button>
         </div>
         {submittedAnswers.some((answer: any) => answer.question_id === question.id) && <div> success!</div>}
       </div>
@@ -82,7 +82,7 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
         <div className="button-div">
           <button onClick={() => handleSubmit()}>Submit</button>
         </div>
-        {submittedAnswers.some((answer: any) => answer.question_id === question.id) && <div> success!</div>}
+        {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && <div> success!</div>}
       </div>
     );
   }
