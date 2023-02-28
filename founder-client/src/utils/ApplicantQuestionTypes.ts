@@ -1,7 +1,7 @@
 export type ApplicantQuestion = {
     readonly id: number;
-    questionContent: string;
-    possibleAnswers?: string[] | undefined;
+    question_content: string;
+    possible_answers: string[];
   };
   
   export type ApplicantAnswer = {

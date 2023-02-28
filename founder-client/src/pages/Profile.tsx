@@ -19,6 +19,7 @@ const Profile = () => {
     const handleLogoutBtn = () => {
         dispatch(logoutThunk());
         localStorage.removeItem("access_token");
+        localStorage.removeItem("currentUserID")
         navigate("/login");
     }
 

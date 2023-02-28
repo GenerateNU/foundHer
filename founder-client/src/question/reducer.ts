@@ -3,14 +3,14 @@ import {createSlice} from "@reduxjs/toolkit";
 import { access, stat } from "fs";
 import {addApplicantAnswerThunk, addApplicantQuestionThunk, getApplicantQuestionsThunk } from "./thunks";
 
-const initialState: {loading: boolean, questions: any[], submittedAnswers: any[]} = {
+const initialState: {loading: boolean, applicantQuestions: any[], submittedAnswers: any[]} = {
     loading: false,
-    questions: [],
+    applicantQuestions: [],
     submittedAnswers: [],
 };
 
-const questionsReducer = createSlice({
-    name: 'questions',
+const applicantQuestionsReducer = createSlice({
+    name: 'applicantQuestions',
     initialState: initialState,
     extraReducers: builder => {
         builder
@@ -29,7 +29,7 @@ const questionsReducer = createSlice({
           })
           .addCase(getApplicantQuestionsThunk.fulfilled, (state, action) => {
             state.loading = false;
-            state.questions = action.payload;
+            state.applicantQuestions = action.payload;
           })
           .addCase(getApplicantQuestionsThunk.pending, (state, action) => {
             state.loading = true;
@@ -41,4 +41,4 @@ const questionsReducer = createSlice({
     }
 })
 
-export default questionsReducer.reducer;
+export default applicantQuestionsReducer.reducer;

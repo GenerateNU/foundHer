@@ -17,6 +17,8 @@ const ApplicantRegister = () => {
     };
     
     if (currentUser) {
+        localStorage.setItem('access_token', currentUser.access_token);
+        localStorage.setItem('currentUserID', currentUser.id);
         navigate("/profile");
     }
     

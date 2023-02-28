@@ -33,6 +33,8 @@ app.add_middleware(
 app.include_router(router)
 app.include_router(eq_router.router)
 app.include_router(ea_router.router)
+app.include_router(aq_router)
+app.include_router(aa_router)
 
 
 @app.get("/")

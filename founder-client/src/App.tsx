@@ -9,9 +9,13 @@ import EmployerRegister from './pages/EmployerRegister/EmployerRegister';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import PreRegister from './pages/Pre-register/PreRegister';
+import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuestionForm';
+import ApplicantQuestionsReducer from "./question/reducer";
+
 const store = configureStore({
   reducer: {
     users: usersReducer,
+    applicantQuestions: ApplicantQuestionsReducer,
   },
 });
 
@@ -27,6 +31,8 @@ export default function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/register-applicant' element={<ApplicantRegister />} />
             <Route path='/register-employer' element={<EmployerRegister />} />
+            <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
+            <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/profile' element={<Profile />} />
           </Routes>
         </BrowserRouter>

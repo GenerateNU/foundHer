@@ -21,7 +21,7 @@ interface Answer {
 }
 
 export const addApplicantAnswer = async (answer: any) => {
-    console.log("Added applicant answer with the following data:", answer)
     const response = await api.post(`${BASE_API_URL}/applicant-answers`, answer)
-    return response.data
+    console.log(response.data);
+    return response.data;
 }

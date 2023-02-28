@@ -5,51 +5,48 @@ import {
   ApplicantQuestion,
   ApplicantAnswer,
 } from "../../utils/ApplicantQuestionTypes";
-import { addApplicantAnswerThunk } from "../../user/thunks";
+
 import { Navigate } from "react-router";
 
 import "./ApplicantQuestion.css";
+import { addApplicantAnswerThunk } from "../../question/thunks";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ApplicantQuestionInput = ({ question }: PropTypes) => {
   const [submit, setSubmit] = useState<boolean>(false);
   const [answer, setAnswer] = useState<string[]>([]);
-  const { currentUser } = useSelector((state: any) => state.users);
-  const dispatch = useDispatch<any>();
+  const { submittedAnswers } = useSelector((state: any) => state.applicantQuestions);
 
+  const dispatch = useDispatch<any>();
+  if (!localStorage.getItem('access_token')) {
+    return <Navigate to={"/login"} />;
+  }
+  console.log(submittedAnswers)
   const handleSubmit = () => {
-    if (!currentUser) {
-      return <Navigate to={"/login"} />;
-    }
     try {
       dispatch(
         addApplicantAnswerThunk({
-          questionId: question.id,
-          applicantId: currentUser,
+          question_id: question.id,
+          applicant_id: localStorage.getItem("currentUserID"),
           answers: answer,
         })
-      );
-      setSubmit(true);
-      console.log("Submit worked properly I think");
+      )
     } catch (e) {
-      console.log("Error submitting");
+      console.log("Error submitting" + e);
     }
   };
 
-  if (question.possibleAnswers) {
-    const options = question.possibleAnswers.map((answerOption, index) => {
+  if (question.possible_answers.length > 0) {
+    const options = question.possible_answers.map((answerOption, index) => {
       return (
         <div>
           <input
             type="checkbox"
-            className="box"
             onChange={(e) => {
               if (e.target.checked) {
                 setAnswer([...answer, e.target.value]);
-                console.log(answer);
               } else {
                 setAnswer([...answer.filter((a) => a !== e.target.value)]);
-                console.log(answer);
               }
             }}
             value={answerOption}
@@ -64,17 +61,18 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
 
     return (
       <div className="question">
-        <span>{question.questionContent}</span>
+        <span>{question.question_content}</span>
         <div>{options}</div>
         <div className="button-div">
           <button onClick={() => handleSubmit()}>Submit</button>
         </div>
+        {submittedAnswers.some((answer: any) => answer.question_id === question.id) && <div> success!</div>}
       </div>
     );
   } else {
     return (
       <div className="question">
-        <span>{question.questionContent}</span>
+        <span>{question.question_content}</span>
         <input
           type="text"
           value={answer}
@@ -84,6 +82,7 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
         <div className="button-div">
           <button onClick={() => handleSubmit()}>Submit</button>
         </div>
+        {submittedAnswers.some((answer: any) => answer.question_id === question.id) && <div> success!</div>}
       </div>
     );
   }
