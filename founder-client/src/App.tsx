@@ -8,10 +8,11 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuestionForm';
-
+import questionsReducer from "./question/reducer"
 const store = configureStore({
   reducer: {
     users: usersReducer,
+    questions: questionsReducer,
   },
 });
 

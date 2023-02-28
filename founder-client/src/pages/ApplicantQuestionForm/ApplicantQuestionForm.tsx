@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import ApplicantQuestionInput from '../../components/ApplicantQuestion/ApplicantQuestion';
 import { ApplicantQuestion, ApplicantAnswer} from '../../utils/ApplicantQuestionTypes';
+import {useDispatch, useSelector} from "react-redux";
+import { getApplicantQuestionsThunk, addApplicantAnswerThunk } from '../../user/thunks';
 
 import './ApplicantQuestionForm.css';
 

@@ -25,7 +25,7 @@ export const profile = async (token: any) => {
     return response.data
 }
 
-export const applicantQuestions = async () => {
+export const getApplicantQuestions = async () => {
     const response = await api.get(`${BASE_API_URL}/all-applicant-questions`)
     return response.data
 }
@@ -37,6 +37,6 @@ export const addApplicantQuestion = async (question: any) => {
 
 export const addApplicantAnswer = async (answer: any) => {
     console.log("Added applicant answer with the following data:", answer)
-    // const response = await api.post(`${BASE_API_URL}/applicant-answers`, answer)
-    // return response.data
+    const response = await api.post(`${BASE_API_URL}/applicant-answers`, answer)
+    return response.data
 }
