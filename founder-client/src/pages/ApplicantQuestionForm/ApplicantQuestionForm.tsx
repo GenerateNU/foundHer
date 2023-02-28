@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 import ApplicantQuestionInput from '../../components/ApplicantQuestion/ApplicantQuestion';
 import { ApplicantQuestion, ApplicantAnswer} from '../../utils/ApplicantQuestionTypes';
-import {useDispatch, useSelector} from "react-redux";
-import { applicantQuestionsThunk, addApplicantAnswerThunk } from '../../user/thunks';
 
 import './ApplicantQuestionForm.css';
 
@@ -39,23 +37,17 @@ const QUESTION_LIST: ApplicantQuestion[] = [
   },
 ];
 
-const handleSubmitBtn = () => {}
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ApplicantQuestionForm = () => {
 
-  const [submit, setSubmit] = useState<boolean>(false);
-
   const questionsView = QUESTION_LIST.map((q, index) => (
-  <ApplicantQuestionInput key={index} question={q} submit={submit} />
+  <ApplicantQuestionInput key={index} question={q} />
   ));
 
   return (
     <section>
       <h1>Applicant Questions</h1>
       {questionsView}
-      <button
-        className="btn btn-primary w-100"
-        onClick={() => setSubmit(true)}>Submit</button>
     </section>
   );
 };
