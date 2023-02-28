@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import EmployerQuestionForm from './pages/EmployerQuestionForm/EmployerQuestionForm';
+import EmployerQuestionForm from './pages/EmployerQuestionBoard/EmployerQuestionBoard';
 const store = configureStore({
   reducer: {
     users: usersReducer,
