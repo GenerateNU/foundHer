@@ -25,7 +25,7 @@
 
     margin-left: 35px;
     margin-top: 20px;
-    background: #D9D9D9;
+    background: #F5DBF2;
     font-size: 15px;
     border-radius: 5px;
 }
@@ -34,10 +34,10 @@
     position: absolute;
     width: 477px;
     height: 450px;
-    left: 482px;
+    left: 500px;
     top: 100px;
 
-    background: #FFFFFF;
+    background: #F5EFEF;
     box-shadow: 0px 5px 10px 6px rgba(0, 0, 0, 0.1);
     border-radius: 7px;
 }
@@ -51,7 +51,7 @@
     top: 423px;
     margin-top: 20px;
     font-size: 15px;
-    background: #D9D9D9;
+    background: #F5DBF2;
     border-radius: 5px;
 }
 
@@ -63,7 +63,7 @@ left: 521px;
 top: 576px;
 margin-left: 35px;
 margin-top: 20px;
-background: #D9D9D9;
+background: #ECBAE6;
 font-size: 18px;
 border-radius: 64px;
 }
@@ -125,6 +125,50 @@ text-align: center;
 color: #000000;
 }
 
+.needHelp {
+    /* position: absolute; */
+    width: 162px;
+    height: 22px;
+    left: 725px;
+    top: 686px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+    /* identical to box height */
+    margin-left: 10px;
+
+    text-align: center;
+
+    color: #000000;
+}
+
+.contactUs {
+    /* position: absolute; */
+    width: 162px;
+    height: 22px;
+    left: 725px;
+    top: 486px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+    /* identical to box height */
+    margin-left: 10px;
+
+    text-align: center;
+
+    color: #000000;
+}
+
 .newto {
-    margin-top: 100px;
+    margin-top: 85px;
+}
+
+.help {
+    margin-top: 1px;
 }
