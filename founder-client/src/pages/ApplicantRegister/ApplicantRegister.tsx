@@ -30,7 +30,7 @@ const ApplicantRegister = () => {
                 <input
                 onChange={(e) => setFullname(e.target.value)}
                 className="form-control field"
-                placeholder="Full Name"
+                placeholder=" Full Name"
                 value={fullname}/>
             </div>
 
@@ -38,7 +38,7 @@ const ApplicantRegister = () => {
                 <input
                 onChange={(e) => setUsername(e.target.value)}
                 className="form-control field"
-                placeholder="Username"
+                placeholder=" Username"
                 value={username}/>
             </div>
             
@@ -46,14 +46,14 @@ const ApplicantRegister = () => {
                 <input
                 onChange={(e) => setEmail(e.target.value)}
                 className="form-control field"
-                placeholder="Email"
+                placeholder=" Email"
                 value={email}/>    
             </div>
             <div>
             <input
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-control field"
-                placeholder="Password"
+                placeholder=" Password"
                 type="password"
                 value={password}/>
             </div>
@@ -61,7 +61,7 @@ const ApplicantRegister = () => {
             <div className="">
             <input
                 className="form-control field"
-                placeholder="Confirm Password"
+                placeholder=" Confirm Password"
                 type="password"
                 />
             </div>

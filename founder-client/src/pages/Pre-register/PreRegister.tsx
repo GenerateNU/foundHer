@@ -20,19 +20,19 @@ const PreRegister = () => {
             Create an Account
         </div>
         <div className="description">
-            Are you a Job Seeker or an Employer
+            Are you a Job Seeker or an Employer?
         </div>
 
         <button className="option" onClick={handleNavigateButtonApplicant}>
             Job Seeker
         </button>
-
+        
         <button className="option" onClick={handleNavigateButtonEmployer}>
             Employer
         </button>
 
         <BottomLine />
-        <NeedHelpContactUs />
+        <NeedHelpContactUs/>
     </div></div>)
 
 }

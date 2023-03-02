@@ -63,7 +63,7 @@ width: 99px;
 height: 22px;
 left: 731px;
 top: 973px;
-margin-left: 55px;
+
 font-family: 'Inter';
 font-style: normal;
 font-weight: 700;
@@ -74,4 +74,8 @@ line-height: 22px;
 text-align: center;
 
 color: #000000;
+}
+
+.NeedHelpContactUs {
+    margin-top: 10px;
 }

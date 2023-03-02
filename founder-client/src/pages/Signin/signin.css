@@ -1,6 +1,15 @@
+.logo {
+    margin: auto;
+    text-align: center; 
+    
+}
+
+
+
+
 .signinTitle {
-    /* position: absolute; */
-    width: 132px;
+    
+    width: 150px;
     height: 48px;
     /* left: 520px; */
     top: 237px;
@@ -11,7 +20,8 @@
     font-size: 40px;
     line-height: 48px;
     margin-left: 35px;
-    /* text-align: center; */
+    
+    margin-bottom: 0px;
 
     color: #000000;
 }
@@ -24,19 +34,21 @@
     top: 310px;
 
     margin-left: 35px;
-    margin-top: 20px;
+    /* margin-top: 1px; */
     background: #F5DBF2;
     font-size: 15px;
     border-radius: 5px;
 }
 
 .formContainer {
-    position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 477px;
     height: 450px;
     left: 500px;
     top: 100px;
 
+    margin: auto;
     background: #F5EFEF;
     box-shadow: 0px 5px 10px 6px rgba(0, 0, 0, 0.1);
     border-radius: 7px;
@@ -49,7 +61,7 @@
     height: 40px;
     left: 521px;
     top: 423px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     font-size: 15px;
     background: #F5DBF2;
     border-radius: 5px;
@@ -75,6 +87,7 @@ height: 22px;
 left: 520px;
 top: 509px;
 margin-left: 35px;
+margin-top: 10px;
 font-family: 'Inter';
 font-style: normal;
 font-weight: 400;
@@ -118,7 +131,7 @@ font-weight: 600;
 font-size: 15px;
 line-height: 22px;
 /* identical to box height */
-margin-left: 10px;
+margin-left: 5px;
 
 text-align: center;
 
@@ -166,9 +179,16 @@ color: #000000;
 }
 
 .newto {
-    margin-top: 85px;
+    margin-top: 5px;
+    
 }
 
 .help {
     margin-top: 1px;
+    margin-bottom: 5px;
+}
+
+.credential-label {
+    padding-left: 35px;
+    margin-bottom: 10px;
 }
