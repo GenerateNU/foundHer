@@ -28,7 +28,7 @@ export const NeedHelpContactUs = () => {
     <>
       <div></div>
       <div className='NeedHelpContactUs'>
-        <span className='needHelp'> Need Help?</span>
+        <span className='needHelp'>Need Help?</span>
         <span className='contactUs' onClick={handleContactUs}>
           Contact Us
         </span>

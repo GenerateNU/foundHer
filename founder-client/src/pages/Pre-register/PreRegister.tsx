@@ -32,9 +32,10 @@ const PreRegister = () => {
         </button>
 
         <BottomLine />
+        <span>
         <NeedHelpContactUs/>
+        </span>
     </div></div>)
-
 }
 
 export default PreRegister;

@@ -35,19 +35,19 @@ const Login = () => {
       </div>
       <div className='formContainer'>
         <h1 className='signinTitle'>Sign-In</h1>
-        <h4 className="credential-label">Username:</h4>
+        
         <input
           className='usernameField form-control'
           onChange={e => setUsername(e.target.value)}
-          placeholder=' enter'
+          placeholder=' Email or Phone'
           value={username}
         />
-        <h4 className='credential-label'>Password:</h4>
+        
         <input
           onChange={e => setPassword(e.target.value)}
           className='form-control passwordField'
-          placeholder=' password'
-          type='password'
+          placeholder=' Password'
+          type='assword'
           value={password}
         />
         <div className='forgotPassword'>Forgot Password?</div>
@@ -60,13 +60,13 @@ const Login = () => {
           <span className='createAnAccount' onClick={handleRegisterBtn}>
             Create an Account</span>
         </div>
-        <br></br><br></br>
-        <div className='help'>
-          <span className='newToFoundHer'> Need Help?</span>
-          <span className='createAnAccount' onClick={handleRegisterBtn}>
+        <NeedHelpContactUs/>
+        {/* <div className='help'>
+          <span className='needHelp'> Need Help?</span>
+          <span className='contactUs' onClick={handleRegisterBtn}>
             Contact Us
           </span>
-        </div>
+        </div> */}
       </div>
     </>
   );
