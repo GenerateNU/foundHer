@@ -10,4 +10,3 @@ export const profileThunk = createAsyncThunk('profile', async (accessToken: stri
 export const loginThunk = createAsyncThunk('login', async (user: any) => await login(user))
 
 export const registerThunk = createAsyncThunk('register', async (user: any) => await register(user))
-

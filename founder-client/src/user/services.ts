@@ -23,8 +23,7 @@ export const logout = async () => {
 };
 
 export const profile = async (token: any) => {
-  const response = await api.get(`${BASE_API_URL}/profile`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return response.data;
-};
+    const response = await api.get(`${BASE_API_URL}/profile`, { headers: {"Authorization" : `Bearer ${token}`} } )
+    return response.data
+}
+
