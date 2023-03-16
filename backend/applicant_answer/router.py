@@ -32,11 +32,15 @@ async def update_question_answer_for_applicant(answer_request: Applicant_Answer_
         Update an existing Applicant_Answer
     """
     
-    db_answer = Applicant_Answer_Repo.fetch_by_id(db, answer_request.id)
+    db_answer: Applicant_Answer = Applicant_Answer_Repo.fetch_by_id(db, answer_request.id)
     if db_answer:
         db_answer.question_id = answer_request["question_id"]
         db_answer.applicant_id = answer_request["applicant_id"]
-        db_answer.answers = answer_request["answers"]
+        db_answer.multiple_choice_answer = answer_request["multiple_choice_answer"]
+        db_answer.open_ended_answer = answer_request["open_ended_answer"]
+        db_answer.ranked_answer = answer_request["ranked_answer"]
+        db_answer.range_answer = answer_request["range_answer"]
+
         json_compatible_question = await Applicant_Answer_Repo.update(db=db, answer_data=answer_request, id=answer_request.id)
     else:
         raise HTTPException(status_code=400, detail=f"Question not found with the given ID: {answer_request.id}")

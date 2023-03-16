@@ -5,7 +5,6 @@ const BASE_API_URL = 'http://localhost:8000';
 const api = axios.create({ withCredentials: true });
 
 export const register = async (user: any) => {
-  console.log(user)
   const response = await api.post(`${BASE_API_URL}/register`, user);
   
   const newUser = response.data;
@@ -27,3 +26,7 @@ export const profile = async (token: any) => {
     return response.data
 }
 
+export const register_applicant = async (applicant: any) => {
+  const response = await api.post(`${BASE_API_URL}/applicant-register`, applicant);
+  return response.data;
+}

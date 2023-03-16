@@ -7,7 +7,6 @@ class EmployerAnswerBase(BaseModel):
     user_id: int
     question_id: int
     answers: List[str]
-    
 
 class EmployerAnswer(EmployerAnswerBase):
     id: int
@@ -20,6 +19,3 @@ class EmployerAnswerCreate(EmployerAnswerBase):
 
 class EmployerAnswerUpdate(BaseModel):
     id: int
-    user_id: int
-    question_id: int
-    answers: List[str]
