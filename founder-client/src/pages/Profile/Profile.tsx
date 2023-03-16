@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import React from "react";
 import { profileThunk, logoutThunk } from "../../user/thunks";
-import {Navigate, useNavigate} from "react-router";
+import {Navigate, useNavigate} from "react-router-dom";
 import "./profile.css"
 const Profile = () => {
     const {currentUser} = useSelector((state: any) => state.users);

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {loginThunk} from "../../user/thunks"
-import {Navigate, useNavigate} from "react-router";
+import {Navigate, useNavigate} from "react-router-dom";
 import './preregister.css';
 import {BottomLine, NeedHelpContactUs} from "../../util/util";
 const PreRegister = () => {
@@ -15,26 +15,27 @@ const PreRegister = () => {
         return navigate("/register-employer");
     }
 
-    return (<div className="box">
+    return (<div className="background"><div className="box">
         <div className="title">
             Create an Account
         </div>
         <div className="description">
-            Are you a Job Seeker or an Employer
+            Are you a Job Seeker or an Employer?
         </div>
 
         <button className="option" onClick={handleNavigateButtonApplicant}>
             Job Seeker
         </button>
-
+        
         <button className="option" onClick={handleNavigateButtonEmployer}>
             Employer
         </button>
-        
-        <BottomLine/>
-        <NeedHelpContactUs/>
-    </div>)
 
+        <BottomLine />
+        <span>
+        <NeedHelpContactUs/>
+        </span>
+    </div></div>)
 }
 
 export default PreRegister;

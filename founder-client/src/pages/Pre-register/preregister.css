@@ -1,12 +1,17 @@
+.background {
+
+    color: linear-gradient(pink, lightgreen);
+}
+
 .box {
 
 position: absolute;
 width: 477px;
 height: 539px;
-left: 482px;
-top: 184px;
+left: 250px;
+top: 100px;
 
-background: #FFFFFF;
+background: #F5EFEF;
 box-shadow: 0px 5px 10px 6px rgba(0, 0, 0, 0.1);
 border-radius: 7px;
 }
@@ -16,7 +21,7 @@ width: 360px;
 height: 48px;
 left: 521px;
 top: 237px;
-margin-left: 35px;
+margin-left: 50px;
 font-family: 'Inter';
 font-style: normal;
 font-weight: 600;
@@ -37,7 +42,9 @@ font-style: normal;
 font-weight: 500;
 font-size: 20px;
 line-height: 24px;
-margin-left: 35px;
+margin-top: 10px;
+margin-left: 50px;
+
 color: #000000;
 }
 
@@ -49,7 +56,7 @@ color: #000000;
     left: 522px;
     top: 377px;
     font-size: 25px;
-    background: #D9D9D9;
+    background: #F5DBF2;
     border-radius: 64px;
 }
 .line {
@@ -61,4 +68,8 @@ top: 634px;
 
 border: 1px solid #000000;
 }
+
+
+
+
 
