@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+
 import {
   ApplicantQuestion,
   ApplicantAnswer,
@@ -11,10 +12,13 @@ import { Navigate } from "react-router";
 import "./ApplicantQuestion.css";
 import { addApplicantAnswerThunk } from "../../question/thunks";
 
+
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ApplicantQuestionInput = ({ question }: PropTypes) => {
   const [submit, setSubmit] = useState<boolean>(false);
   const [answer, setAnswer] = useState<string[]>([]);
+  const [range_selection, setRangeSelection] = useState<{[min_or_max: string]: number}>({});
+  
   const { submittedAnswers } = useSelector((state: any) => state.applicantQuestions);
 
   const dispatch = useDispatch<any>();
@@ -29,6 +33,7 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
           question_id: question.id,
           applicant_id: localStorage.getItem("currentUserID"),
           answers: answer,
+          range_selection: range_selection
         })
       )
     } catch (e) {
@@ -83,6 +88,7 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
           <button onClick={() => handleSubmit()}>Submit</button>
         </div>
         {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && <div> success!</div>}
+        
       </div>
     );
   }

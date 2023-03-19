@@ -4,6 +4,8 @@ import { loginThunk } from '../../user/thunks';
 import { Navigate, useNavigate } from 'react-router-dom';
 import './signin.css';
 import { NeedHelpContactUs } from '../../util/util';
+import MultiRangeSlider from '../../components/SlidingScale/sliding_scale';
+
 
 const Login = () => {
   const { currentUser } = useSelector((state: any) => state.users);
@@ -47,6 +49,9 @@ const Login = () => {
       <button className='btn btn-primary signinButton' onClick={handleLoginBtn}>
         Sign In
       </button>
+
+      <MultiRangeSlider min={10} max={90} onChange={({ min, max }: { min: number; max: number }) =>
+        console.log(`min = ${min}, max = ${max}`)}/>
 
       <div className='newto'>
         <span className='newToFoundHer'> New to Foundher? </span>
