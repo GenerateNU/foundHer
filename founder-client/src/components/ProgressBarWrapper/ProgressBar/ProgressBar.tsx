@@ -32,7 +32,7 @@ const ProgressBar = ({
   });
 
   const getProgressBarWidthCSS = () => {
-    const width = index === maxLength - 1 ? 95 : (index / (maxLength - 1)) * 100;
+    const width = (index / (maxLength - 1)) * 100;
     return `${width}%`;
   };
 
