@@ -7,16 +7,17 @@ import Login from './pages/Signin/Signin';
 import ApplicantRegister from './pages/ApplicantRegister/ApplicantRegister';
 import EmployerRegister from './pages/EmployerRegister/EmployerRegister';
 import Home from './pages/Home';
-import EmployerQuestionForm from './pages/EmployerQuestionBoard/EmployerQuestionBoard';
+import EmployerQuestionForm from './pages/EmployerQuestionForm/EmployerQuestionBoard';
 import Profile from './pages/Profile/Profile';
 import PreRegister from './pages/Pre-register/PreRegister';
 import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuestionForm';
-import ApplicantQuestionsReducer from './question/reducer';
+import { applicantQuestionsReducer, employerQuestionsReducer } from './question/reducer';
 
 const store = configureStore({
   reducer: {
     users: usersReducer,
-    applicantQuestions: ApplicantQuestionsReducer,
+    applicantQuestions: applicantQuestionsReducer.reducer,
+    employerQuestions: employerQuestionsReducer.reducer,
   },
 });
 

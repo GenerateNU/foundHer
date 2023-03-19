@@ -1,44 +1,74 @@
+import { createSlice } from '@reduxjs/toolkit';
+import { access, stat } from 'fs';
+import {
+  addApplicantAnswerThunk,
+  addApplicantQuestionThunk,
+  addEmployerAnswerThunk,
+  addEmployerQuestionThunk,
+  getApplicantQuestionsThunk,
+  getEmployerQuestionsThunk,
+} from './thunks';
 
-import {createSlice} from "@reduxjs/toolkit";
-import { access, stat } from "fs";
-import {addApplicantAnswerThunk, addApplicantQuestionThunk, getApplicantQuestionsThunk } from "./thunks";
-
-const initialState: {loading: boolean, applicantQuestions: any[], submittedAnswers: any[]} = {
-    loading: false,
-    applicantQuestions: [],
-    submittedAnswers: [],
+const initialState: { loading: boolean; applicantQuestions: any[]; submittedAnswers: any[] } = {
+  loading: false,
+  applicantQuestions: [],
+  submittedAnswers: [],
 };
 
-const applicantQuestionsReducer = createSlice({
-    name: 'applicantQuestions',
-    initialState: initialState,
-    extraReducers: builder => {
-        builder
-          .addCase(addApplicantAnswerThunk.pending, (state, action) => {
-            state.loading = true;
-          })
-          .addCase(addApplicantAnswerThunk.fulfilled, (state, action) => {
-            state.loading = false;
-            state.submittedAnswers.push(action.payload)
-          })
-          .addCase(addApplicantQuestionThunk.fulfilled, (state, action) => {
-            state.loading = false;
-          })
-          .addCase(addApplicantQuestionThunk.pending, (state, action) => {
-            state.loading = true;
-          })
-          .addCase(getApplicantQuestionsThunk.fulfilled, (state, action) => {
-            state.loading = false;
-            state.applicantQuestions = action.payload;
-          })
-          .addCase(getApplicantQuestionsThunk.pending, (state, action) => {
-            state.loading = true;
-          })
+export const applicantQuestionsReducer = createSlice({
+  name: 'applicantQuestions',
+  initialState: initialState,
+  extraReducers: builder => {
+    builder
+      .addCase(addApplicantAnswerThunk.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(addApplicantAnswerThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.submittedAnswers.push(action.payload);
+      })
+      .addCase(addApplicantQuestionThunk.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(addApplicantQuestionThunk.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getApplicantQuestionsThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.applicantQuestions = action.payload;
+      })
+      .addCase(getApplicantQuestionsThunk.pending, (state, action) => {
+        state.loading = true;
+      });
+  },
+  reducers: {},
+});
 
-    },
-    reducers: {
-
-    }
-})
-
-export default applicantQuestionsReducer.reducer;
+export const employerQuestionsReducer = createSlice({
+  name: 'employerQuestions',
+  initialState: initialState,
+  extraReducers: builder => {
+    builder
+      .addCase(addEmployerAnswerThunk.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(addEmployerAnswerThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.submittedAnswers.push(action.payload);
+      })
+      .addCase(addEmployerQuestionThunk.fulfilled, (state, action) => {
+        state.loading = false;
+      })
+      .addCase(addEmployerQuestionThunk.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getEmployerQuestionsThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.applicantQuestions = action.payload;
+      })
+      .addCase(getEmployerQuestionsThunk.pending, (state, action) => {
+        state.loading = true;
+      });
+  },
+  reducers: {},
+});
