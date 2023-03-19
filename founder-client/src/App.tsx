@@ -10,7 +10,8 @@ import Home from './pages/Home';
 import Profile from './pages/Profile/Profile';
 import PreRegister from './pages/Pre-register/PreRegister';
 import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuestionForm';
-import ApplicantQuestionsReducer from "./question/reducer";
+import ApplicantQuestionsReducer from './question/reducer';
+import ProgressBarWrapper from './components/ProgressBarWrapper/ProgressBarWrapper';
 
 const store = configureStore({
   reducer: {
@@ -26,7 +27,7 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Login />} />
-            <Route path='/preregister' element={<PreRegister/>} />
+            <Route path='/preregister' element={<PreRegister />} />
             <Route path='/home' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register-applicant' element={<ApplicantRegister />} />
@@ -34,6 +35,18 @@ export default function App() {
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/profile' element={<Profile />} />
+            <Route
+              path='/testing'
+              element={
+                <ProgressBarWrapper markerTitles={['Hi', 'Hey', 'Hello', 'Yellow', 'Mellow']}>
+                  <h1>Hi</h1>
+                  <h1>Hey</h1>
+                  <h1>Hello</h1>
+                  <h1>Yellow</h1>
+                  <h1>Mellow</h1>
+                </ProgressBarWrapper>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </Provider>
