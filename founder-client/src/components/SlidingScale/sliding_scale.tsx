@@ -37,7 +37,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
     if (maxValRef.current) {
       const minPercent = getPercent(minVal);
       const maxPercent = getPercent(+maxValRef.current.value); // Precede with '+' to convert the value from type string to type number
-      // maxValRef.current.style.left = `${minPercent}%`;
+      let left_value = document.getElementsByClassName('slider__left-value')[0].setAttribute("style", "right:" + (maxPercent - minPercent - 8).toString() + "%");
 
       if (range.current) {
         range.current.style.left = `${minPercent}%`;

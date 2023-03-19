@@ -20,18 +20,18 @@
   
   .slider__track,
   .slider__range {
-    border-radius: 3px;
-    height: 5px;
+    border-radius: 500px;
+    height: 10px;
   }
   
   .slider__track {
-    background-color: #ced4da;
+    background-color: #D9D9D9;
     width: 100%;
     z-index: 1;
   }
   
   .slider__range {
-    background-color: #9fe5e1;
+    background-color: #BBBBBB;
     z-index: 2;
   }
   
@@ -39,7 +39,8 @@
   .slider__right-value {
     color: #dee2e6;
     font-size: 12px;
-    margin-top: 20px;
+    top: -25px;
+    /* margin-bottom: 20px; */
   }
   
   .slider__left-value {
@@ -62,6 +63,7 @@
     position: absolute;
     height: 0;
     width: 200px;
+    margin-top: 8px;
     outline: none;
   }
   
