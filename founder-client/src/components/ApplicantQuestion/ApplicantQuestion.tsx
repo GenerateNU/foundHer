@@ -78,8 +78,8 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
           onChange={e => setAnswer([e.target.value])}
           placeholder='Add answer...'
         />
-        <div className='button-div'>
-          <button onClick={() => handleSubmit()}>Submit</button>
+        <div className="button-div">
+          <button onClick={() => handleSubmit()}>Next</button>
         </div>
         {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && (
           <div> success!</div>
