@@ -16,7 +16,16 @@ class Applicant(Base):
     latest_job_title = Column(String(80))
     latest_company = Column(String(80))
     fullname = Column(String(80))
-    resume_file = Column(LargeBinary)
 
     def __repr__(self):
         return 'applicants(username=%s)' % self.username
+    
+class Resume(Base): 
+    __tablename__ = "resumes"
+    id = Column(Integer, primary_key=True,index=True)
+    resume_file = Column(LargeBinary)
+    file_name = Column(String(80))
+    applicant_id = Column(Integer, ForeignKey('applicants.id'))
+
+
+

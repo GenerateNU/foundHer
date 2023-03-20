@@ -15,7 +15,7 @@ class ApplicantBase(BaseModel):
     institution: str
     latest_job_title: str
     latest_company: str
-    resume_file: ByteString
+
 class Applicant(ApplicantBase):
     id: int
 

@@ -69,14 +69,14 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
     return user
 
 
-async def get_current_active_user(current_user: User = Depends(get_current_user)):
+async def get_current_active_user(current_user: Applicant = Depends(get_current_user)):
     return current_user
 
 
-class LoginForm(BaseModel):
+class ApplicantLoginForm(BaseModel):
     username: str
     password: str
-class RegisterForm(LoginForm):
+class ApplicantRegisterForm(ApplicantLoginForm):
     email: str
     fullname: str
     city: str
@@ -86,11 +86,11 @@ class RegisterForm(LoginForm):
     institution: Optional[str]
     latest_job_title: Optional[str]
     latest_company: Optional[str]
-    resume_file: Optional[ByteString]
+    # resume_file: ByteString
     
 
 @router.post("/applicant-register")
-async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
+async def register_user(form_data: ApplicantRegisterForm, db: Session = Depends(get_db)):
     username: str = form_data.username
     password: str = form_data.password
     email: str = form_data.email
@@ -133,7 +133,7 @@ async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
 
 
 @router.post("/applicant-login")
-async def login(form_data: LoginForm, db: Session = Depends(get_db)):
+async def login(form_data: ApplicantLoginForm, db: Session = Depends(get_db)):
     username = form_data.username
     password = form_data.password
     db_user: Applicant = ApplicantRepo.fetch_by_username(db=db, username=username)

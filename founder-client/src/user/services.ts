@@ -30,3 +30,8 @@ export const register_applicant = async (applicant: any) => {
   const response = await api.post(`${BASE_API_URL}/applicant-register`, applicant);
   return response.data;
 }
+
+export const applicant_profile = async (token: any) => {
+  const response = await api.get(`${BASE_API_URL}/applicant-profile`, {headers: {"Authorization": `Bearer ${token}`}})
+  return response.data
+}

@@ -1,6 +1,6 @@
 import {useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {registerThunk} from "../../user/thunks";
+import {registerApplicantThunk} from "../../user/thunks";
 import {Navigate, useNavigate} from "react-router-dom";
 import {BottomLine, NeedHelpContactUs} from "../../util/util";
 import "./applicantregister.css";
@@ -22,9 +22,9 @@ const ApplicantRegister = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch<any>();
     const handleRegisterBtn = () => {
-        dispatch(registerThunk({fullname, username, 
+        dispatch(registerApplicantThunk({fullname, username, 
                                 password, email, city, state, country, institution, 
-                                latest_company, latest_job_title, resume_file}))
+                                latest_company, latest_job_title}))
     };
 
     if (currentUser) {

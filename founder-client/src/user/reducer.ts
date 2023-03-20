@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { loginThunk, logoutThunk, registerThunk, profileThunk } from "./thunks";
+import { loginThunk, logoutThunk, registerThunk, profileThunk, registerApplicantThunk } from "./thunks";
 
 
 const usersReducer = createSlice({
@@ -38,6 +38,13 @@ const usersReducer = createSlice({
           })
           .addCase(loginThunk.pending, (state, action) => {
             state.loading = true;
+          })
+          .addCase(registerApplicantThunk.pending, (state, action) => {
+            state.loading = true;
+          })
+          .addCase(registerApplicantThunk.fulfilled, (state, action) => {
+            state.loading = false;
+            state.currentUser = action.payload;
           })
     },
     reducers: {
