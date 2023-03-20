@@ -1,0 +1,173 @@
+.logo {
+    margin: auto;
+    text-align: center; 
+    
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    width: 477px;
+    height: 555px;
+    left: 500px;
+    top: 100px;
+    
+
+    margin: auto;
+    background: #F5EFEF;
+    box-shadow: 0px 5px 10px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+}
+
+
+.signinTitle {
+    position: absolute;
+    width: 150px;
+    height: 48px;
+    top: 115px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 48px;
+    margin-left: 35px;
+    
+    margin-bottom: 0px;
+
+    color: #000000;
+}
+
+.usernameField {
+    position: absolute;
+    width: 396px;
+    height: 77px;
+    top: 220px;
+    
+    margin-left: 35px;
+    
+    background: #F5DBF2;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+
+
+.passwordField {
+    position: absolute;
+    margin-left: 35px;
+    width: 396px;
+    height: 77px;
+    top: 350px;
+    
+    font-size: 15px;
+    background: #F5DBF2;
+    border-radius: 5px;
+}
+
+
+
+.forgotPassword {
+position: relative;
+width: 153px;
+height: 22px;
+top: 350px;
+left: 35px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 22px;
+/* identical to box height */
+
+/* text-align: center; */
+
+color: #000000;
+}
+
+.signinButton {
+    position: absolute;
+    width: 396px;
+    height: 77px;
+    top: 475px;
+    margin-left: 35px;
+    margin-top: 20px;
+    background: #ECBAE6;
+    font-size: 18px;
+    border-radius: 64px;
+    }
+
+.newToFoundHer {
+    position: relative;
+width: 159px;
+height: 22px;
+left: 100px;
+top: 475px;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 22px;
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+}
+
+.createAnAccount {
+position: relative;
+width: 162px;
+height: 22px;
+top: 475px;
+left: 110px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 22px;
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+}
+
+/* .needHelp {
+    position: absolute;
+    width: 162px;
+    height: 22px;
+    top: 100%;
+    left: 100px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px; */
+    /* identical to box height */
+    /* margin-left: 10px;
+
+    text-align: center;
+
+    color: #000000; */
+/* } */
+
+/* .contactUs {
+    position: absolute;
+    width: 162px;
+    height: 22px;
+    top: 100%;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+
+    text-align: center;
+
+    color: #000000;
+} */
+

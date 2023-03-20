@@ -1,0 +1,84 @@
+.note {
+    margin-top: 20px;
+    margin-left: 55px;
+}
+.note1 {
+width: 219px;
+height: 22px;
+left: 568px;
+top: 668px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+}
+
+.note2 {
+    
+width: 59px;
+height: 22px;
+left: 813px;
+top: 668px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 22px;
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+}
+
+.needHelp {
+position: absolute;
+width: 99px;
+height: 22px;
+left: 740px;
+top: 95%;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 22px;
+/* identical to box height */
+text-align: center;
+
+color: #000000;
+
+}
+
+.contactUs {
+position: absolute;
+width: 99px;
+height: 22px;
+left: 835px;
+top: 95%;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 22px;
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+}
+
+.NeedHelpContactUs {
+    display: flex;
+    justify-content: center;
+    
+}
