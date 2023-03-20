@@ -12,12 +12,14 @@ import "./sliding_scale.css";
 interface MultiRangeSliderProps {
   min: number;
   max: number;
+  unit: string
   onChange: Function;
 }
 
 const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
   min,
   max,
+  unit,
   onChange
 }) => {
   const [minVal, setMinVal] = useState(min);
@@ -37,7 +39,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
     if (maxValRef.current) {
       const minPercent = getPercent(minVal);
       const maxPercent = getPercent(+maxValRef.current.value); // Precede with '+' to convert the value from type string to type number
-      let left_value = document.getElementsByClassName('slider__left-value')[0].setAttribute("style", "right:" + (maxPercent - minPercent - 8).toString() + "%");
+      let left_value = document.getElementsByClassName('slider__left-value')[0].setAttribute("style", "left:" + (minPercent).toString() + "%");
 
       if (range.current) {
         range.current.style.left = `${minPercent}%`;
@@ -53,7 +55,7 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
     if (minValRef.current) {
       const minPercent = getPercent(+minValRef.current.value);
       const maxPercent = getPercent(maxVal);
-      let right_value = document.getElementsByClassName('slider__right-value')[0].setAttribute("style", "left:" + (maxPercent - minPercent - 8).toString() + "%");
+      document.getElementsByClassName('slider__right-value')[0].setAttribute("style", "left:" + (maxPercent - 5).toString() + "%");
 
       if (range.current) {
         range.current.style.width = `${maxPercent - minPercent}%`;

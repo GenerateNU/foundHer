@@ -50,7 +50,7 @@ const Login = () => {
         Sign In
       </button>
 
-      <MultiRangeSlider min={10} max={90} onChange={({ min, max }: { min: number; max: number }) =>
+      <MultiRangeSlider min={10} max={250} unit={"mins"} onChange={({ min, max }: { min: number; max: number }) =>
         console.log(`min = ${min}, max = ${max}`)}/>
 
       <div className='newto'>
