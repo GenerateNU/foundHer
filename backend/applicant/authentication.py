@@ -102,7 +102,7 @@ async def register_user(form_data: ApplicantRegisterForm, db: Session = Depends(
     institution: str = form_data.institution if form_data.institution else ""
     latest_job_title: str =form_data.latest_job_title if form_data.latest_job_title else ""
     latest_company: str = form_data.latest_company if form_data.latest_company else ""
-    resume_file: Optional[ByteString] = form_data.resume_file if form_data.resume_file else None
+    # resume_file: Optional[ByteString] = form_data.resume_file if form_data.resume_file else None
     
     db_user: Applicant = ApplicantRepo.fetch_by_username(db=db, username=username)
     if db_user:
@@ -113,7 +113,7 @@ async def register_user(form_data: ApplicantRegisterForm, db: Session = Depends(
         )
     
     password_hash = get_password_hash(password)
-    new_user = await ApplicantRepo.create(db=db, user=ApplicantCreate(username=username, 
+    new_applicant = await ApplicantRepo.create(db=db, applicant=ApplicantCreate(username=username, 
                                                                       hashed_password=password_hash, 
                                                                       email=email, city=city, 
                                                                       fullname=fullname, 
@@ -122,9 +122,8 @@ async def register_user(form_data: ApplicantRegisterForm, db: Session = Depends(
                                                                       highest_education=highest_education, 
                                                                       institution=institution, 
                                                                       latest_job_title=latest_job_title, 
-                                                                      latest_company=latest_company, 
-                                                                      resume_file=resume_file))
-    json_compatible_item_data = jsonable_encoder(new_user)
+                                                                      latest_company=latest_company))
+    json_compatible_item_data = jsonable_encoder(new_applicant)
     del json_compatible_item_data["hashed_password"]
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={"sub": username}, expires_delta=access_token_expires)

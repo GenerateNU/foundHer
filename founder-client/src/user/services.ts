@@ -12,7 +12,7 @@ export const register = async (user: any) => {
 };
 
 export const login = async (user: any) => {
-  const response = await api.post(`${BASE_API_URL}/login`, user);
+  const response = await api.post(`${BASE_API_URL}/applicant-login`, user);
   return response.data;
 };
 
@@ -22,7 +22,7 @@ export const logout = async () => {
 };
 
 export const profile = async (token: any) => {
-    const response = await api.get(`${BASE_API_URL}/profile`, { headers: {"Authorization" : `Bearer ${token}`} } )
+    const response = await api.get(`${BASE_API_URL}/applicant-profile`, { headers: {"Authorization" : `Bearer ${token}`} } )
     return response.data
 }
 

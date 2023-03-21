@@ -28,7 +28,7 @@ const ApplicantQuestionForm = () => {
   useEffect(() => {
     dispatch(getApplicantQuestionsThunk());
   }, [])
-  const questionsView = applicantQuestions.map((q: { id: any; question_content: string; possible_answers: string[]; }) => (
+  const questionsView = applicantQuestions.map((q: { id: any; question_content: string; possible_answers: string[]; question_type: string}) => (
   <ApplicantQuestionInput key={q.id} question={q} />
   ));
 

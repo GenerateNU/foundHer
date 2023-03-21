@@ -11,7 +11,7 @@ class Applicant_Answer(Base):
     applicant_id = Column(Integer)
     question_type = Column(String)
     range_answer = Column(mutable_json_type(dbtype=JSONB, nested=True))
-    multiple_choice_anwer = Column(ARRAY(String))
+    multiple_choice_answer = Column(ARRAY(String))
     open_ended_answer = Column(String)
     ranked_answer = Column(mutable_json_type(dbtype=JSONB, nested=True))
 

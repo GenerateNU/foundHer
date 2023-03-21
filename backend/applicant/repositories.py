@@ -14,11 +14,10 @@ class ApplicantRepo:
                                             highest_education=applicant.highest_education, 
                                             institution=applicant.institution, 
                                             latest_job_title=applicant.latest_job_title, 
-                                            latest_company=applicant.latest_company, 
-                                            resume_file=applicant.resume_file)
+                                            latest_company=applicant.latest_company)
             db.add(db_applicant)
-            await db.commit()
-            await db.refresh(db_applicant)
+            db.commit()
+            db.refresh(db_applicant)
             return db_applicant
         
     def fetch_by_id(db: Session, _id:int):

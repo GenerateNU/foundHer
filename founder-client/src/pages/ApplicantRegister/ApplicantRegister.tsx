@@ -18,7 +18,6 @@ const ApplicantRegister = () => {
     const [institution, setInstitution] = useState('');
     const [latest_job_title, setLatestJobTitle] = useState('');
     const [latest_company, setLatestCompany] = useState('');
-    const [resume_file, setResumeFile] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch<any>();
     const handleRegisterBtn = () => {

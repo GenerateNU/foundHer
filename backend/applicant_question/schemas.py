@@ -7,8 +7,8 @@ class Applicant_Question_Base(BaseModel):
     question_content : str
     possible_answers : List[str]
     question_type: str
-    min_value: int
-    max_value: int
+    min_value: Optional[int]
+    max_value: Optional[int]
 
 class Applicant_Question(Applicant_Question_Base):
     id : int
