@@ -10,7 +10,6 @@ from fastapi.encoders import jsonable_encoder
 from db.db import get_db, engine
 from .repositories import Applicant_Answer_Repo
 from fastapi import APIRouter
-import users.models as models
 from .schemas import Applicant_Answer, Applicant_Answer_Base, Applicant_Answer_Create, Applicant_Answer_Update
 from . import models
 

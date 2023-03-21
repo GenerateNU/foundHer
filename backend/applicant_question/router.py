@@ -5,7 +5,7 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from db.db import get_db, engine
 from .repositories import Applicant_Question_Repo
-import users.models as models
+import employer.models as models
 from .schemas import Applicant_Question, Applicant_Question_Create, Applicant_Question_Update
 from . import models
 

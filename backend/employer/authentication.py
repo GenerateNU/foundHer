@@ -10,8 +10,8 @@ from fastapi.encoders import jsonable_encoder
 
 from db.db import get_db
 
-from .repositories import UserRepo
-from .schemas import UserCreate, User
+from .repositories import EmployerRepo
+from .schemas import EmployerBase, Employer, EmployerCreate
 from fastapi import APIRouter
 
 
@@ -22,7 +22,7 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: Union[str, None] = None
-    
+
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
@@ -63,13 +63,13 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
         token_data = TokenData(username=username)
     except JWTError:
         raise credentials_exception
-    user = UserRepo.fetch_by_username(db=db, username=token_data.username)
+    user = EmployerRepo.fetch_by_username(db=db, username=token_data.username)
     if user is None:
         raise credentials_exception
     return user
 
 
-async def get_current_active_user(current_user: User = Depends(get_current_user)):
+async def get_current_active_user(current_user: Employer = Depends(get_current_user)):
     return current_user
 
 
@@ -80,7 +80,6 @@ class RegisterForm(LoginForm):
     email: str
     fullname: Optional[str]
     company_name: Optional[str]
-    is_applicant: Optional[bool]
 
 @router.post("/register")
 async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
@@ -89,9 +88,8 @@ async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
     email: str = form_data.email
     fullname: str = form_data.fullname if form_data.fullname else ""
     company_name: str = form_data.company_name if form_data.company_name else ""
-    is_applicant: bool = form_data.is_applicant if form_data.is_applicant else True
     
-    db_user: User = UserRepo.fetch_by_username(db=db, username=username)
+    db_user: Employer = EmployerRepo.fetch_by_username(db=db, username=username)
     if db_user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -100,7 +98,7 @@ async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
         )
     
     password_hash = get_password_hash(password)
-    new_user = await UserRepo.create(db=db, user=UserCreate(username=username, hashed_password=password_hash, email=email, company_name=company_name, fullname=fullname, is_applicant=is_applicant))
+    new_user = await EmployerRepo.create(db=db, user=EmployerCreate(username=username, hashed_password=password_hash, email=email, company_name=company_name, fullname=fullname))
     json_compatible_item_data = jsonable_encoder(new_user)
     del json_compatible_item_data["hashed_password"]
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -113,7 +111,7 @@ async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
 async def login(form_data: LoginForm, db: Session = Depends(get_db)):
     username = form_data.username
     password = form_data.password
-    db_user: User = UserRepo.fetch_by_username(db=db, username=username)
+    db_user: Employer = EmployerRepo.fetch_by_username(db=db, username=username)
 
     if not db_user:
         raise HTTPException(
@@ -136,7 +134,7 @@ async def login(form_data: LoginForm, db: Session = Depends(get_db)):
         return json_compatible_item_data
 
 
-@router.get("/profile", response_model=User)
-async def read_users_me(current_user: User = Depends(get_current_active_user)):
+@router.get("/profile", response_model=Employer)
+async def read_users_me(current_user: Employer = Depends(get_current_active_user)):
     json_compatible_item_data = jsonable_encoder(current_user)
     return json_compatible_item_data
