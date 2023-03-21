@@ -2,6 +2,8 @@ import React from 'react';
 
 import './ProgressBar.css';
 
+const PADDING_VALUE = 10;
+
 const ProgressBar = ({
   index,
   maxLength,
@@ -22,7 +24,7 @@ const ProgressBar = ({
       markerClass = markerClass + ' selected';
     }
     return (
-      <div className='marker-container'>
+      <div className='marker-container' id={`${i}`}>
         <span className={markerClass} onClick={() => (i < index ? handleOnClick(i) : null)}>
           {i + 1}
         </span>
@@ -31,9 +33,12 @@ const ProgressBar = ({
     );
   });
 
-  const getProgressBarWidthCSS = () => {
-    const width = (index / (maxLength - 1)) * 100;
-    return `${width}%`;
+  const getFilledProgressBarWidthCSS = () => {
+    const width = document.getElementById(`${index}`)?.offsetLeft;
+    const barWidth = document.getElementById('markers-wrapper')?.offsetWidth;
+    return width && barWidth
+      ? `${((width + PADDING_VALUE) / barWidth) * 100}%`
+      : `${(index / (maxLength - 1)) * 100}%`;
   };
 
   return (
@@ -42,9 +47,9 @@ const ProgressBar = ({
       <div
         className='bar'
         style={{
-          width: getProgressBarWidthCSS(),
+          width: getFilledProgressBarWidthCSS(),
         }}></div>
-      <div className='markers-wrapper'>{markersList}</div>
+      <div id='markers-wrapper'>{markersList}</div>
     </div>
   );
 };
