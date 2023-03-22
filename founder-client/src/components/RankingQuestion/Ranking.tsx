@@ -12,55 +12,38 @@ export type PropTypes = {
   question: ApplicantQuestion;
 };
 
-// const possibleAnswers = [
-//   {
-//     id: "opt1",
-//     val: "Friendly colleagues and managers"
-//   },
-//   {
-//     id: "opt2",
-//     val: "Being able to earn the most for the job I do"
-//   },
-//   {
-//     id: "opt3",
-//     val: "Maximizing skill and career advancement opportunities"
-//   }
-// ];
-
-
 interface ProcessQuestionType {
   //what the question is asking
-  content: string,
+  content: string;
   //id of question
-  id: number,
+  id: number;
   //list of structs - pair of id and string for each possible answer
-  possibleAnswers: any[]
-
+  possibleAnswers: any[];
 }
 
-function processQuestion({question} : any) : any {
-
-  let processQuestion : ProcessQuestionType = { 
-    content : question.content,
+function processQuestion({ question }: any): any {
+  let processQuestion: ProcessQuestionType = {
+    content: question.content,
     id: question.id,
-    possibleAnswers: []
-  }
+    possibleAnswers: [],
+  };
 
   for (let option of question.possible_answers) {
-    processQuestion.possibleAnswers.push( {id: question.possible_answers.indexOf(option), option: option})
+    processQuestion.possibleAnswers.push({
+      id: question.possible_answers.indexOf(option),
+      option: option,
+    });
   }
 
   return processQuestion;
-
 }
 
-export function RankingScaleUtil( {question} : PropTypes) {
-  
-  let processQ : ProcessQuestionType = processQuestion(question);
+export function RankingScaleUtil({ question }: PropTypes) {
+  let processQ: ProcessQuestionType = processQuestion(question);
 
   const [answers, updateAnswers] = useState(processQ.possibleAnswers);
 
-  function handleOnDragEnd(result : any) {
+  function handleOnDragEnd(result: any) {
     if (!result.destination) return;
 
     const newAnswers = Array.from(answers);
@@ -71,28 +54,23 @@ export function RankingScaleUtil( {question} : PropTypes) {
   }
 
   return (
-    <div className="App">
-      <header className="Ranking-Question">
+    <div className='App'>
+      <header className='Ranking-Question'>
         <h2>{processQ.content}</h2>
         <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="answers">
-            {(provided) => (
-              <ol
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                className="custom-counter"
-              >
+          <Droppable droppableId='answers'>
+            {provided => (
+              <ol {...provided.droppableProps} ref={provided.innerRef} className='custom-counter'>
                 {answers.map(({ id, option }, index) => {
                   return (
                     <Draggable key={id} draggableId={id} index={index}>
-                      {(provided) => (
+                      {provided => (
                         <li
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className="answers"
-                        >
-                          <div className="answerText">{option}</div>
+                          className='answers'>
+                          <div className='answerText'>{option}</div>
                         </li>
                       )}
                     </Draggable>
