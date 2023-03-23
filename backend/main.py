@@ -6,7 +6,8 @@ from applicant_question.router import router as aq_router
 from applicant_answer.router import router as aa_router
 import uvicorn
 from typing import Optional
-from users.authentication import router
+from employer.authentication import router as employer_router
+from applicant.authentication import router as applicant_router
 from employer_questions import router as eq_router
 from employer_answers import router as ea_router
 from db.db import Base, engine
@@ -30,12 +31,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(router)
+app.include_router(employer_router)
 app.include_router(eq_router.router)
 app.include_router(ea_router.router)
 app.include_router(aq_router)
 app.include_router(aa_router)
-
+app.include_router(applicant_router)
 
 @app.get("/")
 async def read():

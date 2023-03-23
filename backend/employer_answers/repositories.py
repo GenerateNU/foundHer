@@ -5,7 +5,13 @@ from . import models, schemas
 class EmployerAnswersRepo:
     
  async def create(db: Session, employer_answer: schemas.EmployerAnswerCreate):
-        db_employer_answer = models.EmployerAnswer(user_id=employer_answer.user_id,question_id=employer_answer.question_id,answers=employer_answer.answers)
+        db_employer_answer = models.EmployerAnswer(question_id=employer_answer.question_id, 
+                                            applicant_id=employer_answer.user_id, 
+                                            range_answer=employer_answer.range_answer, 
+                                            question_type=employer_answer.question_type,
+                                            multiple_choice_answer=employer_answer.multiple_choice_answer, 
+                                            open_ended_answer=employer_answer.open_ended_answer, 
+                                            ranked_answer=employer_answer.ranked_answer)
         db.add(db_employer_answer)
         db.commit()
         db.refresh(db_employer_answer)
