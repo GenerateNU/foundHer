@@ -1,9 +1,30 @@
+.logo {
+    margin: auto;
+    text-align: center; 
+    
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    width: 477px;
+    height: 555px;
+    left: 500px;
+    top: 100px;
+    
+
+    margin: auto;
+    background: #F5EFEF;
+    box-shadow: 0px 5px 10px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+}
+
+
 .signinTitle {
-    /* position: absolute; */
-    width: 132px;
+    position: absolute;
+    width: 150px;
     height: 48px;
-    /* left: 520px; */
-    top: 237px;
+    top: 115px;
 
     font-family: 'Inter';
     font-style: normal;
@@ -11,70 +32,48 @@
     font-size: 40px;
     line-height: 48px;
     margin-left: 35px;
-    /* text-align: center; */
+    
+    margin-bottom: 0px;
 
     color: #000000;
 }
 
 .usernameField {
-    /* position: absolute; */
+    position: absolute;
     width: 396px;
-    height: 40px;
-    left: 521px;
-    top: 310px;
-
+    height: 77px;
+    top: 220px;
+    
     margin-left: 35px;
-    margin-top: 20px;
-    background: #D9D9D9;
+    
+    background: #F5DBF2;
     font-size: 15px;
     border-radius: 5px;
 }
 
-.formContainer {
-    position: absolute;
-    width: 477px;
-    height: 450px;
-    left: 482px;
-    top: 100px;
 
-    background: #FFFFFF;
-    box-shadow: 0px 5px 10px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 7px;
-}
 
 .passwordField {
-    /* position: absolute; */
+    position: absolute;
     margin-left: 35px;
     width: 396px;
-    height: 40px;
-    left: 521px;
-    top: 423px;
-    margin-top: 20px;
+    height: 77px;
+    top: 350px;
+    
     font-size: 15px;
-    background: #D9D9D9;
+    background: #F5DBF2;
     border-radius: 5px;
 }
 
-.signinButton {
-    /* position: relative; */
-width: 396px;
-height: 40px;
-left: 521px;
-top: 576px;
-margin-left: 35px;
-margin-top: 20px;
-background: #D9D9D9;
-font-size: 18px;
-border-radius: 64px;
-}
+
 
 .forgotPassword {
-    /* position: absolute; */
+position: relative;
 width: 153px;
 height: 22px;
-left: 520px;
-top: 509px;
-margin-left: 35px;
+top: 350px;
+left: 35px;
+
 font-family: 'Inter';
 font-style: normal;
 font-weight: 400;
@@ -87,13 +86,24 @@ line-height: 22px;
 color: #000000;
 }
 
+.signinButton {
+    position: absolute;
+    width: 396px;
+    height: 77px;
+    top: 475px;
+    margin-left: 35px;
+    margin-top: 20px;
+    background: #ECBAE6;
+    font-size: 18px;
+    border-radius: 64px;
+    }
+
 .newToFoundHer {
-    /* position: absolute; */
+    position: relative;
 width: 159px;
 height: 22px;
-left: 554px;
-top: 686px;
-margin-left: 115px;
+left: 100px;
+top: 475px;
 font-family: 'Inter';
 font-style: normal;
 font-weight: 400;
@@ -105,12 +115,13 @@ text-align: center;
 
 color: #000000;
 }
+
 .createAnAccount {
-    /* position: absolute; */
+position: relative;
 width: 162px;
 height: 22px;
-left: 725px;
-top: 686px;
+top: 475px;
+left: 110px;
 
 font-family: 'Inter';
 font-style: normal;
@@ -118,13 +129,45 @@ font-weight: 600;
 font-size: 15px;
 line-height: 22px;
 /* identical to box height */
-margin-left: 10px;
 
 text-align: center;
 
 color: #000000;
 }
 
-.newto {
-    margin-top: 100px;
-}
+/* .needHelp {
+    position: absolute;
+    width: 162px;
+    height: 22px;
+    top: 100%;
+    left: 100px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px; */
+    /* identical to box height */
+    /* margin-left: 10px;
+
+    text-align: center;
+
+    color: #000000; */
+/* } */
+
+/* .contactUs {
+    position: absolute;
+    width: 162px;
+    height: 22px;
+    top: 100%;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22px;
+
+    text-align: center;
+
+    color: #000000;
+} */
+

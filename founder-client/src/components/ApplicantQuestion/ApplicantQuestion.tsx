@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { ApplicantQuestion, ApplicantAnswer } from '../../utils/ApplicantQuestionTypes';
 
-import {
-  ApplicantQuestion,
-  ApplicantAnswer,
-} from "../../utils/ApplicantQuestionTypes";
+import { Navigate } from 'react-router-dom';
 
-import { Navigate } from "react-router";
-
-import "./ApplicantQuestion.css";
-import { addApplicantAnswerThunk } from "../../question/thunks";
+import './ApplicantQuestion.css';
+import { addApplicantAnswerThunk } from '../../question/thunks';
 
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -23,21 +19,21 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
 
   const dispatch = useDispatch<any>();
   if (!localStorage.getItem('access_token')) {
-    return <Navigate to={"/login"} />;
+    return <Navigate to={'/login'} />;
   }
-  console.log(submittedAnswers)
+  console.log(submittedAnswers);
   const handleSubmit = () => {
     try {
       dispatch(
         addApplicantAnswerThunk({
           question_id: question.id,
-          applicant_id: localStorage.getItem("currentUserID"),
+          applicant_id: localStorage.getItem('currentUserID'),
           answers: answer,
           range_selection: range_selection
         })
       )
     } catch (e) {
-      console.log("Error submitting" + e);
+      console.log('Error submitting' + e);
     }
   };
 
@@ -46,12 +42,12 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
       return (
         <div>
           <input
-            type="checkbox"
-            onChange={(e) => {
+            type='checkbox'
+            onChange={e => {
               if (e.target.checked) {
                 setAnswer([...answer, e.target.value]);
               } else {
-                setAnswer([...answer.filter((a) => a !== e.target.value)]);
+                setAnswer([...answer.filter(a => a !== e.target.value)]);
               }
             }}
             value={answerOption}
@@ -65,30 +61,33 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
     });
 
     return (
-      <div className="question">
+      <div className='question'>
         <span>{question.question_content}</span>
         <div>{options}</div>
-        <div className="button-div">
+        <div className='button-div'>
           <button onClick={() => handleSubmit()}>Next</button>
         </div>
-        {submittedAnswers.some((answer: any) => answer.question_id === question.id) && <div> success!</div>}
+        {submittedAnswers.some((answer: any) => answer.question_id === question.id) && (
+          <div> success!</div>
+        )}
       </div>
     );
   } else {
     return (
-      <div className="question">
+      <div className='question'>
         <span>{question.question_content}</span>
         <input
-          type="text"
+          type='text'
           value={answer}
-          onChange={(e) => setAnswer([e.target.value])}
-          placeholder="Add answer..."
+          onChange={e => setAnswer([e.target.value])}
+          placeholder='Add answer...'
         />
         <div className="button-div">
-          <button onClick={() => handleSubmit()}>Submit</button>
+          <button onClick={() => handleSubmit()}>Next</button>
         </div>
-        {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && <div> success!</div>}
-        
+        {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && (
+          <div> success!</div>
+        )}
       </div>
     );
   }
