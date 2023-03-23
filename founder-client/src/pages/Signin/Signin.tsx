@@ -4,6 +4,8 @@ import { loginThunk } from '../../user/thunks';
 import { Navigate, useNavigate } from 'react-router-dom';
 import './signin.css';
 import { NeedHelpContactUs } from '../../util/util';
+import MultiRangeSlider from '../../components/SlidingScale/sliding_scale';
+
 
 const Login = () => {
   const { currentUser } = useSelector((state: any) => state.users);
