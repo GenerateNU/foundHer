@@ -8,10 +8,13 @@ import { Navigate } from 'react-router-dom';
 import './ApplicantQuestion.css';
 import { addApplicantAnswerThunk } from '../../question/thunks';
 
+
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ApplicantQuestionInput = ({ question }: PropTypes) => {
   const [submit, setSubmit] = useState<boolean>(false);
   const [answer, setAnswer] = useState<string[]>([]);
+  const [range_selection, setRangeSelection] = useState<{[min_or_max: string]: number}>({});
+  
   const { submittedAnswers } = useSelector((state: any) => state.applicantQuestions);
 
   const dispatch = useDispatch<any>();
@@ -26,8 +29,9 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
           question_id: question.id,
           applicant_id: localStorage.getItem('currentUserID'),
           answers: answer,
-        }),
-      );
+          range_selection: range_selection
+        })
+      )
     } catch (e) {
       console.log('Error submitting' + e);
     }
