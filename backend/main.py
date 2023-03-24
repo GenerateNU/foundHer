@@ -9,6 +9,7 @@ from typing import Optional
 from users.authentication import router
 from employer_questions import router as eq_router
 from employer_answers import router as ea_router
+from application import router as a_router
 from db.db import Base, engine
 
 Base.metadata.create_all(bind=engine)
@@ -35,6 +36,7 @@ app.include_router(eq_router.router)
 app.include_router(ea_router.router)
 app.include_router(aq_router)
 app.include_router(aa_router)
+app.include_router(a_router)
 
 
 @app.get("/")
