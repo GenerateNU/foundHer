@@ -9,6 +9,7 @@ from typing import Optional
 from employer.authentication import router as employer_router
 from applicant.authentication import router as applicant_router
 from employer_questions import router as eq_router
+from exprience import router as applicant_experience_router
 from employer_answers import router as ea_router
 from db.db import Base, engine
 
@@ -37,6 +38,7 @@ app.include_router(ea_router.router)
 app.include_router(aq_router)
 app.include_router(aa_router)
 app.include_router(applicant_router)
+app.include_router(applicant_experience_router.router)
 
 @app.get("/")
 async def read():

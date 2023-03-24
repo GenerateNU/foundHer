@@ -36,4 +36,5 @@ class EmployerQuestionsRepo:
             "max_value": employer_question.max_value,
             "question_type": employer_question.question_type}, synchronize_session="fetch")
         updated_employer_question = EmployerQuestionsRepo.fetch_by_id(db, id)
+        db.commit()
         return updated_employer_question

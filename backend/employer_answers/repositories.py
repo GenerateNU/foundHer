@@ -32,6 +32,7 @@ class EmployerAnswersRepo:
      
  async def update(db: Session, employer_answer_data, id: int):
     db.query(models.EmployerAnswer).filter(models.EmployerAnswer.id == id).update({"answers": employer_answer_data.answers}, synchronize_session="fetch")
+    db.commit()
     db_ea = EmployerAnswersRepo.fetch_by_id(db, id)
     return db_ea
     
