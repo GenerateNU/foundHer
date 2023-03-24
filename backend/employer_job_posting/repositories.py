@@ -11,7 +11,7 @@ from . import models, schemas
 #
 class EmployerJobPostingRepo:
     async def create(db: Session, employer_job_posting: schemas.EmployerJobPostingCreate):
-        db_employer_question = models.Employer_job_posting(employer_id=employer_job_posting.employer_id, description = employer_job_posting.description,
+        db_employer_question = models.Employer_Job_Posting(employer_id=employer_job_posting.employer_id, description = employer_job_posting.description,
                                                            created_at=employer_job_posting.created_at, location=employer_job_posting.location,
                                                            experience_level = employer_job_posting.experience_level)
         db.add(db_employer_question)
@@ -34,7 +34,7 @@ class EmployerJobPostingRepo:
         return db_employer_question
 
     async def update(db: Session, employer_job_posting: schemas.EmployerJobPosting, id: int):
-        db.query(models.Employer_job_posting).filter(models.Employer_job_posting.id == id)\
+        db.query(models.Employer_Job_Posting).filter(models.Employer_Job_Posting.id == id)\
             .update({"employer_id": employer_job_posting.employer_id, "description": employer_job_posting.description,
                      "created_at":employer_job_posting.created_at, "location":employer_job_posting.location,
                      "expereince_level":employer_job_posting.experience_level}, synchronize_session="fetch")
