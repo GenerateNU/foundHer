@@ -12,6 +12,7 @@ develop-eggs/
 dist/
 eggs/
 lib/
+include/
 lib64/
 parts/
 sdist/

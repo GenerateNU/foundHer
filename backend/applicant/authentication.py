@@ -1,6 +1,6 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
-from typing import Union, Optional
+from typing import Union, Optional, ByteString
 from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
@@ -10,8 +10,8 @@ from fastapi.encoders import jsonable_encoder
 
 from db.db import get_db
 
-from .repositories import UserRepo
-from .schemas import UserCreate, User
+from .repositories import ApplicantRepo
+from .schemas import Applicant, ApplicantCreate
 from fastapi import APIRouter
 
 
@@ -63,35 +63,48 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
         token_data = TokenData(username=username)
     except JWTError:
         raise credentials_exception
-    user = UserRepo.fetch_by_username(db=db, username=token_data.username)
+    user = ApplicantRepo.fetch_by_username(db=db, username=token_data.username)
     if user is None:
         raise credentials_exception
     return user
 
 
-async def get_current_active_user(current_user: User = Depends(get_current_user)):
+async def get_current_active_user(current_user: Applicant = Depends(get_current_user)):
     return current_user
 
 
-class LoginForm(BaseModel):
+class ApplicantLoginForm(BaseModel):
     username: str
     password: str
-class RegisterForm(LoginForm):
+class ApplicantRegisterForm(ApplicantLoginForm):
     email: str
-    fullname: Optional[str]
-    company_name: Optional[str]
-    is_applicant: Optional[bool]
+    fullname: str
+    city: str
+    state: str
+    country: Optional[str]
+    highest_education: Optional[str]
+    institution: Optional[str]
+    latest_job_title: Optional[str]
+    latest_company: Optional[str]
+    # resume_file: ByteString
+    
 
-@router.post("/register")
-async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
+@router.post("/applicant-register")
+async def register_user(form_data: ApplicantRegisterForm, db: Session = Depends(get_db)):
     username: str = form_data.username
     password: str = form_data.password
     email: str = form_data.email
     fullname: str = form_data.fullname if form_data.fullname else ""
-    company_name: str = form_data.company_name if form_data.company_name else ""
-    is_applicant: bool = form_data.is_applicant if form_data.is_applicant else True
+    city: str = form_data.city if form_data.city else ""
+    state: str = form_data.state if form_data.state else ""
+    country: str = form_data.country if form_data.country else ""
+    highest_education: str = form_data.highest_education if form_data.highest_education else ""
+    institution: str = form_data.institution if form_data.institution else ""
+    latest_job_title: str =form_data.latest_job_title if form_data.latest_job_title else ""
+    latest_company: str = form_data.latest_company if form_data.latest_company else ""
+    # resume_file: Optional[ByteString] = form_data.resume_file if form_data.resume_file else None
     
-    db_user: User = UserRepo.fetch_by_username(db=db, username=username)
+    db_user: Applicant = ApplicantRepo.fetch_by_username(db=db, username=username)
     if db_user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -100,8 +113,17 @@ async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
         )
     
     password_hash = get_password_hash(password)
-    new_user = await UserRepo.create(db=db, user=UserCreate(username=username, hashed_password=password_hash, email=email, company_name=company_name, fullname=fullname, is_applicant=is_applicant))
-    json_compatible_item_data = jsonable_encoder(new_user)
+    new_applicant = await ApplicantRepo.create(db=db, applicant=ApplicantCreate(username=username, 
+                                                                      hashed_password=password_hash, 
+                                                                      email=email, city=city, 
+                                                                      fullname=fullname, 
+                                                                      state=state, 
+                                                                      country=country, 
+                                                                      highest_education=highest_education, 
+                                                                      institution=institution, 
+                                                                      latest_job_title=latest_job_title, 
+                                                                      latest_company=latest_company))
+    json_compatible_item_data = jsonable_encoder(new_applicant)
     del json_compatible_item_data["hashed_password"]
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(data={"sub": username}, expires_delta=access_token_expires)
@@ -109,11 +131,11 @@ async def register_user(form_data: RegisterForm, db: Session = Depends(get_db)):
     return json_compatible_item_data
 
 
-@router.post("/login")
-async def login(form_data: LoginForm, db: Session = Depends(get_db)):
+@router.post("/applicant-login")
+async def login(form_data: ApplicantLoginForm, db: Session = Depends(get_db)):
     username = form_data.username
     password = form_data.password
-    db_user: User = UserRepo.fetch_by_username(db=db, username=username)
+    db_user: Applicant = ApplicantRepo.fetch_by_username(db=db, username=username)
 
     if not db_user:
         raise HTTPException(
@@ -136,7 +158,7 @@ async def login(form_data: LoginForm, db: Session = Depends(get_db)):
         return json_compatible_item_data
 
 
-@router.get("/profile", response_model=User)
-async def read_users_me(current_user: User = Depends(get_current_active_user)):
+@router.get("/applicant-profile", response_model=Applicant)
+async def read_users_me(current_user: Applicant = Depends(get_current_active_user)):
     json_compatible_item_data = jsonable_encoder(current_user)
     return json_compatible_item_data

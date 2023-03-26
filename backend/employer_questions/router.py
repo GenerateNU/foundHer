@@ -10,7 +10,7 @@ from fastapi.encoders import jsonable_encoder
 from db.db import get_db
 from .repositories import EmployerQuestionsRepo
 from fastapi import APIRouter
-import users.models as models
+import employer.models as models
 from db.db import engine
 from .schemas import EmployerQuestion, EmployerQuestionCreate, EmployerQuestionUpdate
 from fastapi.encoders import jsonable_encoder

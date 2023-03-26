@@ -5,7 +5,7 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from db.db import get_db, engine
 from .repositories import Applicant_Question_Repo
-import users.models as models
+import employer.models as models
 from .schemas import Applicant_Question, Applicant_Question_Create, Applicant_Question_Update
 from . import models
 
@@ -18,9 +18,6 @@ async def add_question(question_request: Applicant_Question_Create, db: Session 
     """
     Add an applicant question and store it in the database
     """
-    # db_question = Applicant_Question_Repo.fetch_by_id(db=db, question_id=question_request.id)
-    # if db_question:
-    #     raise HTTPException(status_code=400, detail="Question already exists")
     json_compatible_question_data = await Applicant_Question_Repo.create(db=db, question=question_request)
 
     return jsonable_encoder(json_compatible_question_data)
@@ -30,7 +27,7 @@ async def get_question (question_id: int, db: Session = Depends(get_db)) -> Opti
     """
     Return the question with the given question ID, or raise exception if not found
     """
-    db_question = Applicant_Question_Repo.fetch_by_id(db=db, question_id=question_id)
+    db_question: Applicant_Question = Applicant_Question_Repo.fetch_by_id(db=db, question_id=question_id)
     if db_question is None:
         raise HTTPException(status_code=404, detail= f"Question not found with the given ID: {question_id}")
 
@@ -51,12 +48,15 @@ async def update_question (question_request: Applicant_Question_Update, db: Sess
     """
     Update a question that already exists in the database
     """
-    db_question = Applicant_Question_Repo.fetch_by_id(db, question_request.id)
+    db_question: Applicant_Question = Applicant_Question_Repo.fetch_by_id(db, question_request.id)
     if db_question:
         updated_question = jsonable_encoder(question_request)
         db_question.question_content = updated_question["question_content"]
         db_question.possible_answers = updated_question["possible_answers"]
-        json_compatible_question = await Applicant_Question_Repo.update(db=db, question_data=question_request, id=question_request.id)
+        db_question.min_value = updated_question["min_value"]
+        db_question.max_value = updated_question["max_value"]
+        db_question.question_type = updated_question["question_type"]
+        json_compatible_question = await Applicant_Question_Repo.update(db=db, question_data=db_question, id=question_request.id)
     else:
         raise HTTPException(status_code=400, detail=f"Question not found with the given ID: {question_request.id}")
 
@@ -67,7 +67,7 @@ async def delete_question(question_id: int, db: Session = Depends(get_db)) -> in
     """
     Delete a question that exists in the database
     """
-    db_question = Applicant_Question_Repo.fetch_by_id(db=db, question_id=question_id)
+    db_question: Applicant_Question = Applicant_Question_Repo.fetch_by_id(db=db, question_id=question_id)
     if db_question is None:
         raise HTTPException(status_code=404, detail= f"Question not found with the given ID: {question_id}")
     
