@@ -34,7 +34,7 @@ async def get_application(application_id: int, db: Session = Depends(get_db)) ->
     return db_application
 
 @router.get('/application/applicant:{applicant_id}', tags=["Application"])
-async def get_application(applicant_id: int, db: Session = Depends(get_db)) -> Optional[Application]:
+async def get_application_applicant(applicant_id: int, db: Session = Depends(get_db)) -> Optional[Application]:
     """
     Return the application with the given applicant user ID, or raise exception if not found
     """
@@ -45,7 +45,7 @@ async def get_application(applicant_id: int, db: Session = Depends(get_db)) -> O
     return db_application
 
 @router.get('/application/posting:{posting_id}', tags=["Application"])
-async def get_application(posting_id: int, db: Session = Depends(get_db)) -> Optional[Application]:
+async def get_application_posting(posting_id: int, db: Session = Depends(get_db)) -> Optional[Application]:
     """
     Return the application with the given application ID, or raise exception if not found
     """
