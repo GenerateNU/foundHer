@@ -7,19 +7,19 @@ from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException, status
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
-from ..db.db import get_db, engine
+from db.db import get_db, engine
 from .repositories import JobPostingRepo
 from fastapi import APIRouter
-import users.models as models
-from .schemas import JobPostingBase, JobPostingCreate, JobPostingPosting, JobPostingUpdate, JobPosting
+from .schemas import JobPostingBase, JobPostingCreate, JobPostingUpdate, JobPosting
 from fastapi.encoders import jsonable_encoder
+from . import models
 
 models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 
 @router.post('/job-posting', tags=['JobPosting'], response_model=JobPosting, status_code=201)
-async def create_question(posting_request: JobPostingCreate, db: Session = Depends(get_db)):
+async def create_job_posting(posting_request: JobPostingCreate, db: Session = Depends(get_db)):
 
     json_compatible_item_data = await JobPostingRepo.create(db=db, job_posting=posting_request)
     return jsonable_encoder(json_compatible_item_data)
@@ -32,7 +32,7 @@ def get_job_posting(job_posting_id: int, db: Session=Depends(get_db)):
         raise HTTPException(status_code=404, detail=f'Employer Question {job_posting_id} not found')
     return jsonable_encoder(db_job_posting)
 
-@router.get('/job-posting/employer:{employer_id}', tags=['JobPosting'], response_model=JobPosting)
+@router.get('/job-posting/employer:{employer_id}', tags=['JobPosting'], response_model=List[JobPosting])
 def get_job_posting_employer(employer_id: int, db: Session=Depends(get_db)):
     db_job_posting = JobPostingRepo.fetch_by_employer_id(db, employer_id)
     if db_job_posting is None:

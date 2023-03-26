@@ -3,9 +3,9 @@ from sqlalchemy import Column, Integer, ForeignKey, String, DateTime
 from db.db import Base
 
 class Job_Posting(Base):
-    __tablename__ = "job_posting"
+    __tablename__ = "job_postings"
     id = Column(Integer, primary_key=True,index=True)
-    employer_id = Column(Integer, ForeignKey('employer.id'))
+    employer_id = Column(Integer, ForeignKey('employers.id'))
     description = Column(String)
     created_at = Column(DateTime)
     location = Column(String)

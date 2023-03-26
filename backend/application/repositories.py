@@ -18,10 +18,10 @@ class Application_Repo:
         return db.query(models.Application).filter(models.Application.id == id).first()
     
     def fetch_by_applicant_id(db: Session, applicant_id: int):
-        return db.query(models.Application).filter(models.Application.applicant_id == applicant_id).first()
+        return db.query(models.Application).filter(models.Application.applicant_id == applicant_id).all()
     
     def fetch_by_posting_id(db: Session, posting_id: int):
-        return db.query(models.Application).filter(models.Application.posting_id == posting_id).first()
+        return db.query(models.Application).filter(models.Application.posting_id == posting_id).all()
  
     def fetch_all(db: Session, skip: int = 0, limit: int = 100):
         return db.query(models.Application).offset(skip).limit(limit).all()

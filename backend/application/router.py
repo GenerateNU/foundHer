@@ -5,7 +5,6 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from db.db import get_db, engine
 from .repositories import Application_Repo
-import users.models as models
 from .schemas import Application, Application_Create
 from . import models
 
@@ -18,7 +17,7 @@ async def add_application(application_request: Application_Create, db: Session =
     """
     Add an application and store it in the database
     """
-    json_compatible_application_data = await Application_Create.create(db=db, application=application_request)
+    json_compatible_application_data = await Application_Repo.create(db=db, application=application_request)
 
     return jsonable_encoder(json_compatible_application_data)
 
@@ -27,7 +26,7 @@ async def get_application(application_id: int, db: Session = Depends(get_db)) ->
     """
     Return the application with the given application ID, or raise exception if not found
     """
-    db_application = Application_Repo.fetch_by_id(db=db, application_id=application_id)
+    db_application = Application_Repo.fetch_by_id(db=db, id=application_id)
     if db_application is None:
         raise HTTPException(status_code=404, detail= f"Application not found with the given ID: {application_id}")
 
@@ -38,7 +37,7 @@ async def get_application_applicant(applicant_id: int, db: Session = Depends(get
     """
     Return the application with the given applicant user ID, or raise exception if not found
     """
-    db_application = Application_Repo.fetch_by_id(db=db, applicant_id=applicant_id)
+    db_application = Application_Repo.fetch_by_applicant_id(db=db, applicant_id=applicant_id)
     if db_application is None:
         raise HTTPException(status_code=404, detail= f"Application not found with the given applicant ID: {applicant_id}")
 
@@ -47,9 +46,9 @@ async def get_application_applicant(applicant_id: int, db: Session = Depends(get
 @router.get('/application/posting:{posting_id}', tags=["Application"])
 async def get_application_posting(posting_id: int, db: Session = Depends(get_db)) -> Optional[Application]:
     """
-    Return the application with the given application ID, or raise exception if not found
+    Return the application with the given posting ID, or raise exception if not found
     """
-    db_application = Application_Repo.fetch_by_id(db=db, posting_id=posting_id)
+    db_application = Application_Repo.fetch_by_posting_id(db=db, posting_id=posting_id)
     if db_application is None:
         raise HTTPException(status_code=404, detail= f"Application not found with the given postion ID: {posting_id}")
 

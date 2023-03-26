@@ -9,6 +9,7 @@
 from typing import List
 
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class JobPostingBase(BaseModel):
@@ -20,7 +21,7 @@ class JobPostingBase(BaseModel):
 
 class JobPosting(JobPostingBase):
     id: int
-    created_at: int
+    created_at: datetime
 
     class Config:
         orm_mode: True
@@ -30,5 +31,5 @@ class JobPostingCreate(JobPostingBase):
 
 class JobPostingUpdate(BaseModel):
     id: int
-    created_at: int
+    created_at: datetime
 

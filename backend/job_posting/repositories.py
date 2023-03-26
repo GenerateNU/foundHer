@@ -1,5 +1,7 @@
 from sqlalchemy.orm import Session
 
+from datetime import datetime
+
 from . import models, schemas
 
 # "     id = Column(Integer, primary_key=True,index=True)
@@ -12,7 +14,7 @@ from . import models, schemas
 class JobPostingRepo:
     async def create(db: Session, job_posting: schemas.JobPostingCreate):
         db_posting = models.Job_Posting(employer_id=job_posting.employer_id, description = job_posting.description,
-                                                           created_at=job_posting.created_at, location=job_posting.location,
+                                                           created_at=datetime.now(), location=job_posting.location,
                                                            experience_level = job_posting.experience_level)
         db.add(db_posting)
         db.commit()
@@ -23,14 +25,14 @@ class JobPostingRepo:
         return db.query(models.Job_Posting).filter(models.Job_Posting.id == _id).first()
     
     def fetch_by_employer_id(db: Session, employer_id:int):
-        return db.query(models.Job_Posting).filter(models.Job_Posting.employer_id == employer_id).first()
+        return db.query(models.Job_Posting).filter(models.Job_Posting.employer_id == employer_id).all()
 
 
     def fetch_all(db: Session, skip: int = 0, limit: int = 100):
-        return db.query(models.Job).offset(skip).limit(limit).all()
+        return db.query(models.Job_Posting).offset(skip).limit(limit).all()
 
     async def delete(db: Session,_id:int):
-        db_posting= db.query(models.Job).filter(models.Job.id == _id).first()
+        db_posting= db.query(models.Job_Posting).filter(models.Job_Posting.id == _id).first()
         print(db_posting)
         db.delete(db_posting)
         db.commit()

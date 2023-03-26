@@ -3,11 +3,11 @@ from sqlalchemy import Column, Integer, ForeignKey, DateTime
 from db.db import Base
 
 class Application(Base):
-    __tablename__ = "application"
+    __tablename__ = "applications"
     #  id, applicant_id, posting_id, createdAt
     id = Column(Integer, primary_key=True,index=True)
-    applicant_id = Column(Integer, ForeignKey('applicant.id'))
-    posting_id = Column(Integer, ForeignKey('employer_job_posting.id'))
+    applicant_id = Column(Integer, ForeignKey('applicants.id'))
+    posting_id = Column(Integer, ForeignKey('job_postings.id'))
     created_at = Column(DateTime)
     
 
