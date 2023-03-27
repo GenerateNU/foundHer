@@ -49,5 +49,8 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+# exclude some common files we don't want in our repo
+**/__pycache__/
+
 .DS_Store
 .idea
