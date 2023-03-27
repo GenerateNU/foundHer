@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -51,8 +50,4 @@ coverage.xml
 docs/_build/
 
 .DS_Store
-=======
-# exclude some common files we don't want in our repo
-**/__pycache__/
->>>>>>> main
 .idea
