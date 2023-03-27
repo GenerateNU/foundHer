@@ -35,18 +35,6 @@ export default function App() {
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/profile' element={<Profile />} />
-            <Route
-              path='/testing'
-              element={
-                <ProgressBarWrapper markerTitles={['Hi', 'Hey', 'Hello', 'Yellow', 'Mellow']}>
-                  <h1>Hi</h1>
-                  <h1>Hey</h1>
-                  <h1>Hello</h1>
-                  <h1>Yellow</h1>
-                  <h1>Mellow</h1>
-                </ProgressBarWrapper>
-              }
-            />
           </Routes>
         </BrowserRouter>
       </Provider>
