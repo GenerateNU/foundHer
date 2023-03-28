@@ -10,6 +10,7 @@ class Applicant_Question(Base):
     question_type = Column(String(80))
     min_value = Column(Integer, nullable=True)
     max_value = Column(Integer, nullable=True)
+    unit = Column(String, nullable=True)
 
     def __repr__(self):
         return 'Applicant_Question(question_content=%s, possible_answers=%s' % (self.question_content, self.possible_answers)

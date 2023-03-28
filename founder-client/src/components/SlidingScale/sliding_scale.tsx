@@ -12,7 +12,7 @@ import "./sliding_scale.css";
 interface MultiRangeSliderProps {
   min: number;
   max: number;
-  unit: string
+  unit: string;
   onChange: Function;
 }
 
@@ -61,11 +61,6 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         range.current.style.width = `${maxPercent - minPercent}%`;
         
       }
-
-      
-      
-
-      
     }
   }, [maxVal, getPercent]);
 

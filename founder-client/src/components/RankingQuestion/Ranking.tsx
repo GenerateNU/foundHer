@@ -21,7 +21,7 @@ interface ProcessQuestionType {
   possibleAnswers: any[];
 }
 
-function processQuestion({ question }: any): any {
+function processQuestion({ question }: any, ): any {
   let processQuestion: ProcessQuestionType = {
     content: question.content,
     id: question.id,
@@ -46,11 +46,11 @@ export function RankingScaleUtil({ question }: PropTypes) {
   function handleOnDragEnd(result: any) {
     if (!result.destination) return;
 
-    const newAnswers = Array.from(answers);
-    const [reorderedAnswers] = newAnswers.splice(result.source.index, 1);
-    newAnswers.splice(result.destination.index, 0, reorderedAnswers);
+    const rankingAnswers = Array.from(answers);
+    const [reorderedAnswers] = rankingAnswers.splice(result.source.index, 1);
+    rankingAnswers.splice(result.destination.index, 0, reorderedAnswers);
 
-    updateAnswers(newAnswers);
+    updateAnswers(rankingAnswers);
   }
 
   return (

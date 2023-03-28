@@ -8,7 +8,8 @@ class EmployerQuestionsRepo:
                                                            possible_answers = employer_question.possible_answers,
                                                            min_value = employer_question.min_value,
                                                            max_value = employer_question.max_value,
-                                                           question_type = employer_question.question_type)
+                                                           question_type = employer_question.question_type,
+                                                           unit=employer_question.unit)
             db.add(db_employer_question)
             db.commit()
             db.refresh(db_employer_question)
@@ -34,6 +35,7 @@ class EmployerQuestionsRepo:
             "possible_answers": employer_question.possible_answers,
             "min_value": employer_question.min_value,
             "max_value": employer_question.max_value,
-            "question_type": employer_question.question_type}, synchronize_session="fetch")
+            "question_type": employer_question.question_type,
+            "unit": employer_question.unit}, synchronize_session="fetch")
         updated_employer_question = EmployerQuestionsRepo.fetch_by_id(db, id)
         return updated_employer_question

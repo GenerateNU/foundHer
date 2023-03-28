@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ApplicantQuestion, ApplicantAnswer } from '../../utils/ApplicantQuestionTypes';
@@ -14,14 +14,16 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
   const [submit, setSubmit] = useState<boolean>(false);
   const [answer, setAnswer] = useState<string[]>([]);
   const [range_selection, setRangeSelection] = useState<{[min_or_max: string]: number}>({});
-  
+  const [ranking_selection, setRankingSelection] = useState<{[ranking_choice: string]: number}>({});
+
+
   const { submittedAnswers } = useSelector((state: any) => state.applicantQuestions);
+
 
   const dispatch = useDispatch<any>();
   if (!localStorage.getItem('access_token')) {
     return <Navigate to={'/login'} />;
   }
-  console.log(submittedAnswers);
   const handleSubmit = () => {
     try {
       dispatch(
@@ -36,6 +38,15 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
       console.log('Error submitting' + e);
     }
   };
+
+
+  const memoized = useCallback(() =>  {    
+    // the callback function to be memoized
+    
+  },
+    // dependencies array
+
+  []);
 
   if (question.possible_answers.length > 0) {
     const options = question.possible_answers.map((answerOption, index) => {

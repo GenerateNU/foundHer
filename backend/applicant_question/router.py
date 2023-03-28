@@ -56,6 +56,7 @@ async def update_question (question_request: Applicant_Question_Update, db: Sess
         db_question.min_value = updated_question["min_value"]
         db_question.max_value = updated_question["max_value"]
         db_question.question_type = updated_question["question_type"]
+        db_question.unit = updated_question["unit"]
         json_compatible_question = await Applicant_Question_Repo.update(db=db, question_data=db_question, id=question_request.id)
     else:
         raise HTTPException(status_code=400, detail=f"Question not found with the given ID: {question_request.id}")
