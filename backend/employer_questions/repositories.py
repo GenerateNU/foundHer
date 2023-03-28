@@ -38,4 +38,5 @@ class EmployerQuestionsRepo:
             "question_type": employer_question.question_type,
             "unit": employer_question.unit}, synchronize_session="fetch")
         updated_employer_question = EmployerQuestionsRepo.fetch_by_id(db, id)
+        db.commit()
         return updated_employer_question
