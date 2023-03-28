@@ -8,6 +8,7 @@ import uvicorn
 from typing import Optional
 from employer.authentication import router as employer_router
 from applicant.authentication import router as applicant_router
+from exprience import router as applicant_experience_router
 from employer_questions.router import router as eq_router
 from employer_answers.router import router as ea_router
 from job_posting.router import router as jp_router
@@ -39,6 +40,7 @@ app.include_router(ea_router)
 app.include_router(aq_router)
 app.include_router(aa_router)
 app.include_router(applicant_router)
+app.include_router(applicant_experience_router.router)
 app.include_router(jp_router)
 app.include_router(a_router)
 
