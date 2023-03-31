@@ -3,8 +3,8 @@ export type ApplicantQuestion = {
     question_content: string;
     possible_answers: string[];
     question_type: string;
-    min_value: string;
-    max_value: string;
+    min_value: number;
+    max_value: number;
     unit: string;
   };
   
@@ -18,4 +18,9 @@ export type ApplicantQuestion = {
     open_ended_answer: string;
     ranked_answer: {[key: string]: number};
   };
+
+  export type PropTypes = {
+    question: ApplicantQuestion;
+  };
+
   
