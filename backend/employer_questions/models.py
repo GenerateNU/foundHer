@@ -10,7 +10,7 @@ class EmployerQuestion(Base):
     question_type = Column(String(80))
     min_value = Column(Integer, nullable=True)
     max_value = Column(Integer, nullable=True)
-    
+    unit = Column(String, nullable=True)
 
     def __repr__(self):
         return 'Employer_Question(id=%s, question=%s)' % (self.id, self.question_content)

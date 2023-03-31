@@ -8,32 +8,49 @@ import {
 } from "react";
 import classnames from "classnames";
 import "./sliding_scale.css";
+import { ApplicantAnswer, ApplicantQuestion } from "../../utils/Types";
+import { addApplicantAnswerThunk } from '../../question/thunks';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface MultiRangeSliderProps {
-  min: number;
-  max: number;
-  unit: string
+  question: ApplicantQuestion
   onChange: Function;
 }
 
 const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
-  min,
-  max,
-  unit,
+  question,
   onChange
 }) => {
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
+  const [minVal, setMinVal] = useState(question.min_value);
+  const [maxVal, setMaxVal] = useState(question.max_value);
   const minValRef = useRef<HTMLInputElement>(null);
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
+  const { submittedAnswers } = useSelector((state: any) => state.applicantQuestions);
 
   // Convert to percentage
   const getPercent = useCallback(
-    (value: number) => Math.round(((value - min) / (max - min)) * 100),
-    [min, max]
+    (value: number) => Math.round(((value - question.min_value) / (question.max_value - question.min_value)) * 100),
+    [question.min_value, question.max_value]
   );
-
+  const dispatch = useDispatch<any>();
+  const handleSubmit = () => {
+    try {
+      dispatch(
+        addApplicantAnswerThunk({
+          question_id: question.id,
+          applicant_id: localStorage.getItem('currentUserID'),
+          question_type: question.question_type,
+          range_answer: {"min": minVal, "max": maxVal},
+          multiple_choice_answer: [],
+          ranked_answer: {},
+          open_ended_answer: ""
+        })
+      )
+    } catch (e) {
+      console.log('Error submitting' + e);
+    }
+  };
   // Set width of the range to decrease from the left side
   useEffect(() => {
     if (maxValRef.current) {
@@ -61,11 +78,6 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         range.current.style.width = `${maxPercent - minPercent}%`;
         
       }
-
-      
-      
-
-      
     }
   }, [maxVal, getPercent]);
 
@@ -78,8 +90,8 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
     <div className="container">
       <input
         type="range"
-        min={min}
-        max={max}
+        min={question.min_value}
+        max={question.max_value}
         value={minVal}
         ref={minValRef}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -88,13 +100,13 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
           event.target.value = value.toString();
         }}
         className={classnames("thumb thumb--zindex-3", {
-          "thumb--zindex-5": minVal > max - 100
+          "thumb--zindex-5": minVal > question.max_value - 100
         })}
       />
       <input
         type="range"
-        min={min}
-        max={max}
+        min={question.min_value}
+        max={question.max_value}
         value={maxVal}
         ref={maxValRef}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -111,6 +123,13 @@ const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         <div className="slider__left-value">{minVal}</div>
         <div className="slider__right-value">{maxVal}</div>
       </div>
+
+      <div className="button-div">
+          <button onClick={() => handleSubmit()}>Submit</button>
+      </div>
+        {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && (
+          <div> success!</div>
+        )}
     </div>
   );
 };

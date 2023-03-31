@@ -9,7 +9,7 @@ class Applicant_Question_Base(BaseModel):
     question_type: str
     min_value: Optional[int]
     max_value: Optional[int]
-
+    unit: Optional[str]
 class Applicant_Question(Applicant_Question_Base):
     id : int
 

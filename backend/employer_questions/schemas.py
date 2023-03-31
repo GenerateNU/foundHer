@@ -9,7 +9,7 @@ class EmployerQuestionBase(BaseModel):
     question_type: str
     min_value: Optional[int]
     max_value: Optional[int]
-    
+    unit: Optional[str]
     
 
 class EmployerQuestion(EmployerQuestionBase):

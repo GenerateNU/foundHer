@@ -10,7 +10,8 @@ class Applicant_Question_Repo:
                                                 possible_answers=question.possible_answers,
                                                 min_value=question.min_value,
                                                 max_value=question.max_value,
-                                                question_type=question.question_type
+                                                question_type=question.question_type,
+                                                unit=question.unit
                                                 )
         db.add(db_question)
         db.commit()
@@ -36,6 +37,7 @@ class Applicant_Question_Repo:
             "possible_answers": question_data.possible_answers,
             "min_value": question_data.min_value,
             "max_value": question_data.max_value,
-            "question_type": question_data.question_type}, synchronize_session="fetch")
+            "question_type": question_data.question_type,
+            "unit": question_data.unit}, synchronize_session="fetch")
         db.commit()
         return question_data
