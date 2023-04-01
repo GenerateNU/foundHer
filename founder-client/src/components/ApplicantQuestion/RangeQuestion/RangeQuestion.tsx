@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { ApplicantAnswer, ApplicantQuestion, PropTypes } from '../../../utils/Types';
+import { ApplicantAnswer, ApplicantQuestion, PropTypes } from '../../../util/Types';
 import { Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addApplicantAnswerThunk } from '../../../question/thunks';

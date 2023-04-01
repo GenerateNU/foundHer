@@ -1,0 +1,56 @@
+.job_title {
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 26px;
+color: #000000;
+} 
+
+.company {
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 10px;
+line-height: 20px;
+color: #757575;
+}
+
+.location{
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 10px;
+line-height: 20px;
+/* or 200% */
+
+
+color: #757575;
+}
+.rectangle {
+    position: absolute;
+left: 8.2%;
+right: 64.34%;
+top: 8.45%;
+bottom: 67.96%;
+
+background: #A5A5A5;
+border-radius: 9px;
+}
+.tag {
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 10px;
+line-height: 26px;
+/* or 262% */
+
+display: flex;
+align-items: center;
+text-align: center;
+
+color: #000000;
+}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addApplicantAnswerThunk } from "../../../question/thunks";
-import { ApplicantAnswer, PropTypes } from "../../../utils/Types";
+import { ApplicantAnswer, PropTypes } from "../../../util/Types";
 
 export const OpenTextQuestion = ({ question }: PropTypes) => {
     const [open_ended_answer, setOpenEndedAnswer] = useState<string>("");

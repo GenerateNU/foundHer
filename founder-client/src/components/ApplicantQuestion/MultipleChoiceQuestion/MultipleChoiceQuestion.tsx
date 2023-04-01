@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addApplicantAnswerThunk } from "../../../question/thunks";
-import { PropTypes } from "../../../utils/Types";
+import { PropTypes } from "../../../util/Types";
 
 
 export const MultipleChoiceQuestion = ({ question }: PropTypes) => {

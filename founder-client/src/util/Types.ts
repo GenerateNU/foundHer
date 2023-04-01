@@ -23,4 +23,15 @@ export type ApplicantQuestion = {
     question: ApplicantQuestion;
   };
 
-  
+  export type JobPosting = {
+    id: number,
+    title: string,
+    company: string,
+    employer_id: number,
+    description: string,
+    created_at: string,
+    location: string,
+    experience_level: string,
+    skills: string[],
+    tags: string[]
+  }

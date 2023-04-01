@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { ApplicantQuestion, ApplicantAnswer, PropTypes } from '../../../utils/Types';
+import { ApplicantQuestion, ApplicantAnswer, PropTypes } from '../../../util/Types';
 
 import { Navigate } from 'react-router-dom';
 import { addApplicantAnswerThunk } from '../../../question/thunks';

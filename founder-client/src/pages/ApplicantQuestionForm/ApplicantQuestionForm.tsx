@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import ApplicantQuestionInput from '../../components/ApplicantQuestion/ApplicantQuestion';
-import { ApplicantQuestion, ApplicantAnswer} from '../../utils/Types';
+import { ApplicantQuestion, ApplicantAnswer} from '../../util/Types';
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from 'react';
 import './ApplicantQuestionForm.css';

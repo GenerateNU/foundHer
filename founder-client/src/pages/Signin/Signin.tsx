@@ -25,7 +25,7 @@ const Login = () => {
   if (currentUser) {
     localStorage.setItem('access_token', currentUser.access_token);
     localStorage.setItem('currentUserID', currentUser.id);
-    return <Navigate to={'/profile'} />;
+    return <Navigate to={'/home'} />;
   }
   return (
     <>

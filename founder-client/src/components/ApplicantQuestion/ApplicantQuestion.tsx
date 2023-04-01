@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ApplicantQuestion, ApplicantAnswer, PropTypes } from '../../utils/Types';
+import { ApplicantQuestion, ApplicantAnswer, PropTypes } from '../../util/Types';
 
 import { Navigate } from 'react-router-dom';
 
