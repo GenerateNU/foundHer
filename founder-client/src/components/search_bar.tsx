@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function SearchBar(props: { onSearchQueryChange: (arg0: any) => void; }) {
+function SearchBar(props: { onSearchQueryChange: (arg0: React.SetStateAction<string>) => void; }) {
   const [searchQuery, setSearchQuery] = useState("");
 
   function handleSearchInputChange(event: { target: { value: React.SetStateAction<string>; }; }) {

@@ -1,0 +1,13 @@
+{
+   "questions":[
+    {
+        "id": 1,
+        "question": ["str"],
+        "isLongAnswer": true,
+        "isProgressBar": false,
+        "isCheckBox": false,
+        "doesAcceptFiles": false,
+        "isDropDown": false
+    }
+]
+}
