@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import './search_bar.css';
 
 function SearchBar(props: { onSearchQueryChange: (arg0: React.SetStateAction<string>) => void; }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -9,7 +10,7 @@ function SearchBar(props: { onSearchQueryChange: (arg0: React.SetStateAction<str
       dispatch({searchQuery});
     } catch (e) {}
   };
-  
+
   function handleSearchInputChange(event: { target: { value: React.SetStateAction<string>; }; }) {
     setSearchQuery(event.target.value);
     props.onSearchQueryChange(event.target.value);

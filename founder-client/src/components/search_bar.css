@@ -36,14 +36,14 @@
   }
 
   .submitButton {
-    padding-left: 100%;
     position: absolute;
-    width: 396px;
-    height: 77px;
+    width: 100px;
+    height: 30px;
     top: 475px;
     margin-left: 35px;
-    margin-top: 20px;
+    margin-top: 0px;
     background: #cd22b9;
     font-size: 18px;
     border-radius: 64px;
+    top: 0;
     }
