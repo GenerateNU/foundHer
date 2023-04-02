@@ -32,5 +32,18 @@
   }
   
   .search-bar button:hover {
-    background-color: #005faa;
+    background-color: #165484;
   }
+
+  .submitButton {
+    padding-left: 100%;
+    position: absolute;
+    width: 396px;
+    height: 77px;
+    top: 475px;
+    margin-left: 35px;
+    margin-top: 20px;
+    background: #cd22b9;
+    font-size: 18px;
+    border-radius: 64px;
+    }
