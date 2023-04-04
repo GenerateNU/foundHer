@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import './search_bar.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 function SearchBar(props: { onSearchQueryChange: (arg0: React.SetStateAction<string>) => void; }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,12 +19,14 @@ function SearchBar(props: { onSearchQueryChange: (arg0: React.SetStateAction<str
   }
 
   return (
-    <div>
-    <input
+    
+    <div className = "search-bar">
+    <FontAwesomeIcon icon={faMagnifyingGlass} />
+    <input className="input"
       type="text"
       value={searchQuery}
       onChange={handleSearchInputChange}
-      placeholder="Search..."
+      placeholder="Search"
     />
     <button className='submitButton' onClick={handleSubmitBtn}>
           Submit
