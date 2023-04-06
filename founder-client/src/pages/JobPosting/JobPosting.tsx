@@ -1,5 +1,6 @@
 import { MuiTabs } from "./muitabs";
-import "./styles.css";
+import "./JobPosting.css";
+
 
 export default function App() {
   const listExperience = ["Entry", "Junior", "Mid", "Senior", "Expert"];
