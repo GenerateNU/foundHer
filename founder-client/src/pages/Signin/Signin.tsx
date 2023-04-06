@@ -4,6 +4,8 @@ import { loginThunk } from '../../user/thunks';
 import { Navigate, useNavigate } from 'react-router-dom';
 import './signin.css';
 import { NeedHelpContactUs } from '../../util/util';
+import MultiRangeSlider from '../../components/SlidingScale/sliding_scale';
+
 
 const Login = () => {
   const { currentUser } = useSelector((state: any) => state.users);
@@ -34,7 +36,7 @@ const Login = () => {
         </svg>
       </div>
       <div className='formContainer'>
-        <h1 className='signinTitle'>Sign-In</h1>
+        <h1 className='signinTitle'>Sign-In as a Job Seeker</h1>
         
         <input
           className='usernameField form-control'

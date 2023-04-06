@@ -12,7 +12,7 @@ const EmployerRegister = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch<any>()
     const handleRegisterBtn = () => {
-        dispatch(registerThunk({username, password, email, company_name, is_applicant: false}))
+        dispatch(registerThunk({username, password, email, company_name}))
     };
     
     if (currentUser) {

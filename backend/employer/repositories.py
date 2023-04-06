@@ -2,9 +2,9 @@ from sqlalchemy.orm import Session
 
 from . import models, schemas
     
-class UserRepo:
-    async def create(db: Session, user: schemas.UserCreate):
-            db_user = models.User(username=user.username, email=user.email, hashed_password=user.hashed_password, company_name=user.company_name, fullname=user.fullname, is_applicant=user.is_applicant)
+class EmployerRepo:
+    async def create(db: Session, user: schemas.EmployerCreate):
+            db_user = models.User(username=user.username, email=user.email, hashed_password=user.hashed_password, company_name=user.company_name, fullname=user.fullname)
             db.add(db_user)
             db.commit()
             db.refresh(db_user)
