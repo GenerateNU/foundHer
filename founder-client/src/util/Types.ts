@@ -23,6 +23,10 @@ export type ApplicantQuestion = {
     question: ApplicantQuestion;
   };
 
+  export type JobPostingPropTypes = {
+    jobPosting: JobPosting;
+  }
+
   export type JobPosting = {
     id: number,
     title: string,

@@ -5,7 +5,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { ApplicantQuestion, ApplicantAnswer, PropTypes } from '../../../util/Types';
 
 import { Navigate } from 'react-router-dom';
-import { addApplicantAnswerThunk } from '../../../question/thunks';
+import { addApplicantAnswerThunk } from '../../../services/question/thunks';
 
 import './Ranking.css';
 

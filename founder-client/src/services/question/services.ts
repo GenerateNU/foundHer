@@ -15,11 +15,6 @@ export const addApplicantQuestion = async (question: any) => {
     return response.data
 }
 
-interface Answer {
-    user_id: string,
-    
-}
-
 export const addApplicantAnswer = async (answer: any) => {
     const response = await api.post(`${BASE_API_URL}/applicant-answers`, answer)
     console.log(response.data);

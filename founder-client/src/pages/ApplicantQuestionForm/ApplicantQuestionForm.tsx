@@ -5,7 +5,7 @@ import { ApplicantQuestion, ApplicantAnswer} from '../../util/Types';
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from 'react';
 import './ApplicantQuestionForm.css';
-import { getApplicantQuestionsThunk } from '../../question/thunks';
+import { getApplicantQuestionsThunk } from '../../services/question/thunks';
 
 
 // eslint-disable-next-line @typescript-eslint/naming-convention

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addApplicantAnswerThunk } from "../../../question/thunks";
+import { addApplicantAnswerThunk } from "../../../services/question/thunks";
 import { PropTypes } from "../../../util/Types";
 
 

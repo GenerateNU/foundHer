@@ -1,6 +1,6 @@
 import {useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {registerApplicantThunk} from "../../user/thunks";
+import {registerApplicantThunk} from "../../services/user/thunks";
 import {Navigate, useNavigate} from "react-router-dom";
 import {BottomLine, NeedHelpContactUs} from "../../util/util";
 import "./applicantregister.css";

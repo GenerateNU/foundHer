@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginThunk } from '../../user/thunks';
+import { loginThunk } from '../../services/user/thunks';
 import { Navigate, useNavigate } from 'react-router-dom';
 import './signin.css';
 import { NeedHelpContactUs } from '../../util/util';

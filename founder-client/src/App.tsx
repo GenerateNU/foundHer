@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
-import usersReducer from './user/reducer';
+import usersReducer from './services/user/reducer';
 import Login from './pages/Signin/Signin';
 import ApplicantRegister from './pages/ApplicantRegister/ApplicantRegister';
 import EmployerRegister from './pages/EmployerRegister/EmployerRegister';
@@ -10,13 +10,15 @@ import Home from './pages/Home';
 import Profile from './pages/Profile/Profile';
 import PreRegister from './pages/Pre-register/PreRegister';
 import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuestionForm';
-import ApplicantQuestionsReducer from './question/reducer';
+import ApplicantQuestionsReducer from './services/question/reducer';
+import jobPostingsReducer from "./services/jobPosting/reducers";
 import ProgressBarWrapper from './components/ProgressBarWrapper/ProgressBarWrapper';
 
 const store = configureStore({
   reducer: {
     users: usersReducer,
     applicantQuestions: ApplicantQuestionsReducer,
+    jobPostings: jobPostingsReducer
   },
 });
 

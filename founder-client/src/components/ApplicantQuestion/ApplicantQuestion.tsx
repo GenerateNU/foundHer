@@ -6,7 +6,7 @@ import { ApplicantQuestion, ApplicantAnswer, PropTypes } from '../../util/Types'
 import { Navigate } from 'react-router-dom';
 
 import './ApplicantQuestion.css';
-import { addApplicantAnswerThunk } from '../../question/thunks';
+import { addApplicantAnswerThunk } from '../../services/question/thunks';
 import RankingScaleUtil from './RankingQuestion/Ranking';
 
 import MultiRangeSlider from '../SlidingScale/sliding_scale';

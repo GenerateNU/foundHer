@@ -9,7 +9,7 @@ import {
 import classnames from "classnames";
 import "./sliding_scale.css";
 import { ApplicantAnswer, ApplicantQuestion } from "../../util/Types";
-import { addApplicantAnswerThunk } from '../../question/thunks';
+import { addApplicantAnswerThunk } from '../../services/question/thunks';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface MultiRangeSliderProps {
