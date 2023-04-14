@@ -7,6 +7,7 @@ import Login from './pages/Signin/Signin';
 import ApplicantRegister from './pages/ApplicantRegister/ApplicantRegister';
 import EmployerRegister from './pages/EmployerRegister/EmployerRegister';
 import Home from './pages/Home';
+import EmployerQuestionForm from './pages/EmployerQuestionForm/EmployerQuestionBoard';
 import Profile from './pages/Profile/Profile';
 import PreRegister from './pages/Pre-register/PreRegister';
 import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuestionForm';
@@ -16,7 +17,8 @@ import ProgressBarWrapper from './components/ProgressBarWrapper/ProgressBarWrapp
 const store = configureStore({
   reducer: {
     users: usersReducer,
-    applicantQuestions: ApplicantQuestionsReducer,
+    applicantQuestions: applicantQuestionsReducer.reducer,
+    employerQuestions: employerQuestionsReducer.reducer,
   },
 });
 
@@ -35,6 +37,7 @@ export default function App() {
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/employer_questions' element={<EmployerQuestionForm />} />
           </Routes>
         </BrowserRouter>
       </Provider>
