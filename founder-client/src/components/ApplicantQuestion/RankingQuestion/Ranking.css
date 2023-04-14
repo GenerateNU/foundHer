@@ -1,0 +1,59 @@
+.Ranking-Question {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+  
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 200;
+    font-size: 32px;
+    line-height: 39px;
+  }
+  
+  .answers {
+    height: 96px;
+    background-color: #eeeeee;
+    margin-bottom: 35px;
+    border-radius: 7.83031px;
+    counter-increment: step-counter;
+    width: 80%;
+  }
+  
+  .answerText {
+    font-family: "Inter";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    position: relative;
+    left: 20px;
+    top: -10px;
+  }
+  
+  .custom-counter {
+    list-style-type: none;
+  }
+  
+  .custom-counter li::before {
+    position: relative;
+    top: 25px;
+    right: 25px;
+    content: counter(step-counter);
+    font-size: 100%;
+    background-color: #eeeeee;
+    color: #9b9b9b;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-right: 5px;
+  }
+
+.button-div {
+  width: 350px;
+  height: 40px;
+  vertical-align: middle;
+
+  background: #D9D9D9;
+  border-radius: 64px;
+}

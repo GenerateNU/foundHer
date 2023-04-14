@@ -4,7 +4,12 @@ from . import models, schemas
 
 class EmployerQuestionsRepo:
     async def create(db: Session, employer_question: schemas.EmployerQuestionCreate):
-            db_employer_question = models.EmployerQuestion(question_content=employer_question.question_content, possible_answers = employer_question.possible_answers)
+            db_employer_question = models.EmployerQuestion(question_content=employer_question.question_content, 
+                                                           possible_answers = employer_question.possible_answers,
+                                                           min_value = employer_question.min_value,
+                                                           max_value = employer_question.max_value,
+                                                           question_type = employer_question.question_type,
+                                                           unit=employer_question.unit)
             db.add(db_employer_question)
             db.commit()
             db.refresh(db_employer_question)
@@ -25,7 +30,13 @@ class EmployerQuestionsRepo:
         return db_employer_question
         
     async def update(db: Session, employer_question: schemas.EmployerQuestionUpdate, id: int):
-        db.query(models.EmployerQuestion).filter(models.EmployerQuestion.id == id).update({"question_content": employer_question.question_content, "possible_answers": employer_question.possible_answers}, synchronize_session="fetch")
-        stuff = EmployerQuestionsRepo.fetch_by_id(db, id)
-        return stuff
-        
+        db.query(models.EmployerQuestion).filter(models.EmployerQuestion.id == id).update({
+            "question_content": employer_question.question_content, 
+            "possible_answers": employer_question.possible_answers,
+            "min_value": employer_question.min_value,
+            "max_value": employer_question.max_value,
+            "question_type": employer_question.question_type,
+            "unit": employer_question.unit}, synchronize_session="fetch")
+        updated_employer_question = EmployerQuestionsRepo.fetch_by_id(db, id)
+        db.commit()
+        return updated_employer_question

@@ -11,7 +11,8 @@ import EmployerQuestionForm from './pages/EmployerQuestionForm/EmployerQuestionB
 import Profile from './pages/Profile/Profile';
 import PreRegister from './pages/Pre-register/PreRegister';
 import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuestionForm';
-import { applicantQuestionsReducer, employerQuestionsReducer } from './question/reducer';
+import ApplicantQuestionsReducer from './question/reducer';
+import ProgressBarWrapper from './components/ProgressBarWrapper/ProgressBarWrapper';
 
 const store = configureStore({
   reducer: {
