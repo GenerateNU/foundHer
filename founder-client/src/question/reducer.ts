@@ -9,9 +9,15 @@ import {
   getEmployerQuestionsThunk,
 } from './thunks';
 
-const initialState: { loading: boolean; applicantQuestions: any[]; submittedAnswers: any[] } = {
+const initialState: {
+  loading: boolean;
+  applicantQuestions: any[];
+  employerQuestions: any[];
+  submittedAnswers: any[];
+} = {
   loading: false,
   applicantQuestions: [],
+  employerQuestions: [],
   submittedAnswers: [],
 };
 
