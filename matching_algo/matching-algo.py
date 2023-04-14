@@ -9,11 +9,11 @@ import pandas as pd
 
 BASE_API_URL = 'http://localhost:8000'
 
-def get_ordered_matches(applicant_id):
+def get_ordered_matches(applicant_id, all_job_postings):
     # get all the data we need
 
     # posting - id: int, employer_id: int, description: str, location: str, experience_level: str
-    all_postings = pd.read_json(json.loads(requests.get("{BASE_API_URL}/all-job-postings").text))
+    all_postings = pd.read_json(json.loads(all_job_postings))
 
     # we probably only want ranked answers?
     # applicant_answer - id: int, question_id: int, applicant_id: int, question_type: str, 
