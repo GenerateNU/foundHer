@@ -13,7 +13,7 @@ from fastapi import APIRouter
 from .schemas import JobPostingBase, JobPostingCreate, JobPostingUpdate, JobPosting
 from fastapi.encoders import jsonable_encoder
 from . import models
-from matching_algo import get_ordered_matches
+import matching_algo
 
 models.Base.metadata.create_all(bind=engine)
 
