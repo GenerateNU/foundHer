@@ -14,6 +14,7 @@ from datetime import datetime
 
 class JobPostingBase(BaseModel):
     employer_id: int
+    title: str
     description: str
     location: str
     experience_level: str

@@ -13,6 +13,7 @@ from fastapi import APIRouter
 from .schemas import JobPostingBase, JobPostingCreate, JobPostingUpdate, JobPosting
 from fastapi.encoders import jsonable_encoder
 from . import models
+from matching_algo import get_ordered_matches
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -40,10 +41,8 @@ def get_job_posting_employer(employer_id: int, db: Session=Depends(get_db)):
     return jsonable_encoder(db_job_posting)
 
 @router.get('/all-job-postings', tags=['JobPosting'], response_model=List[JobPosting])
-def get_employer_all_job_postings(db: Session=Depends(get_db)):
+def get_all_job_postings(db: Session=Depends(get_db)):
     all_db_job_posting = JobPostingRepo.fetch_all(db)
-    # if db_employer_question is None:
-    #     raise HTTPException(status_code=404, detail=f'Employer Question {employer_question_id} not found')
 
     return jsonable_encoder(all_db_job_posting)
 
@@ -63,3 +62,22 @@ async def get_job_posting(job_posting: JobPostingUpdate, db: Session=Depends(get
 async def delete_employer_question(job_posting_id: int, db: Session=Depends(get_db)):
     db_job_posting = await JobPostingRepo.delete(db=db, _id = job_posting_id)
     return jsonable_encoder(db_job_posting)
+
+@router.get('/job-posting:{applicant_id}', tags=['JobPosting'], response_model=List[JobPosting])
+def get_job_posting(applicant_id: int, db: Session=Depends(get_db)):
+    all_job_postings = JobPostingRepo.fetch_all(db)
+
+    # (id, ranking) in descending order
+    ranked_postings = get_ordered_matches(applicant_id, jsonable_encoder(all_job_postings))
+    print("best ranking:", ranked_postings[0][1], "and best posting id:", ranked_postings[0][0])
+
+    # JobPosting List, ranked_posting with the ids in the order we want
+    postings_dict = {}
+
+    for index, ranked_tuple in ranked_postings:
+        postings_dict[ranked_tuple[0]] = index
+
+    all_job_postings.sort(key=lambda x: postings_dict[x["id"]])
+
+    return jsonable_encoder(all_job_postings)
+
