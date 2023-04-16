@@ -35,7 +35,7 @@ const Login = () => {
         </svg>
       </div>
       <div className='formContainer'>
-        <h1 className='signinTitle'>Sign-In</h1>
+        <h1 className='signinTitle'>Sign-In as a Job Seeker</h1>
         
         <input
           className='usernameField form-control'

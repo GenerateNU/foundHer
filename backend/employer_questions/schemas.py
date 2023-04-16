@@ -1,20 +1,15 @@
-###
-# class Employer_Question:
-# tablename = "employer_questions"
-# id = Column(Integer, primary_key=True,index=True)
-# question_content = Column(String(200), nullable=False, unique=True)
-# possible_answers = Column(ARRAY(String(40)))
-###
-
 from typing import List, Optional
 
 from pydantic import BaseModel
 
 
 class EmployerQuestionBase(BaseModel):
-    question_content: str
-    possible_answers: List[str]
-    
+    question_content : str
+    possible_answers : List[str]
+    question_type: str
+    min_value: Optional[int]
+    max_value: Optional[int]
+    unit: Optional[str]
     
 
 class EmployerQuestion(EmployerQuestionBase):
@@ -26,7 +21,5 @@ class EmployerQuestion(EmployerQuestionBase):
 class EmployerQuestionCreate(EmployerQuestionBase):
     pass
 
-class EmployerQuestionUpdate(BaseModel):
+class EmployerQuestionUpdate(EmployerQuestionBase):
     id: int
-    question_content: str
-    possible_answers: List[str]

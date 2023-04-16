@@ -5,7 +5,13 @@ from . import models, schemas
 class EmployerAnswersRepo:
     
  async def create(db: Session, employer_answer: schemas.EmployerAnswerCreate):
-        db_employer_answer = models.EmployerAnswer(user_id=employer_answer.user_id,question_id=employer_answer.question_id,answers=employer_answer.answers)
+        db_employer_answer = models.EmployerAnswer(question_id=employer_answer.question_id, 
+                                            applicant_id=employer_answer.user_id, 
+                                            range_answer=employer_answer.range_answer, 
+                                            question_type=employer_answer.question_type,
+                                            multiple_choice_answer=employer_answer.multiple_choice_answer, 
+                                            open_ended_answer=employer_answer.open_ended_answer, 
+                                            ranked_answer=employer_answer.ranked_answer)
         db.add(db_employer_answer)
         db.commit()
         db.refresh(db_employer_answer)
@@ -26,6 +32,7 @@ class EmployerAnswersRepo:
      
  async def update(db: Session, employer_answer_data, id: int):
     db.query(models.EmployerAnswer).filter(models.EmployerAnswer.id == id).update({"answers": employer_answer_data.answers}, synchronize_session="fetch")
+    db.commit()
     db_ea = EmployerAnswersRepo.fetch_by_id(db, id)
     return db_ea
     

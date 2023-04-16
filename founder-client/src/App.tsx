@@ -7,15 +7,18 @@ import Login from './pages/Signin/Signin';
 import ApplicantRegister from './pages/ApplicantRegister/ApplicantRegister';
 import EmployerRegister from './pages/EmployerRegister/EmployerRegister';
 import Home from './pages/Home';
+import EmployerQuestionForm from './pages/EmployerQuestionForm/EmployerQuestionBoard';
 import Profile from './pages/Profile/Profile';
 import PreRegister from './pages/Pre-register/PreRegister';
 import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuestionForm';
-import ApplicantQuestionsReducer from "./question/reducer";
+import { applicantQuestionsReducer, employerQuestionsReducer } from './question/reducer';
+import ProgressBarWrapper from './components/ProgressBarWrapper/ProgressBarWrapper';
 
 const store = configureStore({
   reducer: {
     users: usersReducer,
-    applicantQuestions: ApplicantQuestionsReducer,
+    applicantQuestions: applicantQuestionsReducer.reducer,
+    employerQuestions: employerQuestionsReducer.reducer,
   },
 });
 
@@ -26,7 +29,7 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Login />} />
-            <Route path='/preregister' element={<PreRegister/>} />
+            <Route path='/preregister' element={<PreRegister />} />
             <Route path='/home' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register-applicant' element={<ApplicantRegister />} />
@@ -34,6 +37,7 @@ export default function App() {
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/employer_questions' element={<EmployerQuestionForm />} />
           </Routes>
         </BrowserRouter>
       </Provider>
