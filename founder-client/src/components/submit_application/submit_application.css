@@ -9,10 +9,6 @@ rect {
   border-radius: 10px;
 }
 
-svg {
-  /* border-radius: 10px 10px 10px 10px; */
-}
-
 .text {
   position: relative;
   font-family: "Poppins";
