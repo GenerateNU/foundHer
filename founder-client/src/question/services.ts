@@ -14,13 +14,9 @@ export const addApplicantQuestion = async (question: any) => {
   return response.data;
 };
 
-interface Answer {
-  user_id: string;
-}
 
 export const addApplicantAnswer = async (answer: any) => {
   const response = await api.post(`${BASE_API_URL}/applicant-answers`, answer);
-  console.log(response.data);
   return response.data;
 };
 
@@ -36,6 +32,10 @@ export const addEmployerQuestion = async (question: any) => {
 
 export const addEmployerAnswer = async (answer: any) => {
   const response = await api.post(`${BASE_API_URL}/employer-answers`, answer);
-  console.log(response.data);
   return response.data;
 };
+
+export const getApplicantAnswers = async (applicantID: string | null) => {
+  const response = await api.get(`${BASE_API_URL}/all-applicant-answers/${applicantID}`)
+  return response.data;
+}

@@ -60,16 +60,15 @@ async def delete_question_answer_for_applicant(answer_id: int, db: Session = Dep
     return jsonable_encoder(json_compatible_delete)
 
 
-@router.get("/applicant-answers/{answer_id}", tags=["Applicant_Answer"])
-async def get_question_answer_for_applicant(answer_id: int, db: Session = Depends(get_db)) -> Optional[Applicant_Answer]:
+@router.get("/applicant-answers/{applicant_id}", tags=["Applicant_Answer"])
+async def get_question_answer_for_applicant(applicant_id: int, db: Session = Depends(get_db)) -> Optional[Applicant_Answer]:
     """
         Get the Applicant Answer that corresponds to the given ID
     """
-    db_answer = Applicant_Answer_Repo.fetch_by_id(db, answer_id)
-    if db_answer is None:
-        raise HTTPException(status_code=404, detail= f"Answer not found with the given ID: {answer_id}")
-    
-    return jsonable_encoder(db_answer)
+    db_answers = Applicant_Answer_Repo.fetch_by_applicant_id(db, applicant_id)
+    print("Aaaa")
+    print(db_answers)
+    return jsonable_encoder(db_answers)
 
 @router.get('/all-applicant-answers/{applicant_id}', tags=["Applicant_Answer"])
 async def get_all_question_answers_for_applicant(applicant_id: int, db: Session = Depends(get_db)) -> List[Applicant_Answer]:

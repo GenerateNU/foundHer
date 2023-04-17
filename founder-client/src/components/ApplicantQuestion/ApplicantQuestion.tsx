@@ -13,6 +13,7 @@ import MultiRangeSlider from '../SlidingScale/sliding_scale';
 import RangeQuestion from './RangeQuestion/RangeQuestion';
 import { MultipleChoiceQuestion } from './MultipleChoiceQuestion/MultipleChoiceQuestion';
 import { OpenTextQuestion } from './OpenTextQuestion/OpenTextQuestion';
+import { getApplicantAnswerThunk } from '../../question/thunks';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ApplicantQuestionInput = ({ question }: PropTypes) => {
@@ -22,6 +23,11 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
   const [open_ended_answer, setOpenEndedAnswer] = useState<string>("");
 
   const dispatch = useDispatch<any>();
+
+  useEffect(() => {
+    dispatch(getApplicantAnswerThunk(localStorage.getItem('currentUserID')));
+  }, []);
+
   if (!localStorage.getItem('access_token')) {
     return <Navigate to={'/login'} />;
   }

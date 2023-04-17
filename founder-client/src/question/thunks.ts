@@ -6,6 +6,7 @@ import {
   employerQuestions,
   addEmployerQuestion,
   addEmployerAnswer,
+  getApplicantAnswers
 } from './services';
 
 export const getApplicantQuestionsThunk = createAsyncThunk(
@@ -37,3 +38,8 @@ export const addEmployerAnswerThunk = createAsyncThunk(
   'addEmployerAnswer',
   async (answer: any) => await addEmployerAnswer(answer),
 );
+
+export const getApplicantAnswerThunk = createAsyncThunk(
+  'getApplicantAnswers',
+  async (applicantID: string | null) => await getApplicantAnswers(applicantID),
+)

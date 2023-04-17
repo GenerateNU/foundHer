@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { access, stat } from 'fs';
 import {
   addApplicantAnswerThunk,
   addApplicantQuestionThunk,
+  getApplicantAnswerThunk,
   addEmployerAnswerThunk,
   addEmployerQuestionThunk,
   getApplicantQuestionsThunk,
@@ -45,7 +45,14 @@ export const applicantQuestionsReducer = createSlice({
       })
       .addCase(getApplicantQuestionsThunk.pending, (state, action) => {
         state.loading = true;
-      });
+      })
+      .addCase(getApplicantAnswerThunk.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getApplicantAnswerThunk.fulfilled, (state, action) => {
+        state.loading = false;
+        state.submittedAnswers = action.payload
+      })
   },
   reducers: {},
 });
