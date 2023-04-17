@@ -1,19 +1,21 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
-from typing import Union, Optional, ByteString
+from typing import  Union, Optional, ByteString
+from typing_extensions import Annotated
+
 from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, Form, HTTPException, status, UploadFile, File
 from pydantic import BaseModel
 from fastapi.encoders import jsonable_encoder
 
 from db.db import get_db
 
 from .repositories import ApplicantRepo
-from .schemas import Applicant, ApplicantCreate
+from .schemas import Applicant, ApplicantCreate, Resume
 from fastapi import APIRouter
-
+from .file_upload import upload_file
 
 router = APIRouter()
 class Token(BaseModel):
@@ -162,3 +164,8 @@ async def login(form_data: ApplicantLoginForm, db: Session = Depends(get_db)):
 async def read_users_me(current_user: Applicant = Depends(get_current_active_user)):
     json_compatible_item_data = jsonable_encoder(current_user)
     return json_compatible_item_data
+
+@router.post("/resume", response_model=None)
+async def upload_resume(resume_file: bytes= Form("file_content"), file_name: str=Form("file_name"), applicant_id: int=Form("applicant_id")):
+    upload_file(applicant_id, resume_file, file_name)
+    return 1

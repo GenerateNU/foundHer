@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {login, logout, profile, register, register_applicant, applicant_profile} from "./services";
+import {login, logout, profile, register, register_applicant, applicant_profile, upload_resume} from "./services";
 
 
 
@@ -17,3 +17,7 @@ export const registerApplicantThunk = createAsyncThunk('register_applicant', asy
 export const applicantProfileThunk = createAsyncThunk('applicant_profile',async (accessToken: string | null) => {
     return await applicant_profile(accessToken);
 });
+
+export const uploadResumeThunk = createAsyncThunk('resume', async (file: any) => {
+    return await upload_resume(file);
+})

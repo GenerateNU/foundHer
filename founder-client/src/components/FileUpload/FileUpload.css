@@ -1,0 +1,52 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  form {
+    box-sizing: border-box;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 500px;
+    cursor: pointer;
+    border: 1.00781px solid #000000;
+    border-radius: 18px;
+  }
+  
+  .selector {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18.1405px;
+    line-height: 22px;
+    text-align: center;
+  
+    color: #000000;
+  }
+  
+  .boxHeader {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 39px;
+  
+    color: #000000;
+  }
+  
+  .uploaded-row {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12.0937px;
+    line-height: 15px;
+  
+    color: #000000;
+  }
