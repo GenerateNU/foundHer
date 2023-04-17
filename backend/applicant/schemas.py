@@ -1,4 +1,5 @@
 from typing import ByteString, List, Optional
+from fastapi import File, UploadFile
 
 from pydantic import BaseModel
 
@@ -27,3 +28,9 @@ class ApplicantCreate(ApplicantBase):
 
 class ApplicantUpdate(ApplicantBase):
     id: int
+
+
+class Resume(BaseModel):
+    applicant_id: int
+    resume_file: bytes
+    file_name: str

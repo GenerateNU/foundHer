@@ -1,12 +1,12 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { loginThunk, logoutThunk, registerThunk, profileThunk, registerApplicantThunk } from "./thunks";
+import { loginThunk, logoutThunk, registerThunk, profileThunk, registerApplicantThunk, uploadResumeThunk } from "./thunks";
 
 
 const usersReducer = createSlice({
     name: 'users',
     initialState: {
         currentUser: null,
-        loading: false,
+        loading: false
     },
     extraReducers: builder => {
         builder
@@ -45,6 +45,9 @@ const usersReducer = createSlice({
           .addCase(registerApplicantThunk.fulfilled, (state, action) => {
             state.loading = false;
             state.currentUser = action.payload;
+          })
+          .addCase(uploadResumeThunk.fulfilled, (state, action) => {
+            state.loading = false;
           })
     },
     reducers: {
