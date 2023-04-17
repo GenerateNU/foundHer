@@ -19,12 +19,24 @@ interface ProcessQuestionType {
   possibleAnswers: any[];
 }
 
-function processQuestion(question : any): any {
+function processQuestion(question: any, submitted_answers: any): any {
   let processQuestion: ProcessQuestionType = {
     question_content: question.question_content,
     id: question.id,
     possibleAnswers: [],
   };
+
+  if (submitted_answers.some((answer: ApplicantAnswer) => answer.question_id === question.id)) {
+    let submitted_answer: ApplicantAnswer = submitted_answers.findLast((answer: ApplicantAnswer) => answer.question_id === question.id)
+    processQuestion.possibleAnswers = new Array(question.possible_answers.length);
+    for (let [option, ranking] of Object.entries(submitted_answer.ranked_answer)) {
+      processQuestion.possibleAnswers[ranking] = {
+        option_id: String(ranking),
+        option: option
+      };
+    }
+    return processQuestion;
+  } 
 
   for (let option of question.possible_answers) {
     processQuestion.possibleAnswers.push({
@@ -40,8 +52,8 @@ interface FormattedAnswer {
 }
 
 export function RankingScaleUtil({ question }: PropTypes) {
-  let processQ: ProcessQuestionType = processQuestion(question);
   const { submittedAnswers } = useSelector((state: any) => state.applicantQuestions);
+  const [processQ, setProcessQ] = useState<ProcessQuestionType>(processQuestion(question, submittedAnswers));
   const [answers, updateAnswers] = useState(processQ.possibleAnswers);
   const [final_ranked_answer, updateRankedAnswer] = useState(formatRankedAnswers(answers));
   function handleOnDragEnd(result: any) {
@@ -55,16 +67,19 @@ export function RankingScaleUtil({ question }: PropTypes) {
     updateRankedAnswer(final_results);
   }
 
+  useEffect(() => {
+    setProcessQ(processQuestion(question, submittedAnswers))
+    updateAnswers(processQ.possibleAnswers);
+  }, [submittedAnswers])
+
   function formatRankedAnswers(ranked_answers: any[]) {
     let result: FormattedAnswer = {};
     for (let i =0;i < ranked_answers.length; i++) {
       result[ranked_answers[i].option]= i;
     }
-    console.log(result);
     return result;
   }
   const dispatch = useDispatch<any>();
-
 
   const handleSubmit = () => {
     try {
@@ -115,7 +130,7 @@ export function RankingScaleUtil({ question }: PropTypes) {
         <div className="button-div">
           <button onClick={() => handleSubmit()}>Next</button>
           {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && (
-          <span> success!</span>
+          <span> submitted!</span>
         )}
         </div>
 
