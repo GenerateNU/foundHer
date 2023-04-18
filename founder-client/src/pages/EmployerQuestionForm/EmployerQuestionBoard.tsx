@@ -1,39 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EmployerQuestionInput from '../../components/EmployerQuestionInput/EmployerQuestionInput';
 import { getEmployerQuestionsThunk } from '../../question/thunks';
-import { EmployerQuestion } from '../../utils/EmployerQuestionTypes';
 
 import './EmployerQuestionBoard.css';
+import ProgressBarWrapper from '../../components/ProgressBarWrapper/ProgressBarWrapper';
+import Input from '../../components/Input/Input';
 
-const QUESTION_LIST: EmployerQuestion[] = [
-  {
-    id: 1,
-    questionContent: 'What is your name?',
-  },
-  {
-    id: 2,
-    questionContent: 'What is your identified gender?',
-    possibleAnswers: ['Male', 'Female', 'Non-binary'],
-  },
-  {
-    id: 3,
-    questionContent: 'What are your preferred pronouns?',
-    possibleAnswers: ['he/him/his', 'she/her/hers', 'they/them/theirs', 'other'],
-  },
-  {
-    id: 4,
-    questionContent: 'What position are you applying for?',
-  },
-  {
-    id: 5,
-    questionContent: 'Do you have a reference?',
-  },
-];
+const PROGRESS_BAR_MARKER_TITLES = ['Company Information', 'Questions'];
 
 const EmployerQuestionForm = () => {
   const { employerQuestions } = useSelector((state: any) => state.employerQuestions);
   const dispatch = useDispatch<any>();
+
+  const [questions, setQuestions] = useState({
+    organizationName: '',
+    industry: '',
+    size: '',
+    location: '',
+  });
 
   useEffect(() => {
     dispatch(getEmployerQuestionsThunk());
@@ -44,7 +29,50 @@ const EmployerQuestionForm = () => {
 
   return (
     <section>
-      <h1>Employer Questions</h1>
+      <h1>FindHer</h1>
+      <ProgressBarWrapper markerTitles={PROGRESS_BAR_MARKER_TITLES}>
+        <div style={{ width: '80%', margin: '80px auto' }}>
+          <h2>Company Information</h2>
+          <div>
+            <div
+              className='container'
+              style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '50px' }}>
+              <Input
+                type='text'
+                inputName='Name'
+                inputValue={questions.organizationName}
+                inputOnChange={value => setQuestions({ ...questions, organizationName: value })}
+              />
+              <Input
+                type='text'
+                inputName='Industry'
+                inputValue={questions.industry}
+                inputOnChange={value => setQuestions({ ...questions, industry: value })}
+              />
+            </div>
+            <div
+              className='item'
+              style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '50px' }}>
+              <Input
+                type='text'
+                inputName='Size'
+                inputValue={questions.size}
+                inputOnChange={value => setQuestions({ ...questions, size: value })}
+              />
+              <Input
+                type='text'
+                inputName='Location'
+                inputValue={questions.location}
+                inputOnChange={value => setQuestions({ ...questions, location: value })}
+              />
+            </div>
+          </div>
+        </div>
+        <div style={{ width: '80%', margin: '80px auto' }}>
+          <h2>Questions</h2>
+          {questionsView}
+        </div>
+      </ProgressBarWrapper>
       {questionsView}
     </section>
   );

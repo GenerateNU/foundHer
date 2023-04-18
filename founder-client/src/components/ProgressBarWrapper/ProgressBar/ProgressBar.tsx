@@ -2,7 +2,7 @@ import React from 'react';
 
 import './ProgressBar.css';
 
-const PADDING_VALUE = 10;
+const PADDING_VALUE = 50;
 
 const ProgressBar = ({
   index,
@@ -37,16 +37,32 @@ const ProgressBar = ({
     const width = document.getElementById(`${index}`)?.offsetLeft;
     const barWidth = document.getElementById('markers-wrapper')?.offsetWidth;
     return width && barWidth
-      ? `${((width + PADDING_VALUE) / barWidth) * 100}%`
+      ? `${((width + PADDING_VALUE - getLeftPosition()) / barWidth) * 100}%`
       : `${(index / (maxLength - 1)) * 100}%`;
+  };
+
+  const getLeftPosition = () => {
+    const left = document.getElementById(`0`)?.clientWidth;
+    return left ? left / 2 : 0;
+  };
+
+  const getWidth = () => {
+    const barWidth = document.getElementById('markers-wrapper')?.offsetWidth;
+    return barWidth ? barWidth - getLeftPosition() - PADDING_VALUE : '100%';
   };
 
   return (
     <div className='progress-bar'>
-      <div className='bar-bg'></div>
+      <div
+        className='bar-bg'
+        style={{
+          left: getLeftPosition(),
+          width: getWidth(),
+        }}></div>
       <div
         className='bar'
         style={{
+          left: getLeftPosition(),
           width: getFilledProgressBarWidthCSS(),
         }}></div>
       <div id='markers-wrapper'>{markersList}</div>
