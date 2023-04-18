@@ -29,11 +29,9 @@ const ApplicantQuestionForm = () => {
   }, []);
 
   const questionsView = applicantQuestions.map((q: ApplicantQuestion, index: number) => (
-    <div>
-      <span>{index + 1}</span>
-      <span>
-        <ApplicantQuestionInput key={q.id} question={q} />
-      </span>
+    <div style={{ width: '80%', margin: '80px auto' }}>
+      <h2>Matching Question</h2>
+      <ApplicantQuestionInput key={q.id} question={q} />
     </div>
   ));
 
@@ -108,12 +106,8 @@ const ApplicantQuestionForm = () => {
             </div>
           </div>
         </div>
-        <div style={{ width: '80%', margin: '80px auto' }}>
-          <h2>Matching Questions</h2>
-          {questionsView}
-        </div>
+        {questionsView}
       </ProgressBarWrapper>
-      {questionsView}
     </section>
   );
 };
