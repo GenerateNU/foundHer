@@ -9,6 +9,7 @@ import { getApplicantQuestionsThunk } from '../../question/thunks';
 import ProgressBarWrapper from '../../components/ProgressBarWrapper/ProgressBarWrapper';
 import Input from '../../components/Input/Input';
 import { Checkbox, FormControlLabel } from '@mui/material';
+import Uploader from '../../components/FileUpload/FileUpload';
 
 const PROGRESS_BAR_MARKER_TITLES = ['Autofill', 'Work Experience', 'Questions'];
 
@@ -41,7 +42,7 @@ const ApplicantQuestionForm = () => {
       <ProgressBarWrapper markerTitles={PROGRESS_BAR_MARKER_TITLES}>
         <div style={{ width: '80%', margin: '80px auto' }}>
           <h2>Upload Resume</h2>
-          {/* TODO: Upload Resume Component Here */}
+          <Uploader/>
         </div>
         <div style={{ width: '80%', margin: '80px auto' }}>
           <h2>Work Experience</h2>
