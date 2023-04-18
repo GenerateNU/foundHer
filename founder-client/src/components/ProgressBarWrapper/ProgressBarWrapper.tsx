@@ -8,6 +8,7 @@ const ProgressBarWrapper = (props: { children: React.ReactNode; markerTitles: st
   const maxLength = elements.length;
 
   const buttonText = index !== maxLength - 1 ? 'Next' : 'Finish';
+
   const handleOnNext = () => {
     if (index === maxLength - 1) {
       // TODO: send to API
@@ -27,8 +28,10 @@ const ProgressBarWrapper = (props: { children: React.ReactNode; markerTitles: st
         markers={props.markerTitles}
         handleOnClick={switchIndex}
       />
+
       {elements[index]}
       <button onClick={() => handleOnNext()}>{buttonText}</button>
+      {index > 0 ? <button onClick={() => setIndex(index - 1)}>Back</button> : <></>}
     </section>
   );
 };

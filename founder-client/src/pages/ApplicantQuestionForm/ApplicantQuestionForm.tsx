@@ -8,7 +8,7 @@ import './ApplicantQuestionForm.css';
 import { getApplicantQuestionsThunk } from '../../question/thunks';
 import ProgressBarWrapper from '../../components/ProgressBarWrapper/ProgressBarWrapper';
 import Input from '../../components/Input/Input';
-import { Checkbox } from '@mui/material';
+import { Checkbox, FormControlLabel } from '@mui/material';
 
 const PROGRESS_BAR_MARKER_TITLES = ['Autofill', 'Work Experience', 'Questions'];
 
@@ -41,7 +41,7 @@ const ApplicantQuestionForm = () => {
     <section>
       <h1>FindHer</h1>
       <ProgressBarWrapper markerTitles={PROGRESS_BAR_MARKER_TITLES}>
-        <div>
+        <div style={{ width: '80%', margin: '80px auto' }}>
           <h2>Upload Resume</h2>
           {/* TODO: Upload Resume Component Here */}
         </div>
@@ -73,7 +73,21 @@ const ApplicantQuestionForm = () => {
                 inputValue={questions.title}
                 inputOnChange={value => setQuestions({ ...questions, title: value })}
               />
-              <Checkbox />
+              <FormControlLabel
+                value='end'
+                control={
+                  <Checkbox
+                    sx={{
+                      'color': '#3E2CC0',
+                      '&.Mui-checked': {
+                        color: '#3E2CC0',
+                      },
+                    }}
+                  />
+                }
+                label={"I'm currently working here"}
+                labelPlacement='end'
+              />
             </div>
             <div className='item' style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
               <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
