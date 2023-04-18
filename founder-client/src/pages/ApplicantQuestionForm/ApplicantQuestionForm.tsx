@@ -30,7 +30,6 @@ const ApplicantQuestionForm = () => {
 
   const questionsView = applicantQuestions.map((q: ApplicantQuestion, index: number) => (
     <div style={{ width: '80%', margin: '80px auto' }}>
-      <h2>Matching Question</h2>
       <ApplicantQuestionInput key={q.id} question={q} />
     </div>
   ));
