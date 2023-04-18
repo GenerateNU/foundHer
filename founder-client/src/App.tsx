@@ -35,9 +35,8 @@ export default function App() {
             <Route path='/register-applicant' element={<ApplicantRegister />} />
             <Route path='/register-employer' element={<EmployerRegister />} />
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
-            <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/employer_questions' element={<EmployerQuestionForm />} />
+            <Route path='/employer-questions' element={<EmployerQuestionForm />} />
           </Routes>
         </BrowserRouter>
       </Provider>
