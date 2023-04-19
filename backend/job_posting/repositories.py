@@ -35,7 +35,7 @@ class JobPostingRepo:
 
     async def update(db: Session, job_posting: schemas.JobPosting, id: int):
         db.query(models.Job_Posting).filter(models.Job_Posting.id == id)\
-            .update({"employer_id": job_posting.employer_id, "description": job_posting.description,
+            .update({"employer_id": job_posting.employer_id, "title": job_posting.title, "description": job_posting.description,
                      "created_at":job_posting.created_at, "location":job_posting.location,
                      "expereince_level":job_posting.experience_level, 
                      "tags": job_posting.tags,

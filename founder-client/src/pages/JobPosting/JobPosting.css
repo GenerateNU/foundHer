@@ -1,0 +1,201 @@
+.App {
+    text-align: center;
+  }
+  
+  .jobTitle {
+    position: flex;
+  
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+  
+    margin-bottom: 0;
+  
+    color: #000000;
+  }
+  
+  .jobType {
+    position: flex;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #000000;
+  
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .posted {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+  
+    margin-top: 0px;
+    margin-bottom: 15px;
+  
+    text-align: center;
+  
+    color: #000000;
+  }
+  
+  .line {
+    position: flex;
+  
+    border: 1px solid #a5a5a5;
+  }
+  
+  .locationHeader {
+    position: flex;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+  
+    margin-bottom: 0px;
+  
+    color: #000000;
+  }
+  
+  .locationSub {
+    position: flex;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    /* identical to box height */
+  
+    text-align: center;
+  
+    margin-top: 10px;
+  
+    color: #000000;
+  }
+  
+  .experienceLevel {
+    position: flex;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+  
+    color: #000000;
+  }
+  
+  .desiredSkills {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+  
+    color: #000000;
+  }
+  
+  .experienceOption {
+    list-style-type: none;
+    display: inline;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    /* identical to box height */
+  
+    padding-right: 10px;
+    padding-left: 10px;
+  
+    border: 1px solid #a5a5a5;
+    padding: 7px;
+    padding-right: 15px;
+    padding-left: 15px;
+  
+    text-align: center;
+  
+    color: #000000;
+  }
+  
+  .experienceOptionSelected {
+    list-style-type: none;
+    display: inline;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    /* identical to box height */
+  
+    padding-right: 10px;
+    padding-left: 10px;
+  
+    border: 1px solid #a5a5a5;
+  
+    text-align: center;
+  
+    color: #000000;
+  
+    padding: 7px;
+  
+    padding-right: 15px;
+    padding-left: 15px;
+  
+    background: #d9d9d9;
+  }
+  
+  .listExperience {
+    position: flex;
+    padding-right: 35px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+  }
+  
+  .skillOption {
+    list-style-type: none;
+    display: inline;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    /* identical to box height */
+  
+    padding-right: 10px;
+    padding-left: 10px;
+  
+    border: 1px solid #a5a5a5;
+    padding: 7px;
+    padding-right: 15px;
+    padding-left: 15px;
+  
+    text-align: center;
+  
+    background: #d9d9d9;
+    opacity: 0.9;
+    border-radius: 36px;
+    color: #000000;
+  
+    margin: 5px;
+  }
+  
+  .listSkills {
+    position: flex;
+    margin-bottom: 30px;
+  }
+  
+  .Tabs {
+    display: flex;
+    justify-content: center;
+  }

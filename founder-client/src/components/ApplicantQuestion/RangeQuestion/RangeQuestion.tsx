@@ -7,7 +7,7 @@ import { Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addApplicantAnswerThunk } from '../../../services/question/thunks';
 import "./RangeQuestion.css"
-
+import { useEffect } from 'react';
 
 const minDistance = 0;
 
@@ -15,6 +15,14 @@ const minDistance = 0;
 export default function RangeQuestion({ question }: PropTypes) {
   const { submittedAnswers } = useSelector((state: any) => state.applicantQuestions);
   const [value1, setValue1] = React.useState<number[]>([question.min_value, question.max_value]);
+  const [value2, setValue2] = React.useState<number[]>([question.min_value, question.max_value]);
+  useEffect(() => {
+    if (submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id)) {
+      let submitted_answer = submittedAnswers.findLast((answer: ApplicantAnswer) => answer.question_id === question.id)
+      let formatted_submitted_answer = [submitted_answer.range_answer.min_value, submitted_answer.range_answer.max_value];
+      setValue1(formatted_submitted_answer);
+    }
+  }, [submittedAnswers])
 
   const handleChange1 = (
     event: Event,
@@ -61,6 +69,8 @@ export default function RangeQuestion({ question }: PropTypes) {
       <Slider
         aria-label="Always visible"
         value={value1} 
+        min={value2[0]}
+        max={value2[1]} 
         onChange={handleChange1}
         valueLabelDisplay="auto"
         valueLabelFormat={valuetext}
@@ -70,7 +80,7 @@ export default function RangeQuestion({ question }: PropTypes) {
           <button onClick={() => handleSubmit()}>Next</button>
         </div>
         {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && (
-          <div> success!</div>
+          <div> submitted!</div>
         )}
     </Box>
   );

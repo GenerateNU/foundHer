@@ -16,5 +16,5 @@ class Job_Posting(Base):
     tags = Column(ARRAY(String))
 
     def __repr__(self):
-        return 'Job_Posting(id=%s, employer_id=%s, description=%s, created_at=%s, location=%s, experience_level=%s)' % \
-               (self.id, self.employer_id, self.description, self.created_at, self.location, self.experience_level)
+        return 'Job_Posting(id=%s, employer_id=%s, title=%s, description=%s, created_at=%s, location=%s, experience_level=%s)' % \
+               (self.id, self.employer_id, self.title, self.description, self.created_at, self.location, self.experience_level)

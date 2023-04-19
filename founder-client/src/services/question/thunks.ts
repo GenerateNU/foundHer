@@ -1,10 +1,45 @@
-import {createAsyncThunk} from "@reduxjs/toolkit";
-import {applicantQuestions, addApplicantQuestion, addApplicantAnswer} from "./services";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  applicantQuestions,
+  addApplicantQuestion,
+  addApplicantAnswer,
+  employerQuestions,
+  addEmployerQuestion,
+  addEmployerAnswer,
+  getApplicantAnswers
+} from './services';
 
+export const getApplicantQuestionsThunk = createAsyncThunk(
+  'applicantQuestions',
+  async () => await applicantQuestions(),
+);
 
+export const addApplicantQuestionThunk = createAsyncThunk(
+  'addApplicantQuestion',
+  async (question: any) => await addApplicantQuestion(question),
+);
 
-export const getApplicantQuestionsThunk = createAsyncThunk('applicantQuestions', async () => await applicantQuestions())
+export const addApplicantAnswerThunk = createAsyncThunk(
+  'addApplicantAnswer',
+  async (answer: any) => await addApplicantAnswer(answer),
+);
 
-export const addApplicantQuestionThunk = createAsyncThunk('addApplicantQuestion', async (question: any) => await addApplicantQuestion(question))
+export const getEmployerQuestionsThunk = createAsyncThunk(
+  'employerQuestions',
+  async () => await employerQuestions(),
+);
 
-export const addApplicantAnswerThunk = createAsyncThunk('addApplicantAnswer', async (answer: any) => await addApplicantAnswer(answer))
+export const addEmployerQuestionThunk = createAsyncThunk(
+  'addEmployerQuestion',
+  async (question: any) => await addEmployerQuestion(question),
+);
+
+export const addEmployerAnswerThunk = createAsyncThunk(
+  'addEmployerAnswer',
+  async (answer: any) => await addEmployerAnswer(answer),
+);
+
+export const getApplicantAnswerThunk = createAsyncThunk(
+  'getApplicantAnswers',
+  async (applicantID: string | null) => await getApplicantAnswers(applicantID),
+)

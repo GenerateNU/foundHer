@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addApplicantAnswerThunk } from "../../../services/question/thunks";
 import { ApplicantAnswer, PropTypes } from "../../../util/Types";
@@ -8,6 +8,13 @@ export const OpenTextQuestion = ({ question }: PropTypes) => {
     const { submittedAnswers } = useSelector((state: any) => state.applicantQuestions);
 
     const dispatch = useDispatch<any>();
+
+    useEffect(() => {
+      if (submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id)) {
+        setOpenEndedAnswer(submittedAnswers.findLast((answer: ApplicantAnswer) => answer.question_id === question.id).open_ended_answer)
+      }
+    }, [submittedAnswers])
+
     const handleSubmit = () => {
         try {
           dispatch(
@@ -38,7 +45,7 @@ export const OpenTextQuestion = ({ question }: PropTypes) => {
           <button onClick={() => handleSubmit()}>Next</button>
         </div>
         {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && (
-          <div> success!</div>
+          <div> submitted!</div>
         )}
       </div>
     );
