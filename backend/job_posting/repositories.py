@@ -4,19 +4,13 @@ from datetime import datetime
 
 from . import models, schemas
 
-# "     id = Column(Integer, primary_key=True,index=True)
-#         employer_id = Column(Integer, ForeignKey('applicant_questions.id'))
-#     description = Column(String)
-#     created_at = Column(Integer)
-#     location = Column(String)
-#     experience_level = Column(String)
-#
 class JobPostingRepo:
     async def create(db: Session, job_posting: schemas.JobPostingCreate):
-        db_posting = models.Job_Posting(employer_id=job_posting.employer_id, title=job_posting.title,
-                                        description = job_posting.description,
-                                        created_at=datetime.now(), location=job_posting.location,
-                                        experience_level = job_posting.experience_level)
+        db_posting = models.Job_Posting(employer_id=job_posting.employer_id, description = job_posting.description,
+                                                           created_at=datetime.now(), location=job_posting.location,
+                                                           experience_level = job_posting.experience_level, 
+                                                           tags=job_posting.tags, skills=job_posting.skills, 
+                                                           title=job_posting.title, company=job_posting.company)
         db.add(db_posting)
         db.commit()
         db.refresh(db_posting)
@@ -43,6 +37,10 @@ class JobPostingRepo:
         db.query(models.Job_Posting).filter(models.Job_Posting.id == id)\
             .update({"employer_id": job_posting.employer_id, "title": job_posting.title, "description": job_posting.description,
                      "created_at":job_posting.created_at, "location":job_posting.location,
-                     "expereince_level":job_posting.experience_level}, synchronize_session="fetch")
+                     "expereince_level":job_posting.experience_level, 
+                     "tags": job_posting.tags,
+                     "skills": job_posting.skills, 
+                     "title": job_posting.title, 
+                     "company": job_posting.company}, synchronize_session="fetch")
         updated_job = JobPostingRepo.fetch_by_id(db, id)
         return updated_job

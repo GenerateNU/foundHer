@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ApplicantQuestion, ApplicantAnswer, PropTypes } from '../../utils/Types';
+import { ApplicantQuestion, ApplicantAnswer, PropTypes } from '../../util/Types';
 
 import { Navigate } from 'react-router-dom';
 
 import './ApplicantQuestion.css';
-import { addApplicantAnswerThunk } from '../../question/thunks';
+import { addApplicantAnswerThunk } from '../../services/question/thunks';
 import RankingScaleUtil from './RankingQuestion/Ranking';
 
 import MultiRangeSlider from '../SlidingScale/sliding_scale';
 import RangeQuestion from './RangeQuestion/RangeQuestion';
 import { MultipleChoiceQuestion } from './MultipleChoiceQuestion/MultipleChoiceQuestion';
 import { OpenTextQuestion } from './OpenTextQuestion/OpenTextQuestion';
-import { getApplicantAnswerThunk } from '../../question/thunks';
+import { getApplicantAnswerThunk } from '../../services/question/thunks';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const ApplicantQuestionInput = ({ question }: PropTypes) => {

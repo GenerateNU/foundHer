@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, ForeignKey, String, DateTime
+from sqlalchemy import Column, Integer, ForeignKey, String, DateTime, ARRAY
 
 from db.db import Base
 
@@ -7,11 +7,13 @@ class Job_Posting(Base):
     id = Column(Integer, primary_key=True,index=True)
     employer_id = Column(Integer, ForeignKey('employers.id'))
     title = Column(String)
+    company = Column(String)
     description = Column(String)
     created_at = Column(DateTime)
     location = Column(String)
     experience_level = Column(String)
-    
+    skills = Column(ARRAY(String))
+    tags = Column(ARRAY(String))
 
     def __repr__(self):
         return 'Job_Posting(id=%s, employer_id=%s, title=%s, description=%s, created_at=%s, location=%s, experience_level=%s)' % \

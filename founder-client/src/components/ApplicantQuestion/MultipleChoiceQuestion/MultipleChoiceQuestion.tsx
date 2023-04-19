@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addApplicantAnswerThunk } from "../../../question/thunks";
-import { ApplicantAnswer, PropTypes } from "../../../utils/Types";
-import React from "react";
+import { addApplicantAnswerThunk } from "../../../services/question/thunks";
+import { ApplicantAnswer, PropTypes } from "../../../util/Types";
 import { Checkbox } from "@mui/material";
 
 
@@ -67,9 +66,6 @@ export const MultipleChoiceQuestion = ({ question }: PropTypes) => {
           <div className='button-div'>
             <button onClick={() => handleSubmit()}>Next</button>
           </div>
-          {submittedAnswers.some((answer: any) => answer.question_id === question.id) && (
-            <div> submitted!</div>
-          )}
         </div>
         );
 }

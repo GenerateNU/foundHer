@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginThunk } from '../../user/thunks';
+import { loginThunk } from '../../services/user/thunks';
 import { Navigate, useNavigate } from 'react-router-dom';
 import './signin.css';
 import { NeedHelpContactUs } from '../../util/util';
@@ -25,7 +25,7 @@ const Login = () => {
   if (currentUser) {
     localStorage.setItem('access_token', currentUser.access_token);
     localStorage.setItem('currentUserID', currentUser.id);
-    return <Navigate to={'/profile'} />;
+    return <Navigate to={'/home'} />;
   }
   return (
     <>

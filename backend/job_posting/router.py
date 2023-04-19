@@ -66,21 +66,23 @@ async def delete_employer_question(job_posting_id: int, db: Session=Depends(get_
 @router.get('/job-posting/applicant:{applicant_id}', tags=['JobPosting'], response_model=List[JobPosting])
 def get_job_posting(applicant_id: int, db: Session=Depends(get_db)):
     all_job_postings = JobPostingRepo.fetch_all(db)
+    try:
+        # (id, ranking) in descending order
+        ranked_postings = matching.get_ordered_matches(applicant_id, jsonable_encoder(all_job_postings))
+        print("best ranking:", ranked_postings[0][1], "and best posting id:", ranked_postings[0][0])
 
-    # (id, ranking) in descending order
-    ranked_postings = matching.get_ordered_matches(applicant_id, jsonable_encoder(all_job_postings))
-    print("best ranking:", ranked_postings[0][1], "and best posting id:", ranked_postings[0][0])
+        # JobPosting List, ranked_posting with the ids in the order we want
+        postings_dict = {}
 
-    # JobPosting List, ranked_posting with the ids in the order we want
-    postings_dict = {}
+        print("BELOW IS A LIST OF THE IDs ALONGSIDE THE RANKING")
+        print(ranked_postings)
 
-    print("BELOW IS A LIST OF THE IDs ALONGSIDE THE RANKING")
-    print(ranked_postings)
+        for index, ranked_tuple in enumerate(ranked_postings):
+            postings_dict[ranked_tuple[0]] = index
 
-    for index, ranked_tuple in enumerate(ranked_postings):
-        postings_dict[ranked_tuple[0]] = index
+        all_job_postings.sort(key=lambda x: postings_dict[x.id])
 
-    all_job_postings.sort(key=lambda x: postings_dict[x.id])
-
-    return jsonable_encoder(all_job_postings)
+        return jsonable_encoder(all_job_postings)
+    except:
+        return jsonable_encoder(all_job_postings)
 

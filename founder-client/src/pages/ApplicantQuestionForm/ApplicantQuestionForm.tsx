@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
 import ApplicantQuestionInput from '../../components/ApplicantQuestion/ApplicantQuestion';
-import { ApplicantQuestion, ApplicantAnswer } from '../../utils/Types';
-import { useDispatch, useSelector } from 'react-redux';
+import { ApplicantQuestion, ApplicantAnswer} from '../../util/Types';
+import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from 'react';
 import './ApplicantQuestionForm.css';
-import { getApplicantQuestionsThunk } from '../../question/thunks';
+import { getApplicantQuestionsThunk } from '../../services/question/thunks';
+import './ApplicantQuestionForm.css';
 import ProgressBarWrapper from '../../components/ProgressBarWrapper/ProgressBarWrapper';
 import Input from '../../components/Input/Input';
 import { Checkbox, FormControlLabel } from '@mui/material';
@@ -31,7 +32,6 @@ const ApplicantQuestionForm = () => {
 
   const questionsView = applicantQuestions.map((q: ApplicantQuestion, index: number) => (
     <div style={{ width: '80%', margin: '80px auto' }}>
-      <h2>Matching Question</h2>
       <ApplicantQuestionInput key={q.id} question={q} />
     </div>
   ));

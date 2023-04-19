@@ -1,0 +1,74 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  rect {
+    fill: gray;
+    opacity: 20%;
+    border-radius: 10px;
+  }
+  
+  svg {
+    /* border-radius: 10px 10px 10px 10px; */
+  }
+  
+  .text {
+    position: relative;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    top: -100px;
+    text-decoration: underline;
+    margin: 0px;
+  }
+  
+  .number {
+    position: relative;
+    font-family: "Roboto";
+    font-style: normal;
+    font-size: 32px;
+    font-weight: 500px;
+    top: -100px;
+    margin: 0px;
+  }
+  
+  #status-update-text {
+    right: 20%;
+  }
+  
+  #status-update-num {
+    right: 30%;
+  }
+  
+  #applications-num {
+    right: 26%;
+  }
+  
+  #applications-text {
+    right: 20%;
+  }
+  
+  #matches-num {
+    right: 26%;
+  }
+  
+  #matches-text {
+    right: 15%;
+  }
+  
+  .boxes {
+    display: flex;
+    position: relative;
+    justify-content: center;
+  }
+  
+  .clipart {
+    position: relative;
+    top: -50px;
+    right: 380px;
+    height: 30px;
+  }
+  

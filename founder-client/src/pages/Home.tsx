@@ -1,12 +1,43 @@
-import React from 'react';
+import { Box, Stack } from '@mui/material';
+import { stat } from 'fs';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import Uploader from '../components/FileUpload/FileUpload';
+import JobSummaryCard from '../components/JobSummaryCard/JobSummaryCard';
+import { getPostingsForApplicantThunk } from '../services/jobPosting/thunks';
+import { JobPosting } from '../util/Types';
+import ApplicantSummaryBar from '../components/ApplicantSummaryBar/ApplicantSummaryBar'
+import SearchBar from '../components/SearchBar/SearchBar';
+const POSTINGS = []
+
+
 export default function Home() {
   const { currentUser } = useSelector((state: any) => state.users);
-  
-  return (<div>{currentUser && 
-  <h1>Welcome new user: {currentUser.username}</h1>
-  } 
-  <Uploader/>
-  </div>);
+  const { jobPostings } = useSelector((state: any) => state.jobPostings);
+  const dispatch = useDispatch<any>();
+
+  useEffect(() => {
+    dispatch(getPostingsForApplicantThunk(1));
+  }, []);
+
+  return (
+    <Box>
+      <Stack>
+        <SearchBar onSearchQueryChange={function (arg0: React.SetStateAction<string>): void {
+          throw new Error('Function not implemented.');
+        } }/>
+      </Stack>
+
+      <Stack>
+        <ApplicantSummaryBar summaryProp={{matches : jobPostings.length}}/>
+      </Stack>
+      <Stack>
+        {jobPostings.map((posting: any) => {
+            return (<JobSummaryCard key={posting.id} jobPosting={posting}/>)
+        })}
+      </Stack>
+      
+    </Box>
+    
+  );
 }

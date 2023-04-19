@@ -18,7 +18,10 @@ class JobPostingBase(BaseModel):
     description: str
     location: str
     experience_level: str
-
+    company: str
+    tags: List[str]
+    skills: List[str]
+    title: str
 
 class JobPosting(JobPostingBase):
     id: int

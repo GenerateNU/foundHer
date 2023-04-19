@@ -14,7 +14,6 @@ export const addApplicantQuestion = async (question: any) => {
   return response.data;
 };
 
-
 export const addApplicantAnswer = async (answer: any) => {
   const response = await api.post(`${BASE_API_URL}/applicant-answers`, answer);
   return response.data;

@@ -2,10 +2,10 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { ApplicantAnswer, ApplicantQuestion, PropTypes } from '../../../utils/Types';
+import { ApplicantAnswer, ApplicantQuestion, PropTypes } from '../../../util/Types';
 import { Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addApplicantAnswerThunk } from '../../../question/thunks';
+import { addApplicantAnswerThunk } from '../../../services/question/thunks';
 import "./RangeQuestion.css"
 import { useEffect } from 'react';
 
@@ -79,9 +79,6 @@ export default function RangeQuestion({ question }: PropTypes) {
     <div className="button-div">
           <button onClick={() => handleSubmit()}>Next</button>
         </div>
-        {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && (
-          <div> submitted!</div>
-        )}
     </Box>
   );
 }

@@ -3,7 +3,7 @@ import "./FileUpload.css";
 import { MdDelete } from "react-icons/md";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadResumeThunk } from "../../user/thunks";
+import { uploadResumeThunk } from "../../services/user/thunks";
 
 function Uploader(): JSX.Element {
 

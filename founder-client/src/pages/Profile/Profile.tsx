@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import React from "react";
-import { profileThunk, logoutThunk } from "../../user/thunks";
+import { profileThunk, logoutThunk } from "../../services/user/thunks";
 import {Navigate, useNavigate} from "react-router-dom";
 import "./profile.css"
 const Profile = () => {
