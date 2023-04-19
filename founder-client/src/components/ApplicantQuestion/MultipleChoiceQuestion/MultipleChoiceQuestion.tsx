@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addApplicantAnswerThunk } from "../../../services/question/thunks";
 import { ApplicantAnswer, PropTypes } from "../../../util/Types";
 import { Checkbox } from "@mui/material";
 import "../ApplicantQuestion.css";
+import { stat } from "fs";
 export const MultipleChoiceQuestion = ({ question }: PropTypes) => {
     const { submittedAnswers } = useSelector((state: any) => state.applicantQuestions);
     const [mulitple_choice_answer, setMCAnswer] = useState<string[]>([]);
@@ -48,17 +49,21 @@ export const MultipleChoiceQuestion = ({ question }: PropTypes) => {
       };
 
       const Option = ({answerOption}: any) => {
+        const [state, changeState] = useState<boolean>(false);
         return (
           <div>
             <Checkbox
-            defaultChecked={selectedOptions[answerOption]}
             onChange={e => {
+              selectedOptions[answerOption] = !selectedOptions[answerOption]
+              changeState(!state);
               if (e.target.checked) {
                 setMCAnswer([...mulitple_choice_answer, e.target.value]);
               } else {
                 setMCAnswer([...mulitple_choice_answer.filter(a => a !== e.target.value)]);
               }
+              
             }}
+            checked={selectedOptions[answerOption]}
             value={answerOption}
             inputProps={{ 'aria-label': 'controlled' }}
             />
