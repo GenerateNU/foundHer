@@ -32,7 +32,7 @@ def get_ordered_matches(applicant_id, all_job_postings):
     employers = pd.unique(employer_answers["user_id"])
 
     # job title
-    # latest_job_title = json.loads(requests.get(f"{BASE_API_URL}/applicant-profile").text)["latest_job_title"]
+    latest_job_title = json.loads(requests.get(f"{BASE_API_URL}/applicant-profile/applicant:{applicant_id}").text)["latest_job_title"]
 
     # experience - id: int, applicant_id: int, from_: str, to_: str, description: str, company: str, location: str  
     latest_job_experiences = pd.DataFrame(json.loads(requests.get(f"{BASE_API_URL}/applicant-experiences/{applicant_id}").text))["description"]
@@ -59,8 +59,8 @@ def get_ordered_matches(applicant_id, all_job_postings):
     employer_answers["final_score"] = employer_answers["final_score"].apply(np.mean)
 
     # match job titles and previous job title
-    # title_scores = tfidf_score([latest_job_title], all_postings["title"].tolist())
-    # all_postings["title_score"] = title_scores
+    title_scores = tfidf_score([latest_job_title], all_postings["title"].tolist())
+    all_postings["title_score"] = title_scores
 
     # match job descriptions and previous job descriptions
     description_scores = tfidf_score(latest_job_experiences, all_postings["description"].tolist())
@@ -73,16 +73,15 @@ def get_ordered_matches(applicant_id, all_job_postings):
 
 
     # combine all scores with some sort of weighting for a final score
-    # all_postings["weighted_score"] = (.5 * all_postings["employer_score"]) + (.2 * all_postings["title_score"]) + (.3 * all_postings["description_score"])
-    all_postings["weighted_score"] = (.5 * all_postings["employer_score"]) + (.5 * all_postings["description_score"])
+    all_postings["weighted_score"] = (.3 * all_postings["employer_score"]) + (.3 * all_postings["title_score"]) + (.4 * all_postings["description_score"])
+    # all_postings["weighted_score"] = (.5 * all_postings["employer_score"]) + (.5 * all_postings["description_score"])
     all_postings.fillna(0, inplace=True)
 
     print(all_postings)
     result = list(zip(all_postings["id"], all_postings["weighted_score"]))
     result.sort(key=lambda x: x[1], reverse=True)
 
-    print("Result111")
-    print(result)
+    # print(result)
     return result
 
 

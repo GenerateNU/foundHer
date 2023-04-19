@@ -165,6 +165,13 @@ async def read_users_me(current_user: Applicant = Depends(get_current_active_use
     json_compatible_item_data = jsonable_encoder(current_user)
     return json_compatible_item_data
 
+@router.get('/applicant-profile/applicant:{applicant_id}', response_model=Applicant)
+async def read_users_me(applicant_id: int, db: Session = Depends(get_db)):
+    db_user = ApplicantRepo.fetch_by_id(db=db, _id=applicant_id)
+    if db_user is None:
+        raise HTTPException(status_code=404, detail=f'Applicant with id {applicant_id} not found')
+    return jsonable_encoder(db_user)
+
 @router.post("/resume", response_model=None)
 async def upload_resume(resume_file: bytes= Form("file_content"), file_name: str=Form("file_name"), applicant_id: int=Form("applicant_id")):
     upload_file(applicant_id, resume_file, file_name)
