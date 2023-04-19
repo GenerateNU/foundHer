@@ -75,7 +75,9 @@ export function RankingScaleUtil({ question }: PropTypes) {
   function formatRankedAnswers(ranked_answers: any[]) {
     let result: FormattedAnswer = {};
     for (let i =0;i < ranked_answers.length; i++) {
-      result[ranked_answers[i].option]= i;
+      if (ranked_answers[i]) {
+        result[ranked_answers[i].option]= i;
+      }
     }
     return result;
   }

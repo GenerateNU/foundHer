@@ -8,7 +8,7 @@ import { getPostingsForApplicantThunk } from '../services/jobPosting/thunks';
 import { JobPosting } from '../util/Types';
 import ApplicantSummaryBar from '../components/ApplicantSummaryBar/ApplicantSummaryBar'
 import SearchBar from '../components/SearchBar/SearchBar';
-const POSTINGS = []
+import "./Home.css";
 
 
 export default function Home() {
@@ -31,10 +31,20 @@ export default function Home() {
       <Stack>
         <ApplicantSummaryBar summaryProp={{matches : jobPostings.length}}/>
       </Stack>
+
       <Stack>
-        {jobPostings.map((posting: any) => {
-            return (<JobSummaryCard key={posting.id} jobPosting={posting}/>)
-        })}
+          <div className="background">
+          <div className="Matches">
+            <h1 className="Matches">Top Matches for you!</h1>
+          </div>
+          <div className="jobs">
+          {jobPostings.map((posting: any) => {
+              return(
+              <JobSummaryCard key={posting.id} jobPosting={posting}/>
+              )
+          })}
+        </div>
+          </div>
       </Stack>
       
     </Box>
