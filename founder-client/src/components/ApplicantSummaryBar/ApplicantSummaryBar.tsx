@@ -16,7 +16,7 @@ export default function ApplicantSummaryBar(summaryProp: any) {
             </svg>
             <FontAwesomeIcon icon={faClipboardList} className="clipart" />
             <h4 className="number" id="matches-num">
-              {summaryProp.matches}
+              {summaryProp.summaryProp.matches}
             </h4>
             <h4 className="text" id="matches-text">
               New Job Matches!
