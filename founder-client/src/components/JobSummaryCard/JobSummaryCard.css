@@ -1,4 +1,4 @@
-.job_title {
+/* .job_title {
 font-family: 'Inter';
 font-style: normal;
 font-weight: 400;
@@ -26,7 +26,7 @@ font-size: 10px;
 line-height: 20px;
 /* or 200% */
 
-
+/*
 color: #757575;
 }
 .rectangle {
@@ -48,9 +48,236 @@ font-size: 10px;
 line-height: 26px;
 /* or 262% */
 
+/*
 display: flex;
 align-items: center;
 text-align: center;
 
 color: #000000;
-}
+} */
+
+.background {
+    background: #ecedff;
+  }
+  
+  .Matches {
+    font-family: "DM Serif Text";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 38px;
+    line-height: 57px;
+  
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.25px;
+  
+    color: #000000;
+  }
+  
+  .title {
+    /* Job Title */
+  
+    position: flex;
+  
+    /* DM serif Text/16
+  
+  small titles or subtitles
+  */
+    font-family: "DM Serif Text";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 110.5%;
+    /* or 18px */
+  
+    letter-spacing: 0.1px;
+  
+    margin-top: 12px;
+    margin-bottom: 0;
+  
+    /* Text/Titles/Primary Dark */
+  
+    color: #0e1012;
+  }
+  
+  .company {
+    /* Poppins/small */
+  
+    display: flex;
+  
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 13px;
+  
+    margin-top: 7px;
+  
+    /* or 130% */
+  
+    /* Text/Secondary Gray */
+  
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  .location {
+    display: flex;
+  
+    /* Poppins/small */
+  
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 13px;
+    /* or 130% */
+  
+    /* Text/Secondary Gray */
+  
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  .jobOption {
+    position: relative;
+    list-style-type: none;
+    display: inline;
+    overflow-wrap: normal;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+  
+    /* identical to box height */
+  
+    padding-right: 10px;
+    padding-left: 10px;
+  
+    padding: 7px;
+    padding-right: 15px;
+    padding-left: 15px;
+  
+    text-align: center;
+  
+    background: #f0f0f0;
+    border-radius: 18.312px;
+    opacity: 0.9;
+  
+    color: #000000;
+  
+    margin: 5px;
+  }
+  
+  .jobCard {
+    background: #ffffff;
+    border-radius: 18px;
+    width: 100%;
+  }
+  
+  .pay {
+    position: relative;
+    bottom: 20px;
+    left: 20px;
+  
+    /* Poppins/small */
+  
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 13px;
+    /* identical to box height, or 130% */
+  
+    /* Text/Paragraph & tags/Secondary Dark */
+  
+    color: #25282b;
+  }
+  
+  .match {
+    position: relative;
+    bottom: 105px;
+    left: 200px;
+  
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 13px;
+    /* identical to box height, or 130% */
+  
+    /* Text/Paragraph & tags/Secondary Dark */
+  
+    color: #25282b;
+  }
+  
+  .desc {
+    /* Poppins/small */
+  
+    position: relative;
+    bottom: 75px;
+    left: 20px;
+  
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 13px;
+    /* or 130% */
+  
+    /* Text/Paragraph & tags/Secondary Dark */
+  
+    color: #25282b;
+  }
+  
+  .saveButton {
+    background: #ecedff;
+    border-radius: 9.02245px;
+  }
+  
+  .applyButton {
+    background: #3e2cc0;
+    border-radius: 9.02245px;
+  }
+  
+  .blankSquare {
+    position: relative;
+    width: 67px;
+    height: 67px;
+    top: 24px;
+    left: 20px;
+    background: #a5a5a5;
+    border-radius: 9px;
+  }
+  
+  .titleCompanyLocation {
+    position: relative;
+    bottom: 55px;
+    left: 33%;
+  }
+  
+  .jobDetailsDisplay {
+    position: relative;
+    bottom: 50px;
+    right: 5%;
+  }
+  
+  .jobs {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .jobButtons {
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .dollarIcon {
+    position: relative;
+    bottom: -24px;
+  }
+  
+  .checkIcon {
+    position: relative;
+    top: -60px;
+    left: 175px;
+  }

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import JobSummaryCard from '../components/JobSummaryCard/JobSummaryCard';
 import { getPostingsForApplicantThunk } from '../services/jobPosting/thunks';
 import { JobPosting } from '../util/Types';
+import ApplicantSummaryBar from '../components/ApplicantSummaryBar/ApplicantSummaryBar'
 
 const POSTINGS = []
 
@@ -21,6 +22,7 @@ export default function Home() {
 
   return (
     <Box>
+      <ApplicantSummaryBar summaryProp={{matches : 16}}/>
       {jobPostings.map((posting: any) => {
           return (<JobSummaryCard key={posting.id} jobPosting={posting}/>)
        })}
