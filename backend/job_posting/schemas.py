@@ -6,7 +6,7 @@
 # possible_answers = Column(ARRAY(String(40)))
 ###
 
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel
 from datetime import datetime
@@ -22,6 +22,7 @@ class JobPostingBase(BaseModel):
     tags: List[str]
     skills: List[str]
     title: str
+    weighted_score: Optional[float]
 
 class JobPosting(JobPostingBase):
     id: int

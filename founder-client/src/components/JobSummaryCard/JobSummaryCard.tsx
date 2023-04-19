@@ -4,15 +4,15 @@ import "./JobSummaryCard.css";
 import { JobPosting, JobPostingPropTypes } from "../../util/Types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign, faCheck } from "@fortawesome/free-solid-svg-icons";
-
+import {Navigate} from 'react-router-dom';
 
 
 export default function JobSummaryCard(jobPostingProp: JobPostingPropTypes) {
   const [applied, setApplied] = useState(false);
   const [saved, setSaved] = useState(false);
 
-  function handleClickApply() {
-    setApplied(true);
+  function handleClickView() {
+    return <Navigate to={`/postings/${jobPostingProp.jobPosting.id}`} />;
   }
   function handleClickSave() {
     setSaved(true);
@@ -32,7 +32,7 @@ export default function JobSummaryCard(jobPostingProp: JobPostingPropTypes) {
 
   const pay = "150$-200$/hr";
 
-  const match = "80% match";
+  const match = jobPostingProp.jobPosting.weighted_score + "%";
 
   const description = jobPostingProp.jobPosting.description;
 
@@ -71,7 +71,7 @@ export default function JobSummaryCard(jobPostingProp: JobPostingPropTypes) {
               sx={{ boxShadow: 0 }}
               variant="contained"
               className="applyButton"
-              onClick={handleClickApply}
+              onClick={handleClickView}
             >
               View
             </Button>

@@ -67,6 +67,8 @@ async def delete_employer_question(job_posting_id: int, db: Session=Depends(get_
 def get_job_posting(applicant_id: int, db: Session=Depends(get_db)):
     all_job_postings = JobPostingRepo.fetch_all(db)
     try:
+
+        id_to_score = {}
         # (id, ranking) in descending order
         ranked_postings = matching.get_ordered_matches(applicant_id, jsonable_encoder(all_job_postings))
         print("best ranking:", ranked_postings[0][1], "and best posting id:", ranked_postings[0][0])
@@ -81,8 +83,14 @@ def get_job_posting(applicant_id: int, db: Session=Depends(get_db)):
             postings_dict[ranked_tuple[0]] = index
 
         all_job_postings.sort(key=lambda x: postings_dict[x.id])
+        for ranked_posting in ranked_postings:
+            id_to_score[ranked_posting[0]] = ranked_posting[1]
+        
+        result = jsonable_encoder(all_job_postings)
+        for each in result:
+            each["weighted_score"] = round(id_to_score[each["id"]] * 100, 2)
 
-        return jsonable_encoder(all_job_postings)
+        return result
     except:
         return jsonable_encoder(all_job_postings)
 

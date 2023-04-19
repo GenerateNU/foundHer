@@ -1,0 +1,22 @@
+.jobs {
+    display: flex;
+    gap: 20px;
+}
+  
+.background {
+    background: #ecedff;
+}
+
+.Matches {
+    font-family: "DM Serif Text";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 38px;
+    line-height: 57px;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.25px;
+
+    color: #000000;
+}

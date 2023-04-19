@@ -37,5 +37,6 @@ export type ApplicantQuestion = {
     location: string,
     experience_level: string,
     skills: string[],
-    tags: string[]
+    tags: string[],
+    weighted_score: number | null
   }
