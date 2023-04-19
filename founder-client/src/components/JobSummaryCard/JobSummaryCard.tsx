@@ -71,11 +71,7 @@ export default function JobSummaryCard(jobPostingProp: JobPostingPropTypes) {
               sx={{ boxShadow: 0 }}
               variant="contained"
               className="applyButton"
-<<<<<<< HEAD
               onClick={handleClickView}
-=======
-              onClick={handleClickApply}
->>>>>>> main
             >
               View
             </Button>

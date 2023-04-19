@@ -8,11 +8,7 @@ import { getPostingsForApplicantThunk } from '../services/jobPosting/thunks';
 import { JobPosting } from '../util/Types';
 import ApplicantSummaryBar from '../components/ApplicantSummaryBar/ApplicantSummaryBar'
 import SearchBar from '../components/SearchBar/SearchBar';
-<<<<<<< HEAD
 import "./Home.css";
-=======
-const POSTINGS = []
->>>>>>> main
 
 
 export default function Home() {
