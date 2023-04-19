@@ -13,6 +13,7 @@ import PreRegister from './pages/Pre-register/PreRegister';
 import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuestionForm';
 import { applicantQuestionsReducer, employerQuestionsReducer } from './question/reducer';
 import ProgressBarWrapper from './components/ProgressBarWrapper/ProgressBarWrapper';
+import JobPosting from './pages/JobPosting/JobPosting';
 
 const store = configureStore({
   reducer: {
@@ -37,6 +38,7 @@ export default function App() {
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/employer-questions' element={<EmployerQuestionForm />} />
+            <Route path='/jobs' element={<JobPosting />} />
           </Routes>
         </BrowserRouter>
       </Provider>

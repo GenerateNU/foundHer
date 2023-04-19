@@ -29,7 +29,7 @@ const EmployerQuestionForm = () => {
 
   return (
     <section>
-      <h1>FindHer</h1>
+      <h1 style={{ textAlign: 'center' }}>FindHer</h1>
       <ProgressBarWrapper markerTitles={PROGRESS_BAR_MARKER_TITLES}>
         <div style={{ width: '80%', margin: '80px auto' }}>
           <h2>Company Information</h2>
