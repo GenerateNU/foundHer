@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <Box>
-      <ApplicantSummaryBar summaryProp={{matches : 16}}/>
+      {/* <ApplicantSummaryBar summaryProp={{matches : 16}}/> */}
       {jobPostings.map((posting: any) => {
           return (<JobSummaryCard key={posting.id} jobPosting={posting}/>)
        })}

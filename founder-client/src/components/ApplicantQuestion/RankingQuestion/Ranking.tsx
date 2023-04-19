@@ -129,9 +129,6 @@ export function RankingScaleUtil({ question }: PropTypes) {
         </DragDropContext>
         <div className="button-div">
           <button onClick={() => handleSubmit()}>Next</button>
-          {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && (
-          <span> submitted!</span>
-        )}
         </div>
 
       </header>

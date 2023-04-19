@@ -66,9 +66,6 @@ export const MultipleChoiceQuestion = ({ question }: PropTypes) => {
           <div className='button-div'>
             <button onClick={() => handleSubmit()}>Next</button>
           </div>
-          {submittedAnswers.some((answer: any) => answer.question_id === question.id) && (
-            <div> submitted!</div>
-          )}
         </div>
         );
 }

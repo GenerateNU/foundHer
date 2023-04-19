@@ -79,9 +79,6 @@ export default function RangeQuestion({ question }: PropTypes) {
     <div className="button-div">
           <button onClick={() => handleSubmit()}>Next</button>
         </div>
-        {submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id) && (
-          <div> submitted!</div>
-        )}
     </Box>
   );
 }

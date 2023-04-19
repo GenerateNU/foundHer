@@ -6,7 +6,7 @@ const api = axios.create({withCredentials: true});
 
 export const getPostingsForApplicant = async (applicantID: number) => {
     // const response = await api.get(`${BASE_API_URL}/postings/?applicantid=${applicantID}`);
-    const response = await api.get(`${BASE_API_URL}/all-job-postings`);
+    const response = await api.get(`${BASE_API_URL}/job-posting/applicant:${applicantID}`);
     return response.data;
 }
 
