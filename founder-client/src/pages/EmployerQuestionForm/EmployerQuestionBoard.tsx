@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EmployerQuestionInput from '../../components/EmployerQuestionInput/EmployerQuestionInput';
-import { getEmployerQuestionsThunk } from '../../question/thunks';
+import { getEmployerQuestionsThunk } from '../../services/question/thunks';
 
 import './EmployerQuestionBoard.css';
 import ProgressBarWrapper from '../../components/ProgressBarWrapper/ProgressBarWrapper';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { EmployerQuestion } from '../../utils/EmployerQuestionTypes';
+import { EmployerQuestion } from '../../util/EmployerQuestionTypes';
 import './EmployerQuestionInput.css';
 
 const EmployerQuestionInput = ({ question }: { question: EmployerQuestion }) => {
