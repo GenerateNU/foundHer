@@ -42,15 +42,11 @@ const ApplicantQuestionInput = ({ question }: PropTypes) => {
   }
   else if (question.question_type === "ranked") {
     return (
-    <div className='question'>
       <RankingScaleUtil question={question}/>
-    </div>
     )
   } else {
     return (
-      <div className=''>
-        <RangeQuestion question={question}/>
-      </div>
+      <RangeQuestion question={question}/>
     )
      
   }

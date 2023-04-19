@@ -15,20 +15,20 @@ export const MultipleChoiceQuestion = ({ question }: PropTypes) => {
       if (submittedAnswers.some((answer: ApplicantAnswer) => answer.question_id === question.id)) {
         let submitted_answer: ApplicantAnswer = submittedAnswers.findLast((answer: ApplicantAnswer) => answer.question_id === question.id)
         let mc_selection = submitted_answer.multiple_choice_answer;
-        let s: any = {}
+        let state: any = {}
         for (let option of question.possible_answers) {
           if (mc_selection.includes(option)) {
-            s[option] = true;
+            state[option] = true;
           } else {
-            s[option] = false;
+            state[option] = false;
           }
         }
-        setSelectedOptions(s);
+        setSelectedOptions(state);
       }
     }, [submittedAnswers])
 
 
-
+    
     const handleSubmit = () => {
         try {
           dispatch(
@@ -46,6 +46,28 @@ export const MultipleChoiceQuestion = ({ question }: PropTypes) => {
           console.log('Error submitting' + e);
         }
       };
+
+      const Option = ({answerOption}: any) => {
+        return (
+          <div>
+            <Checkbox
+            defaultChecked={selectedOptions[answerOption]}
+            onChange={e => {
+              if (e.target.checked) {
+                setMCAnswer([...mulitple_choice_answer, e.target.value]);
+              } else {
+                setMCAnswer([...mulitple_choice_answer.filter(a => a !== e.target.value)]);
+              }
+            }}
+            value={answerOption}
+            inputProps={{ 'aria-label': 'controlled' }}
+            />
+            <span>
+              {answerOption}
+            </span>
+          </div>
+            )
+      }
     
   
       return (
@@ -53,29 +75,11 @@ export const MultipleChoiceQuestion = ({ question }: PropTypes) => {
           <span>{question.question_content}</span>
           <div>
             {question.possible_answers.map((answerOption, index) => {
-            return (
-            <div>
-              <Checkbox
-              onChange={e => {
-                if (e.target.checked) {
-                  setMCAnswer([...mulitple_choice_answer, e.target.value]);
-                } else {
-                  setMCAnswer([...mulitple_choice_answer.filter(a => a !== e.target.value)]);
-                }
-              }}
-              defaultChecked={selectedOptions[answerOption]}
-              value={answerOption}
-              inputProps={{ 'aria-label': 'controlled' }}
-              />
-              <span>
-                {answerOption}
-              </span>
-            </div>
-              )
+              return (<Option key={index} answerOption={answerOption}/>)
             })}
           </div>
           <div className='button-div'>
-            <button onClick={() => handleSubmit()}>Next</button>
+            <button onClick={() => handleSubmit()}>Submit</button>
           </div>
         </div>
         );

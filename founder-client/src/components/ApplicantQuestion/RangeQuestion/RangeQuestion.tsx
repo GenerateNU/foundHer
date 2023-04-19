@@ -6,7 +6,6 @@ import { ApplicantAnswer, ApplicantQuestion, PropTypes } from '../../../util/Typ
 import { Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addApplicantAnswerThunk } from '../../../services/question/thunks';
-import "./RangeQuestion.css"
 import { useEffect } from 'react';
 import "../ApplicantQuestion.css";
 const minDistance = 0;
@@ -76,9 +75,9 @@ export default function RangeQuestion({ question }: PropTypes) {
         valueLabelFormat={valuetext}
         disableSwap
       />
-    <div className="button-div">
-          <button onClick={() => handleSubmit()}>Next</button>
-        </div>
+    
+      <button className="button-div" onClick={() => handleSubmit()}>Submit</button>
+    
     </Box>
   );
 }

@@ -103,7 +103,7 @@ export function RankingScaleUtil({ question }: PropTypes) {
   
   return (
     <div>
-      <header className=''>
+      <header className='Ranking-Question'>
         <h4>{processQ.question_content}</h4>
         <DragDropContext onDragEnd={handleOnDragEnd}>
           <Droppable droppableId='answers'>
@@ -129,10 +129,7 @@ export function RankingScaleUtil({ question }: PropTypes) {
             )}
           </Droppable>
         </DragDropContext>
-        <div className="button-div">
-          <button onClick={() => handleSubmit()}>Next</button>
-        </div>
-
+        <button className="button-div" onClick={() => handleSubmit()}>Submit</button>
       </header>
     </div>
   );
