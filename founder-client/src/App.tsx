@@ -14,6 +14,7 @@ import ApplicantQuestionForm from './pages/ApplicantQuestionForm/ApplicantQuesti
 import jobPostingsReducer from "./services/jobPosting/reducers";
 import { applicantQuestionsReducer, employerQuestionsReducer } from './services/question/reducer';
 import ProgressBarWrapper from './components/ProgressBarWrapper/ProgressBarWrapper';
+import JobPosting from './pages/JobPosting/JobPosting';
 
 const store = configureStore({
   reducer: {
@@ -39,6 +40,7 @@ export default function App() {
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/employer-questions' element={<EmployerQuestionForm />} />
+            <Route path='/jobs' element={<JobPosting />} />
           </Routes>
         </BrowserRouter>
       </Provider>

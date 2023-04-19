@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Input.css';
+import styles from './Input.module.css';
 
 const Input = ({
   type,
@@ -15,8 +15,13 @@ const Input = ({
 }) => {
   return (
     <div>
-      <span>{inputName}</span>
-      <input type={type} value={inputValue} onChange={e => inputOnChange(e.target.value)} />
+      <span className={styles.span}>{inputName}</span>
+      <input
+        className={styles.input}
+        type={type}
+        value={inputValue}
+        onChange={e => inputOnChange(e.target.value)}
+      />
     </div>
   );
 };
