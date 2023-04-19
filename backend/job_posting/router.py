@@ -13,7 +13,7 @@ from fastapi import APIRouter
 from .schemas import JobPostingBase, JobPostingCreate, JobPostingUpdate, JobPosting
 from fastapi.encoders import jsonable_encoder
 from . import models
-import matching_algo
+import matching_algo.matching_algo as matching
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -63,21 +63,24 @@ async def delete_employer_question(job_posting_id: int, db: Session=Depends(get_
     db_job_posting = await JobPostingRepo.delete(db=db, _id = job_posting_id)
     return jsonable_encoder(db_job_posting)
 
-@router.get('/job-posting:{applicant_id}', tags=['JobPosting'], response_model=List[JobPosting])
+@router.get('/job-posting/applicant:{applicant_id}', tags=['JobPosting'], response_model=List[JobPosting])
 def get_job_posting(applicant_id: int, db: Session=Depends(get_db)):
     all_job_postings = JobPostingRepo.fetch_all(db)
 
     # (id, ranking) in descending order
-    ranked_postings = get_ordered_matches(applicant_id, jsonable_encoder(all_job_postings))
+    ranked_postings = matching.get_ordered_matches(applicant_id, jsonable_encoder(all_job_postings))
     print("best ranking:", ranked_postings[0][1], "and best posting id:", ranked_postings[0][0])
 
     # JobPosting List, ranked_posting with the ids in the order we want
     postings_dict = {}
 
-    for index, ranked_tuple in ranked_postings:
+    print("BELOW IS A LIST OF THE IDs ALONGSIDE THE RANKING")
+    print(ranked_postings)
+
+    for index, ranked_tuple in enumerate(ranked_postings):
         postings_dict[ranked_tuple[0]] = index
 
-    all_job_postings.sort(key=lambda x: postings_dict[x["id"]])
+    all_job_postings.sort(key=lambda x: postings_dict[x.id])
 
     return jsonable_encoder(all_job_postings)
 

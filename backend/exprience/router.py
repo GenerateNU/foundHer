@@ -25,7 +25,6 @@ async def create_question(experience_request: ExperienceCreate, db: Session = De
 @router.get('/applicant-experiences/{applicant_id}', tags=['Experiences'], response_model=List[Experience])
 def get_experience_by_id(applicant_id: int, db: Session=Depends(get_db)):
     db_experiences: List[Experience] = ExperienceRepo.fetch_by_applicant_id(db, applicant_id)
-    print()
     return jsonable_encoder(db_experiences)
 
 
