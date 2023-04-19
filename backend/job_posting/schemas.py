@@ -22,7 +22,10 @@ class JobPostingBase(BaseModel):
     tags: List[str]
     skills: List[str]
     title: str
+<<<<<<< HEAD
     weighted_score: Optional[float]
+=======
+>>>>>>> main
 
 class JobPosting(JobPostingBase):
     id: int
