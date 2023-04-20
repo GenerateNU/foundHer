@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EmployerQuestionInput from '../../components/EmployerQuestionInput/EmployerQuestionInput';
 import { getEmployerQuestionsThunk } from '../../services/question/thunks';
+import Logo from '../../Logo.png';
 
 import './EmployerQuestionBoard.css';
 import ProgressBarWrapper from '../../components/ProgressBarWrapper/ProgressBarWrapper';
@@ -29,7 +30,7 @@ const EmployerQuestionForm = () => {
 
   return (
     <section>
-      <h1>FindHer</h1>
+      <h1><img src={Logo} alt="FindHer Logo" width='200' height='66' /></h1>
       <ProgressBarWrapper markerTitles={PROGRESS_BAR_MARKER_TITLES}>
         <div style={{ width: '80%', margin: '80px auto' }}>
           <h2>Company Information</h2>

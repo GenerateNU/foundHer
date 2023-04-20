@@ -1,5 +1,13 @@
 section {
   width: 80%;
-  margin: 30px auto;
+  margin: 20px auto;
+  padding: 30px;
   border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: .2em;
+  margin-bottom: .2em;
+  display: block;
 }

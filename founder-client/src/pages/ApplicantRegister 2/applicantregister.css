@@ -1,0 +1,66 @@
+.box {
+    position: absolute;
+    width: 477px;
+    height: 900px;
+    left: 482px;
+    top: 170px;
+
+background: #FFFFFF;
+box-shadow: 0px 5px 10px 6px rgba(0, 0, 0, 0.1);
+border-radius: 7px;
+}
+
+.title {
+width: 360px;
+height: 48px;
+left: 521px;
+top: 195px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 40px;
+line-height: 48px;
+
+color: #000000;
+}
+.description {
+width: 153px;
+height: 24px;
+left: 522px;
+top: 250px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 24px;
+
+color: #000000;
+}
+.field {
+    width: 396px;
+    height: 70px;
+    left: 522px;
+    top: 295px;
+    margin-top: 15px;
+    background: #D9D9D9;
+    font-size: larger;
+    margin-left: 35px;
+    border-radius: 5px;
+}
+
+.button {
+    width: 396px;
+    height: 77px;
+    left: 521px;
+    top: 772px;
+
+    background: #D9D9D9;
+    border-radius: 64px;
+    margin-left: 35px;
+    margin-top: 20px;
+
+    font-size: 18px;
+    border-radius: 64px;
+}

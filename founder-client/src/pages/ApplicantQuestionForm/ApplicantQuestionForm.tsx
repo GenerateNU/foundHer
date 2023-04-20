@@ -11,6 +11,7 @@ import ProgressBarWrapper from '../../components/ProgressBarWrapper/ProgressBarW
 import Input from '../../components/Input/Input';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import Uploader from '../../components/FileUpload/FileUpload';
+import Logo from '../../Logo.png';
 
 
 const PROGRESS_BAR_MARKER_TITLES = ['Autofill', 'Work Experience', 'Questions'];
@@ -57,13 +58,13 @@ const ApplicantQuestionForm = () => {
 
   return (
     <section>
-      <h1>FindHer</h1>
+      <h1><img src={Logo} alt="FindHer Logo" width='200' height='66'/></h1>
       <ProgressBarWrapper markerTitles={PROGRESS_BAR_MARKER_TITLES}>
-        <div style={{ width: '80%', margin: '80px auto' }}>
+        <div style={{ width: '80%', margin: '40px auto' }}>
           <h2>Upload Resume</h2>
           <Uploader/>
         </div>
-        <div style={{ width: '80%', margin: '80px auto' }}>
+        <div style={{ width: '80%', margin: '40px auto' }}>
           <h2>Work Experience</h2>
           <div>
             <div

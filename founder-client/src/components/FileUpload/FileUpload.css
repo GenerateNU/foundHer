@@ -13,8 +13,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 300px;
-    width: 500px;
+    height: 200px;
+    width: 400px;
     cursor: pointer;
     border: 1.00781px solid #000000;
     border-radius: 18px;
