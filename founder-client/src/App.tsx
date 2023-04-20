@@ -40,7 +40,7 @@ export default function App() {
             <Route path='/applicant-questions' element={<ApplicantQuestionForm />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/employer-questions' element={<EmployerQuestionForm />} />
-            <Route path='/jobs' element={<JobPosting />} />
+            <Route path='/jobs/:jid' element={<JobPosting />} />
           </Routes>
         </BrowserRouter>
       </Provider>

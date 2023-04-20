@@ -4,15 +4,16 @@ import "./JobSummaryCard.css";
 import { JobPosting, JobPostingPropTypes } from "../../util/Types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDollarSign, faCheck } from "@fortawesome/free-solid-svg-icons";
-import {Navigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 
 export default function JobSummaryCard(jobPostingProp: JobPostingPropTypes) {
   const [applied, setApplied] = useState(false);
   const [saved, setSaved] = useState(false);
 
+  const navigate = useNavigate();
   function handleClickView() {
-    return <Navigate to={`/postings/${jobPostingProp.jobPosting.id}`} />;
+    navigate(`/jobs/${jobPostingProp.jobPosting.id}`)
   }
   function handleClickSave() {
     setSaved(true);

@@ -17,7 +17,8 @@ export default function Home() {
   const dispatch = useDispatch<any>();
 
   useEffect(() => {
-    dispatch(getPostingsForApplicantThunk(1));
+    // @ts-ignore
+    dispatch(getPostingsForApplicantThunk(localStorage.getItem('currentUserID')));
   }, []);
 
   return (
