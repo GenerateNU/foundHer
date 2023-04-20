@@ -38,3 +38,13 @@ export const getApplicantAnswers = async (applicantID: string | null) => {
   const response = await api.get(`${BASE_API_URL}/all-applicant-answers/${applicantID}`)
   return response.data;
 }
+
+export const getApplicantExperience = async (applicantID: string | null) => {
+  const response = await api.get(`${BASE_API_URL}/applicant-experiences/${applicantID}`);
+  return response.data;
+}
+
+export const postApplicantExperience = async (experience: any) => {
+  const response = await api.post(`${BASE_API_URL}/applicant-experiences`, experience);
+  return response.data;
+}

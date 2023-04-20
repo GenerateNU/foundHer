@@ -7,6 +7,8 @@ import {
   addEmployerQuestionThunk,
   getApplicantQuestionsThunk,
   getEmployerQuestionsThunk,
+  getApplicantExperienceThunk,
+  postApplicantExperienceThunk
 } from './thunks';
 
 const initialState: {
@@ -14,11 +16,13 @@ const initialState: {
   applicantQuestions: any[];
   employerQuestions: any[];
   submittedAnswers: any[];
+  experiences: any[];
 } = {
   loading: false,
   applicantQuestions: [],
   employerQuestions: [],
   submittedAnswers: [],
+  experiences: []
 };
 
 export const applicantQuestionsReducer = createSlice({
@@ -52,6 +56,9 @@ export const applicantQuestionsReducer = createSlice({
       .addCase(getApplicantAnswerThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.submittedAnswers = action.payload
+      })
+      .addCase(getApplicantExperienceThunk.fulfilled, (state, action) => {
+        state.experiences = action.payload
       })
   },
   reducers: {},

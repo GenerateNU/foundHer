@@ -5,30 +5,49 @@ import { ApplicantQuestion, ApplicantAnswer} from '../../util/Types';
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from 'react';
 import './ApplicantQuestionForm.css';
-import { getApplicantQuestionsThunk } from '../../services/question/thunks';
+import { getApplicantQuestionsThunk, getApplicantExperienceThunk, postApplicantExperienceThunk } from '../../services/question/thunks';
 import './ApplicantQuestionForm.css';
 import ProgressBarWrapper from '../../components/ProgressBarWrapper/ProgressBarWrapper';
 import Input from '../../components/Input/Input';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import Uploader from '../../components/FileUpload/FileUpload';
 
+
 const PROGRESS_BAR_MARKER_TITLES = ['Autofill', 'Work Experience', 'Questions'];
 
 const ApplicantQuestionForm = () => {
   const { applicantQuestions } = useSelector((state: any) => state.applicantQuestions);
+  const { experiences } = useSelector((state: any) => state.applicantQuestions);
+
   const dispatch = useDispatch<any>();
 
   const [questions, setQuestions] = useState({
-    organizationName: '',
-    industry: '',
+    company: '',
     title: '',
-    startDate: '',
-    endDate: '',
+    from_: '',
+    to_: '',
+    description: '',
+    location: ''
   });
+
+  function handleSubmit() {
+    dispatch(postApplicantExperienceThunk(questions));
+  }
+
 
   useEffect(() => {
     dispatch(getApplicantQuestionsThunk());
   }, []);
+
+  useEffect(() => {
+    dispatch(getApplicantExperienceThunk(localStorage.getItem('currentUserID')));
+    console.log(experiences)
+    if (experiences && experiences.length > 0) {
+      setQuestions({company: experiences[0].company,  title: experiences[0].title, 
+        from_: experiences[0].from_, to_: experiences[0].to_ 
+      , description: experiences[0].description, location: experiences[0].location  });
+    }
+  }, [])
 
   const questionsView = applicantQuestions.map((q: ApplicantQuestion, index: number) => (
     <div style={{ width: '80%', margin: '80px auto' }}>
@@ -53,14 +72,8 @@ const ApplicantQuestionForm = () => {
               <Input
                 type='text'
                 inputName='Organization Name'
-                inputValue={questions.organizationName}
-                inputOnChange={value => setQuestions({ ...questions, organizationName: value })}
-              />
-              <Input
-                type='text'
-                inputName='Industry'
-                inputValue={questions.industry}
-                inputOnChange={value => setQuestions({ ...questions, industry: value })}
+                inputValue={questions.company}
+                inputOnChange={value => setQuestions({ ...questions, company: value })}
               />
             </div>
             <div
@@ -93,17 +106,35 @@ const ApplicantQuestionForm = () => {
                 <Input
                   type='text'
                   inputName='Start Date'
-                  inputValue={questions.startDate}
-                  inputOnChange={value => setQuestions({ ...questions, startDate: value })}
+                  inputValue={questions.from_}
+                  inputOnChange={value => setQuestions({ ...questions, from_: value })}
                 />
                 <Input
                   type='text'
                   inputName='End Date'
-                  inputValue={questions.endDate}
-                  inputOnChange={value => setQuestions({ ...questions, endDate: value })}
+                  inputValue={questions.to_}
+                  inputOnChange={value => setQuestions({ ...questions, to_: value })}
                 />
               </div>
-              <div></div>
+              <div className='item' style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
+                <Input
+                  type='text'
+                  inputName='Location'
+                  inputValue={questions.location}
+                  inputOnChange={value => setQuestions({ ...questions, location: value })}
+                />
+
+              </div>
+              </div>
+              <div className='item' style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+              <Input
+                                type='text'
+                                inputName='Description'
+                                inputValue={questions.description}
+                                inputOnChange={value => setQuestions({ ...questions, description: value })}
+                              />
+              </div>
             </div>
           </div>
         </div>

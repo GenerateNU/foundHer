@@ -29,7 +29,7 @@ export default function ApplicantSummaryBar(summaryProp: any) {
             </svg>
             <FontAwesomeIcon icon={faClipboardList} className="clipart" />
             <h4 className="number" id="applications-num">
-              10
+              0
             </h4>
             <h4 className="text" id="applications-text">
               Applications
@@ -42,7 +42,7 @@ export default function ApplicantSummaryBar(summaryProp: any) {
             </svg>
             <FontAwesomeIcon icon={faCheckDouble} className="clipart" />
             <h4 className="number" id="status-update-num">
-              4
+              0
             </h4>
             <h4 className="text" id="status-update-text">
               Status Updates
