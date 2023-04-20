@@ -38,10 +38,10 @@ const ApplicantQuestionForm = () => {
 
   useEffect(() => {
     dispatch(getApplicantQuestionsThunk());
+    dispatch(getApplicantExperienceThunk(localStorage.getItem('currentUserID')));
   }, []);
 
   useEffect(() => {
-    dispatch(getApplicantExperienceThunk(localStorage.getItem('currentUserID')));
     console.log(experiences)
     if (experiences && experiences.length > 0) {
       setQuestions({applicant_id: localStorage.getItem("currentUserID"), company: experiences[0].company,  title: experiences[0].title, 
