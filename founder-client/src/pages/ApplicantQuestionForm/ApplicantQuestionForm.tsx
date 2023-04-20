@@ -22,6 +22,7 @@ const ApplicantQuestionForm = () => {
   const dispatch = useDispatch<any>();
 
   const [questions, setQuestions] = useState({
+    applicant_id: localStorage.getItem("currentUserID"),
     company: '',
     title: '',
     from_: '',
@@ -43,7 +44,7 @@ const ApplicantQuestionForm = () => {
     dispatch(getApplicantExperienceThunk(localStorage.getItem('currentUserID')));
     console.log(experiences)
     if (experiences && experiences.length > 0) {
-      setQuestions({company: experiences[0].company,  title: experiences[0].title, 
+      setQuestions({applicant_id: localStorage.getItem("currentUserID"), company: experiences[0].company,  title: experiences[0].title, 
         from_: experiences[0].from_, to_: experiences[0].to_ 
       , description: experiences[0].description, location: experiences[0].location  });
     }
@@ -136,6 +137,7 @@ const ApplicantQuestionForm = () => {
                               />
               </div>
             </div>
+            <button onClick={() => handleSubmit()}>Submit</button>
           </div>
         </div>
         {questionsView}
